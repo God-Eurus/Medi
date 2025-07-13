@@ -55,7 +55,7 @@ function App() {
     case 'hospitals':
       return <Hospitals onBack={() => setCurrentView('home')} />;
     case 'flights':
-      return <FlightBooking />;
+      return <FlightBooking onBack={() => setCurrentView('home')} />;
     case 'doctors':
       return <Doctors onBack={() => setCurrentView('home')} />;
     case 'about':

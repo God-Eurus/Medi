@@ -1,7 +1,20 @@
 import React, { useState } from 'react';
-import { Plane, Calendar, MapPin, Users, Search, ArrowRight, Clock, Shield } from 'lucide-react';
+import {
+  Plane,
+  Calendar,
+  MapPin,
+  Users,
+  Search,
+  ArrowRight,
+  Clock,
+  Shield
+} from 'lucide-react';
 
-export default function FlightBooking() {
+interface FlightBookingProps {
+  onBack: () => void;
+}
+
+export default function FlightBooking({ onBack }: FlightBookingProps) {
   const [formData, setFormData] = useState({
     from: '',
     to: '',
@@ -23,21 +36,20 @@ export default function FlightBooking() {
       alert('Please fill in all required fields');
       return;
     }
-    
-    // Create Skyscanner URL with proper formatting
+
     const fromCode = formData.from.toLowerCase().replace(/\s+/g, '-');
     const toCode = formData.to.toLowerCase().replace(/\s+/g, '-');
     const departureDate = formData.departure.replace(/-/g, '');
     const returnDate = formData.return ? formData.return.replace(/-/g, '') : '';
-    
+
     let skyscannerUrl = `https://www.skyscanner.com/transport/flights/${fromCode}/${toCode}/${departureDate}`;
-    
+
     if (formData.tripType === 'round-trip' && returnDate) {
       skyscannerUrl += `/${returnDate}`;
     }
-    
+
     skyscannerUrl += `/?adults=${formData.passengers}&children=0&adultsv2=${formData.passengers}&childrenv2=&infants=0&cabinclass=economy&rtn=${formData.tripType === 'round-trip' ? '1' : '0'}`;
-    
+
     window.open(skyscannerUrl, '_blank');
   };
 
@@ -45,6 +57,15 @@ export default function FlightBooking() {
     <section id="flights" className="py-20 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
+          {/* ✅ Back Button */}
+          <button
+            onClick={onBack}
+            className="inline-flex items-center text-sm text-gray-600 hover:text-blue-600 transition mb-4"
+          >
+            <ArrowRight className="h-4 w-4 transform rotate-180 mr-2" />
+            Back to Home
+          </button>
+
           <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
             Book Your Medical Travel
           </h2>
@@ -179,13 +200,13 @@ export default function FlightBooking() {
                 <Search className="mr-2 h-5 w-5" />
                 Search Medical Travel Flights
               </button>
-              
+
               <p className="text-sm text-gray-500 mt-3 text-center">
-                You'll be redirected to Skyscanner to complete your booking with medical travel options
+                You'll be redirected to Skyscanner to complete your booking with medical travel options.
               </p>
             </div>
           </div>
-          
+
           <div className="mt-8 grid md:grid-cols-3 gap-6 text-white">
             <div className="text-center">
               <div className="bg-white/20 rounded-full w-12 h-12 flex items-center justify-center mx-auto mb-3">
