@@ -57,15 +57,15 @@ export default function Footer() {
             <div className="space-y-4">
               <div className="flex items-center">
                 <Mail className="h-5 w-5 text-blue-400 mr-3" />
-                <span className="text-gray-300">info@medivoyage.com</span>
+                <span className="text-gray-300">medivoyagehealthcare@gmail.com</span>
               </div>
               <div className="flex items-center">
                 <Phone className="h-5 w-5 text-blue-400 mr-3" />
-                <span className="text-gray-300">+1 (555) 123-4567</span>
+                <span className="text-gray-300">+91 9530102585 </span>
               </div>
               <div className="flex items-center">
                 <MapPin className="h-5 w-5 text-blue-400 mr-3" />
-                <span className="text-gray-300">Global Healthcare Network</span>
+                <span className="text-gray-300">212 CK Tower Kishanpole Bazaar Achariyon ka Rasta Jaipur</span>
               </div>
             </div>
           </div>
@@ -73,7 +73,7 @@ export default function Footer() {
 
         <div className="border-t border-gray-800 mt-12 pt-8 text-center">
           <p className="text-gray-400">
-            © 2024 MediVoyage. All rights reserved. | Bringing world-class healthcare closer to you.
+            © 2025 MediVoyage. All rights reserved. | Bringing world-class healthcare closer to you.
           </p>
         </div>
       </div>

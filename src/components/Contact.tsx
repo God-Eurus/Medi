@@ -59,7 +59,7 @@ export default function Contact({ onBack }: ContactProps) {
                 </div>
                 <div>
                   <h3 className="font-semibold text-gray-900">24/7 Support Hotline</h3>
-                  <p className="text-gray-600">+1 (555) 123-4567</p>
+                  <p className="text-gray-600">+91 9530102585 </p>
                 </div>
               </div>
 
@@ -69,7 +69,7 @@ export default function Contact({ onBack }: ContactProps) {
                 </div>
                 <div>
                   <h3 className="font-semibold text-gray-900">Email Support</h3>
-                  <p className="text-gray-600">info@medivoyage.com</p>
+                  <p className="text-gray-600">medivoyagehealthcare@gmail.com</p>
                 </div>
               </div>
 
