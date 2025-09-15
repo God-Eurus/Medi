@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom'; // ✅ 1. Import Link for navigation
 import { Menu, X, MessageCircle } from 'lucide-react';
 
 interface HeaderProps {
@@ -8,55 +9,48 @@ interface HeaderProps {
 export default function Header({ onChatToggle }: HeaderProps) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
+  // ✅ 2. Updated navLinks to use URL paths instead of events
   const navLinks = [
-    { label: 'Home', event: 'goHome' },
-    { label: 'Treatment', event: 'showTreatment' },
-    { label: 'Wellness', event: 'showWellness' },
-    { label: 'Hospitals', event: 'showHospitals' },
-    { label: 'Doctors', event: 'showDoctors' },
-    { label: 'Hotels', event: 'showHotels' },
-    { label: 'Book Flights', event: 'showFlights' },
+    { label: 'Home', path: '/' },
+    { label: 'Treatment', path: '/treatment' },
+    { label: 'Wellness', path: '/wellness' },
+    { label: 'Hospitals', path: '/hospitals' },
+    { label: 'Doctors', path: '/doctors' },
+    { label: 'Book Flights', path: '/flights' },
   ];
-
-  const handleNavClick = (event: string) => {
-    window.dispatchEvent(new CustomEvent(event));
-    setIsMenuOpen(false);
-  };
+  
+  // ✅ 3. The handleNavClick function is no longer needed
+  // const handleNavClick = (event: string) => { ... };
 
   return (
     <header className="bg-white shadow-sm sticky top-0 z-40">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
-          {/* Logo */}
-          <div className="flex items-center">
+          {/* Logo - can also be a link to home */}
+          <Link to="/" className="flex items-center">
             <img src="/logo.png" alt="MediVoyage Logo" className="h-10 w-auto" />
             <span className="ml-2 text-xl font-bold text-gray-900">MediVoyage</span>
-          </div>
+          </Link>
 
           {/* Desktop Nav */}
-          <nav className="hidden md:flex space-x-6">
-            {navLinks.map(({ label, event }) => (
-              <a
+          <nav className="hidden md:flex space-x-6 items-center">
+            {navLinks.map(({ label, path }) => (
+              // ✅ 4. Replaced <a> tag with <Link>
+              <Link
                 key={label}
-                href="#"
-                onClick={(e) => {
-                  e.preventDefault();
-                  handleNavClick(event);
-                }}
+                to={path}
                 className="text-gray-700 hover:text-blue-600 transition-colors"
               >
                 {label}
-              </a>
+              </Link>
             ))}
-            <button
-              onClick={() => {
-                window.dispatchEvent(new CustomEvent('showContact'));
-                setIsMenuOpen(false);
-              }}
+            {/* ✅ 4. Replaced <button> with <Link> */}
+            <Link
+              to="/contact"
               className="text-gray-700 hover:text-blue-600 transition-colors"
             >
               Contact
-            </button>
+            </Link>
           </nav>
 
           {/* Icons */}
@@ -81,28 +75,25 @@ export default function Header({ onChatToggle }: HeaderProps) {
         {isMenuOpen && (
           <div className="md:hidden py-4 border-t">
             <nav className="flex flex-col space-y-4">
-              {navLinks.map(({ label, event }) => (
-                <a
+              {navLinks.map(({ label, path }) => (
+                // ✅ 4. Replaced <a> tag with <Link>
+                <Link
                   key={label}
-                  href="#"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    handleNavClick(event);
-                  }}
-                  className="text-gray-700 hover:text-blue-600 transition-colors"
+                  to={path}
+                  // ✅ 5. Added onClick to close menu after navigation
+                  onClick={() => setIsMenuOpen(false)}
+                  className="text-gray-700 hover:text-blue-600 transition-colors px-2 py-1"
                 >
                   {label}
-                </a>
+                </Link>
               ))}
-              <button
-                onClick={() => {
-                  window.dispatchEvent(new CustomEvent('showContact'));
-                  setIsMenuOpen(false);
-                }}
-                className="text-gray-700 hover:text-blue-600 transition-colors text-left"
+              <Link
+                to="/contact"
+                onClick={() => setIsMenuOpen(false)}
+                className="text-gray-700 hover:text-blue-600 transition-colors text-left px-2 py-1"
               >
                 Contact
-              </button>
+              </Link>
             </nav>
           </div>
         )}

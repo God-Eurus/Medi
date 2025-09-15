@@ -1,63 +1,235 @@
 import React from 'react';
-import { Users, Clock, MapPin, Award } from 'lucide-react';
+import { 
+  Users, 
+  Clock, 
+  MapPin, 
+  Award, 
+  HeartHandshake, 
+  Stethoscope, 
+  ShieldCheck,
+  Building,
+  Target,
+  CheckCircle, // For the hero list
+  Folder,      // For certifications
+  Server       // For certifications
+} from 'lucide-react';
+
+// NEW COMPONENT: For the Practo-style "Why MediVoyage" hero section
+const HeroSection = () => (
+ <section className="bg-gray-50 py-20">
+  <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center gap-12">
+    
+    {/* Image (Left Side) - MOVED HERE */}
+    <div className="md:w-1/2">
+      <img
+        src="/img.png" // Using your existing image path
+        alt="Doctor consulting with a patient"
+        className="w-full max-w-md mx-auto"
+      />
+    </div>
+
+    {/* Text Content (Right Side) - MOVED HERE */}
+    <div className="md:w-1/2 text-center md:text-left">
+      <h1 className="text-4xl md:text-5xl font-bold text-gray-900 leading-tight mb-6">
+  <span className="text-blue-600">Medivoyage</span> Your Health Journey, Safe and Secure.
+</h1>
+      <ul className="space-y-4 mb-8">
+        <li className="flex items-center justify-center md:justify-start text-lg text-gray-600">
+          <CheckCircle className="h-6 w-6 text-blue-600 mr-3 flex-shrink-0" />
+          Doctor-led guidance, not broker-led portals.
+        </li>
+        <li className="flex items-center justify-center md:justify-start text-lg text-gray-600">
+          <CheckCircle className="h-6 w-6 text-blue-600 mr-3 flex-shrink-0" />
+          End-to-end support, from travel to recovery.
+        </li>
+        <li className="flex items-center justify-center md:justify-start text-lg text-gray-600">
+          <CheckCircle className="h-6 w-6 text-blue-600 mr-3 flex-shrink-0" />
+          HIPAA-compliant systems to protect your data.
+        </li>
+      </ul>
+    </div>
+
+  </div>
+</section>
+);
+
+// NEW COMPONENT: For the Practo-style "Our Doctor Insights" certification bar
+const CertificationsSection = () => (
+  <section className="py-16 bg-white">
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+        
+        {/* Certification Item 1 */}
+        <div className="flex flex-col items-center text-center">
+          <div className="relative mb-3">
+            <Building className="h-12 w-12 text-gray-700" />
+            <CheckCircle className="h-6 w-6 text-blue-600 bg-white rounded-full absolute -bottom-1 -right-1" />
+          </div>
+          <p className="text-gray-600 font-medium">JCI & NABH Accredited Hospitals</p>
+        </div>
+
+        {/* Certification Item 2 */}
+        <div className="flex flex-col items-center text-center">
+          <div className="relative mb-3">
+            <ShieldCheck className="h-12 w-12 text-gray-700" />
+            <CheckCircle className="h-6 w-6 text-blue-600 bg-white rounded-full absolute -bottom-1 -right-1" />
+          </div>
+          <p className="text-gray-600 font-medium">HIPAA Compliant Data Security</p>
+        </div>
+        
+        {/* Certification Item 3 */}
+        <div className="flex flex-col items-center text-center">
+          <div className="relative mb-3">
+            <Stethoscope className="h-12 w-12 text-gray-700" />
+            <CheckCircle className="h-6 w-6 text-blue-600 bg-white rounded-full absolute -bottom-1 -right-1" />
+          </div>
+          <p className="text-gray-600 font-medium">Expert Doctor-Led Vetting</p>
+        </div>
+        
+        {/* Certification Item 4 */}
+        <div className="flex flex-col items-center text-center">
+          <div className="relative mb-3">
+            <HeartHandshake className="h-12 w-12 text-gray-700" />
+            <CheckCircle className="h-6 w-6 text-blue-600 bg-white rounded-full absolute -bottom-1 -right-1" />
+          </div>
+          <p className="text-gray-600 font-medium">Patient-Centered Counselling</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+);
+
 
 export default function About() {
   return (
-    <section id="about" className="py-20 bg-gray-50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
+    // The parent container is now a React Fragment <>
+    <>
+      {/* START: YOUR UNTOUCHED "INDIA" SECTION */}
+      <section id="about" className="relative py-20 bg-gray-50 overflow-hidden">
+        {/* Background Image */}
+        <div className="absolute inset-0 -z-10">
+          <img
+            src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/80/World_map_-_low_resolution.svg/2000px-World_map_-_low_resolution.svg.png"
+            alt="World map background"
+            className="w-full h-full object-cover opacity-10"
+          />
+        </div>
+
+        {/* Content */}
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
-            Why MediVoyage Exists
+            🌍 India: Your Trusted Destination for World-Class Healthcare
           </h2>
-          <p className="text-xl text-gray-600 max-w-4xl mx-auto leading-relaxed">
-            We started MediVoyage with one simple belief: access to quality healthcare should not depend on where you live.
+          <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed mb-12">
+            India has become a global leader in healthcare, offering advanced treatments at affordable costs.
+            Patients from across the world travel here for its expert doctors, modern hospitals, and faster
+            access to life-saving procedures.
           </p>
-        </div>
 
-        <div className="grid lg:grid-cols-2 gap-12 items-center mb-16">
-          <div>
-            <img 
-              src="https://images.pexels.com/photos/4386466/pexels-photo-4386466.jpeg?_gl=1*ga69vt*_ga*NjIwNDY4NzAuMTczNjg0MTc1OQ..*_ga_8JE65Q40S6*czE3NTI0MzIyNzgkbzQkZzEkdDE3NTI0MzIzNjUkajUzJGwwJGgw" 
-              alt="Medical consultation" 
-              className="w-full h-96 object-cover rounded-2xl shadow-lg"
-            />
-          </div>
-          <div>
-            <h3 className="text-2xl font-bold text-gray-900 mb-6">
-              Founded by Doctors, Driven by Compassion
-            </h3>
-            <p className="text-lg text-gray-600 mb-6 leading-relaxed">
-              Founded by doctors, our platform helps patients from Africa, the Middle East, and beyond get timely, transparent treatment at internationally trusted hospitals. We guide you every step of the way — from free second opinions to travel support and post-recovery check-ins.
-            </p>
-            <p className="text-lg text-gray-600 leading-relaxed">
-              MediVoyage isn't just about travel. It's about restoring your health, dignity, and peace of mind.
-            </p>
+          {/* Highlights */}
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 text-left mb-16">
+            <div className="p-6 bg-blue-50 rounded-xl shadow-sm">
+              <Users className="h-12 w-12 text-blue-600 mb-4" />
+              <h4 className="text-xl font-semibold text-gray-900 mb-2">2M+ Patients</h4>
+              <p className="text-gray-600">choose India every year for treatment</p>
+            </div>
+            <div className="p-6 bg-green-50 rounded-xl shadow-sm">
+              <Clock className="h-12 w-12 text-green-600 mb-4" />
+              <h4 className="text-xl font-semibold text-gray-900 mb-2">1.1M+ Medical Visas</h4>
+              <p className="text-gray-600">issued annually to international patients</p>
+            </div>
+            <div className="p-6 bg-purple-50 rounded-xl shadow-sm">
+              <MapPin className="h-12 w-12 text-purple-600 mb-4" />
+              <h4 className="text-xl font-semibold text-gray-900 mb-2">Globally Renowned Doctors</h4>
+              <p className="text-gray-600">leading specialists across all major fields</p>
+            </div>
+            <div className="p-6 bg-orange-50 rounded-xl shadow-sm">
+              <Award className="h-12 w-12 text-orange-600 mb-4" />
+              <h4 className="text-xl font-semibold text-gray-900 mb-2">Accredited Hospitals</h4>
+              <p className="text-gray-600">with state-of-the-art facilities & tech</p>
+            </div>
+            <div className="p-6 bg-teal-50 rounded-xl shadow-sm">
+              <Stethoscope className="h-12 w-12 text-teal-600 mb-4" />
+              <h4 className="text-xl font-semibold text-gray-900 mb-2">Quick Treatment</h4>
+              <p className="text-gray-600">diagnosis to surgery in under a week</p>
+            </div>
           </div>
         </div>
+      </section>
+      {/* END: YOUR UNTOUCHED "INDIA" SECTION */}
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-          <div className="text-center p-6 bg-blue-50 rounded-xl">
-            <Users className="h-12 w-12 text-blue-600 mx-auto mb-4" />
-            <h4 className="text-xl font-semibold text-gray-900 mb-2">Expert Network</h4>
-            <p className="text-gray-600">Connect with world-class medical professionals</p>
+
+      {/* START: NEW PRACTO-STYLE SECTIONS */}
+      <HeroSection />
+      <CertificationsSection />
+      {/* END: NEW PRACTO-STYLE SECTIONS */}
+       <section className="py-20 bg-white">
+  <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div className="grid lg:grid-cols-2 gap-12 items-center">
+      {/* Text side */}
+      <div>
+        <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-8 text-center lg:text-left">Our Doctor Insights </h2>
+        <div className="space-y-8"> {/* Increased spacing slightly for a more open feel */}
+          
+          {/* Item 1 */}
+          <div className="flex items-start gap-4">
+            <Building className="h-8 w-8 text-blue-600 flex-shrink-0" />
+            <p className="text-lg text-gray-700">
+              <span className="font-semibold">Only the Best Hospitals –</span> We partner exclusively with internationally accredited centers (JCI, NABH, NABL, etc).
+            </p>
           </div>
-          <div className="text-center p-6 bg-green-50 rounded-xl">
-            <Clock className="h-12 w-12 text-green-600 mx-auto mb-4" />
-            <h4 className="text-xl font-semibold text-gray-900 mb-2">Fast Access</h4>
-            <p className="text-gray-600">Skip long waiting times for urgent care</p>
+
+          {/* Item 2 */}
+          <div className="flex items-start gap-4">
+            <Stethoscope className="h-8 w-8 text-blue-600 flex-shrink-0" />
+            <p className="text-lg text-gray-700">
+              <span className="font-semibold">Expert Selection –</span> As doctors, we identify the right specialists and treatments with precision.
+            </p>
           </div>
-          <div className="text-center p-6 bg-purple-50 rounded-xl">
-            <MapPin className="h-12 w-12 text-purple-600 mx-auto mb-4" />
-            <h4 className="text-xl font-semibold text-gray-900 mb-2">Global Reach</h4>
-            <p className="text-gray-600">Access to hospitals worldwide</p>
+
+          {/* Item 3 */}
+          <div className="flex items-start gap-4">
+            <Target className="h-8 w-8 text-blue-600 flex-shrink-0" />
+            <p className="text-lg text-gray-700">
+              <span className="font-semibold">Knowledge-Backed Choices –</span> Every recommendation comes from medical expertise, not guesswork or margins.
+            </p>
           </div>
-          <div className="text-center p-6 bg-orange-50 rounded-xl">
-            <Award className="h-12 w-12 text-orange-600 mx-auto mb-4" />
-            <h4 className="text-xl font-semibold text-gray-900 mb-2">Quality Care</h4>
-            <p className="text-gray-600">Only trusted, accredited facilities</p>
+
+          {/* Item 4 */}
+          <div className="flex items-start gap-4">
+            <HeartHandshake className="h-8 w-8 text-blue-600 flex-shrink-0" />
+            <p className="text-lg text-gray-700">
+              <span className="font-semibold">Patient-Centered Counselling –</span> We ensure you receive the safest, most effective, and proven care.
+            </p>
           </div>
+
+          {/* Item 5 */}
+          <div className="flex items-start gap-4">
+            <ShieldCheck className="h-8 w-8 text-blue-600 flex-shrink-0" />
+            <p className="text-lg text-gray-700">
+              <span className="font-semibold">No Middlemen, No Brokers –</span> Direct doctor-to-patient care ensures easier access and lower costs.
+            </p>
+          </div>
+
         </div>
       </div>
-    </section>
+
+      {/* Video side */}
+      <div className="w-full h-96 rounded-2xl shadow-lg overflow-hidden">
+        <iframe
+          className="w-full h-full object-cover"
+          src="https://www.youtube.com/embed/erei6SZjcck?autoplay=1&mute=1&loop=1&playlist=erei6SZjcck"
+          title="Doctor Insights Video"
+          frameBorder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowFullScreen
+        ></iframe>
+      </div>
+    </div>
+  </div>
+</section>
+    </>
+    
   );
 }

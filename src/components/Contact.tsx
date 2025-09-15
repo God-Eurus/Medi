@@ -1,11 +1,18 @@
 import React, { useState } from 'react';
-import { Mail, Phone, MapPin, Send, ArrowLeft, Clock, MessageSquare } from 'lucide-react';
+import { useNavigate } from 'react-router-dom'
+import {
+  Mail,
+  Phone,
+  MapPin,
+  Send,
+  ArrowLeft,
+  Clock,
+  MessageSquare,
+} from 'lucide-react'
 
-interface ContactProps {
-  onBack: () => void;
-}
+export default function Contact() {
+  const navigate = useNavigate()
 
-export default function Contact({ onBack }: ContactProps) {
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
@@ -15,31 +22,37 @@ export default function Contact({ onBack }: ContactProps) {
     medicalCondition: '',
     urgency: 'normal',
     message: '',
-    preferredContact: 'email'
-  });
+    preferredContact: 'email',
+  })
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+  const handleInputChange = (
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+    >,
+  ) => {
     setFormData({
       ...formData,
-      [e.target.name]: e.target.value
-    });
-  };
+      [e.target.name]: e.target.value,
+    })
+  }
 
   const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    console.log('Enquiry submitted:', formData);
-    alert('Thank you for your enquiry! Our medical travel specialists will contact you within 24 hours.');
-  };
+    e.preventDefault()
+    console.log('Enquiry submitted:', formData)
+    alert(
+      'Thank you for your enquiry! Our medical travel specialists will contact you within 24 hours.',
+    )
+  }
 
   return (
     <div className="min-h-screen bg-gray-50 py-12">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <button
-          onClick={onBack}
+          onClick={() => navigate(-1)}
           className="mb-8 flex items-center text-blue-600 hover:text-blue-700 transition-colors"
         >
           <ArrowLeft className="h-5 w-5 mr-2" />
-          Back to Home
+          Back
         </button>
 
         <div className="grid lg:grid-cols-2 gap-12">
@@ -49,7 +62,8 @@ export default function Contact({ onBack }: ContactProps) {
               Get in Touch
             </h1>
             <p className="text-xl text-gray-600 mb-8">
-              Ready to start your medical journey? Our specialists are here to help you every step of the way.
+              Ready to start your medical journey? Our specialists are here to
+              help you every step of the way.
             </p>
 
             <div className="space-y-6 mb-8">
@@ -58,7 +72,9 @@ export default function Contact({ onBack }: ContactProps) {
                   <Phone className="h-6 w-6 text-blue-600" />
                 </div>
                 <div>
-                  <h3 className="font-semibold text-gray-900">24/7 Support Hotline</h3>
+                  <h3 className="font-semibold text-gray-900">
+                    24/7 Support Hotline
+                  </h3>
                   <p className="text-gray-600">+91 9530102585 </p>
                 </div>
               </div>
@@ -95,9 +111,12 @@ export default function Contact({ onBack }: ContactProps) {
             </div>
 
             <div className="bg-blue-50 p-6 rounded-xl">
-              <h3 className="font-semibold text-gray-900 mb-3">Emergency Medical Travel</h3>
+              <h3 className="font-semibold text-gray-900 mb-3">
+                Emergency Medical Travel
+              </h3>
               <p className="text-gray-600 mb-4">
-                For urgent medical situations requiring immediate travel arrangements, call our emergency hotline.
+                For urgent medical situations requiring immediate travel
+                arrangements, call our emergency hotline.
               </p>
               <button className="bg-red-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-red-700 transition-colors">
                 Emergency Hotline: +1 (555) 911-HELP
@@ -109,7 +128,9 @@ export default function Contact({ onBack }: ContactProps) {
           <div className="bg-white rounded-2xl shadow-xl p-8">
             <div className="flex items-center mb-6">
               <MessageSquare className="h-8 w-8 text-blue-600 mr-3" />
-              <h2 className="text-2xl font-bold text-gray-900">Medical Travel Enquiry</h2>
+              <h2 className="text-2xl font-bold text-gray-900">
+                Medical Travel Enquiry
+              </h2>
             </div>
 
             <form onSubmit={handleSubmit} className="space-y-6">
@@ -254,11 +275,16 @@ export default function Contact({ onBack }: ContactProps) {
 
               <div className="bg-gray-50 p-4 rounded-lg">
                 <p className="text-sm text-gray-600">
-                  <strong>What happens next?</strong><br />
-                  1. Our medical specialists will review your enquiry<br />
-                  2. We'll contact you within 24 hours to discuss your options<br />
-                  3. Receive a free second opinion and treatment plan<br />
-                  4. Get assistance with travel arrangements and hospital bookings
+                  <strong>What happens next?</strong>
+                  <br />
+                  1. Our medical specialists will review your enquiry
+                  <br />
+                  2. We'll contact you within 24 hours to discuss your options
+                  <br />
+                  3. Receive a free second opinion and treatment plan
+                  <br />
+                  4. Get assistance with travel arrangements and hospital
+                  bookings
                 </p>
               </div>
 
@@ -274,5 +300,5 @@ export default function Contact({ onBack }: ContactProps) {
         </div>
       </div>
     </div>
-  );
+  )
 }
