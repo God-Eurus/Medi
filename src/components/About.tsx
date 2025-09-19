@@ -9,6 +9,7 @@ import {
   ShieldCheck,
   Building,
   Target,
+  PhoneCall,
   CheckCircle, // For the hero list
   Folder,      // For certifications
   Server       // For certifications
@@ -129,6 +130,11 @@ export default function About() {
 
           {/* Highlights */}
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 text-left mb-16">
+            <div className="p-6 bg-teal-50 rounded-xl shadow-sm">
+              <PhoneCall className="h-12 w-12 text-teal-600 mb-4" />
+              <h4 className="text-xl font-semibold text-gray-900 mb-2">Speedy Consultation</h4>
+              <p className="text-gray-600">contact to consultation within 12 hrs</p>
+            </div>
             <div className="p-6 bg-blue-50 rounded-xl shadow-sm">
               <Users className="h-12 w-12 text-blue-600 mb-4" />
               <h4 className="text-xl font-semibold text-gray-900 mb-2">2M+ Patients</h4>

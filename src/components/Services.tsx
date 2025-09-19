@@ -5,8 +5,8 @@ export default function Services() {
   const services = [
     {
       icon: FileText,
-      title: "Free Second Opinions",
-      description: "Get expert medical opinions from leading specialists worldwide at no cost.",
+      title: "Second Opinions",
+      description: "Get expert medical opinions from leading specialists worldwide.",
       color: "blue"
     },
     {
