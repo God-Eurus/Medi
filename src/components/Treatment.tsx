@@ -286,7 +286,7 @@ export default function Treatment() {
                     {sub.description}
                   </p>
                   <p className="text-xl font-bold text-blue-600 mt-auto pt-4 border-t border-gray-100">
-                    Starts from ${sub.price.toLocaleString()}
+                    ${sub.price.toLocaleString()}
                   </p>
                 </div>
               ))}

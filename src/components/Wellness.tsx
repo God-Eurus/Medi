@@ -80,7 +80,7 @@ export default function Wellness({ onBack }: WellnessProps) {
             Back to Home
           </button>
           <h1 className="text-4xl font-bold text-gray-900 mb-4">
-            Explore <span className="text-teal-500">Wellness Programs</span>
+            Explore <span className="text-blue-600">Wellness Programs</span>
           </h1>
 
           {/* Tabs */}
@@ -91,7 +91,7 @@ export default function Wellness({ onBack }: WellnessProps) {
                 onClick={() => setActiveTab(category)}
                 className={`pb-3 px-1 border-b-2 font-medium text-sm ${
                   activeTab === category
-                    ? 'border-teal-500 text-teal-600'
+                    ? 'border-blue-500 text-blue-600'
                     : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
                 }`}
               >
@@ -105,7 +105,7 @@ export default function Wellness({ onBack }: WellnessProps) {
       {/* Content */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
         <h2 className="text-2xl font-bold text-gray-900 mb-6">
-          {activeTab} <span className="text-teal-500">Packages</span>
+          {activeTab} <span className="text-blue-600">Packages</span>
         </h2>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -122,8 +122,8 @@ export default function Wellness({ onBack }: WellnessProps) {
                   </div>
                   <h3 className="text-lg font-semibold text-gray-900 mb-2">{program.title}</h3>
                   <p className="text-sm text-gray-600 mb-2">{program.subtitle}</p>
-                  <div className="text-sm text-teal-600 font-medium">{program.rating}</div>
-                  <div className="text-lg font-bold text-orange-600 mt-2">{program.price}</div>
+                  <div className="text-sm text-blue-600 font-medium">{program.rating}</div>
+                  <div className="text-lg font-bold text-blue-600 mt-2">{program.price}</div>
                 </div>
               </div>
             );
@@ -131,7 +131,7 @@ export default function Wellness({ onBack }: WellnessProps) {
         </div>
 
         {/* Call to Action */}
-        <div className="mt-16 bg-gradient-to-r from-teal-500 to-blue-600 rounded-2xl p-8 text-white text-center">
+        <div className="mt-16 bg-gradient-to-r from-green-500 to-blue-600 rounded-2xl p-8 text-white text-center">
           <h3 className="text-2xl font-bold mb-4">Need Help Choosing a Program?</h3>
           <p className="text-lg mb-6 text-teal-100">
             Talk to our wellness experts and customize your experience based on your needs.

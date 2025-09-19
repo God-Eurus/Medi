@@ -30,10 +30,10 @@ export const hospitals: HospitalType[] = [
     imageUrl: 'https://lh3.googleusercontent.com/p/AF1QipOU1T8Wke5M8QsnS0V-DPas-iB4FEkxWIKsKrsA=s1360-w1360-h1020-rw', // Note: Replace with your image path
     beds: 1400,
     icuBeds: 125,
-    established: 1999,
+    established: 1998,
     specialties: ['Cardiology', 'Neurology', 'Orthopedics', 'Oncology', 'Gastroenterology'],
     // End of fix
-    description: 'Apollo Hospital is a multi-specialty hospital in Jaipur, known for its advanced cardiac and neuro sciences departments. It offers a wide range of services with state-of-the-art technology and a patient-centric approach.',
+    description: 'Mahatama Gandhi Hospital is a multi-specialty hospital in Jaipur, known for its advanced cardiac and neuro sciences departments. It offers a wide range of services with state-of-the-art technology and a patient-centric approach.',
     doctors: [
       { id: 'd01', name: 'Dr. Anjali Sharma', specialty: 'Cardiologist', imageUrl: '/docimg2.jpg' },
       { id: 'd02', name: 'Dr. Rohan Mehra', specialty: 'Neurosurgeon', imageUrl: '/docimg3.jpg' },
