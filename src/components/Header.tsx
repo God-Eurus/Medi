@@ -11,16 +11,14 @@ export default function Header({ onChatToggle }: HeaderProps) {
 
   // ✅ 2. Updated navLinks to use URL paths instead of events
   const navLinks = [
-    { label: 'Home', path: '/' },
+    // { label: 'Home', path: '/' },
+    { label: 'Doctors', path: '/doctors' },
+    { label: 'Hospitals', path: '/hospitals' },
     { label: 'Treatment', path: '/treatment' },
     { label: 'Wellness', path: '/wellness' },
-    { label: 'Hospitals', path: '/hospitals' },
-    { label: 'Doctors', path: '/doctors' },
-    { label: 'Book Flights', path: '/flights' },
   ];
   
-  // ✅ 3. The handleNavClick function is no longer needed
-  // const handleNavClick = (event: string) => { ... };
+
 
   return (
     <header className="bg-white shadow-sm sticky top-0 z-40">

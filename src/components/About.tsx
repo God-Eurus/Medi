@@ -15,7 +15,6 @@ import {
   Server       // For certifications
 } from 'lucide-react';
 
-// NEW COMPONENT: For the Practo-style "Why MediVoyage" hero section
 const HeroSection = () => (
  <section className="bg-gray-50 py-20">
   <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center gap-12">

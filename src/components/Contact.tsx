@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom';
+import { useForm, ValidationError } from '@formspree/react';
 import {
   Mail,
   Phone,
@@ -8,10 +9,13 @@ import {
   ArrowLeft,
   Clock,
   MessageSquare,
-} from 'lucide-react'
+} from 'lucide-react';
 
 export default function Contact() {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
+
+  // Formspree hook (your provided form ID)
+  const [formState, handleFormspreeSubmit] = useForm('mvgdypne');
 
   const [formData, setFormData] = useState({
     firstName: '',
@@ -23,7 +27,7 @@ export default function Contact() {
     urgency: 'normal',
     message: '',
     preferredContact: 'email',
-  })
+  });
 
   const handleInputChange = (
     e: React.ChangeEvent<
@@ -33,15 +37,51 @@ export default function Contact() {
     setFormData({
       ...formData,
       [e.target.name]: e.target.value,
-    })
-  }
+    });
+  };
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
-    console.log('Enquiry submitted:', formData)
-    alert(
-      'Thank you for your enquiry! Our medical travel specialists will contact you within 24 hours.',
-    )
+  // Combined submit: submits via Formspree and keeps your existing behavior
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    // Let Formspree read the form element's inputs (we use the event directly)
+    // preventDefault is handled by Formspree's handler in the example pattern,
+    // but we call preventDefault here to control the flow and then pass the event.
+    e.preventDefault();
+
+    // Submit to Formspree (pass the native event). This follows the example usage.
+    // Note: handleFormspreeSubmit may update formState asynchronously.
+    await handleFormspreeSubmit(e as any);
+
+    console.log('Enquiry submitted:', formData);
+
+    // If submission succeeded, show an alert (and you also render a success UI below).
+    if (formState.succeeded) {
+      // keep the alert (optional)
+      alert(
+        'Thank you for your enquiry! Our medical travel specialists will contact you within 24 hours.',
+      );
+    }
+  };
+
+  // Show success UI if Formspree reports success
+  if (formState.succeeded) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-gray-50 p-6">
+        <div className="max-w-2xl bg-white rounded-2xl shadow-xl p-8 text-center">
+          <h2 className="text-2xl font-bold text-gray-900 mb-4">
+            Thanks — we received your enquiry
+          </h2>
+          <p className="text-gray-600 mb-6">
+            Our medical travel specialists will contact you within 24 hours.
+          </p>
+          <button
+            onClick={() => navigate('/')}
+            className="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors"
+          >
+            Return Home
+          </button>
+        </div>
+      </div>
+    );
   }
 
   return (
@@ -58,12 +98,9 @@ export default function Contact() {
         <div className="grid lg:grid-cols-2 gap-12">
           {/* Contact Information */}
           <div>
-            <h1 className="text-4xl font-bold text-gray-900 mb-6">
-              Get in Touch
-            </h1>
+            <h1 className="text-4xl font-bold text-gray-900 mb-6">Get in Touch</h1>
             <p className="text-xl text-gray-600 mb-8">
-              Ready to start your medical journey? Our specialists are here to
-              help you every step of the way.
+              Ready to start your medical journey? Our specialists are here to help you every step of the way.
             </p>
 
             <div className="space-y-6 mb-8">
@@ -72,9 +109,7 @@ export default function Contact() {
                   <Phone className="h-6 w-6 text-blue-600" />
                 </div>
                 <div>
-                  <h3 className="font-semibold text-gray-900">
-                    24/7 Support Hotline
-                  </h3>
+                  <h3 className="font-semibold text-gray-900">24/7 Support Hotline</h3>
                   <p className="text-gray-600">+91 9530102585 </p>
                 </div>
               </div>
@@ -111,12 +146,9 @@ export default function Contact() {
             </div>
 
             <div className="bg-blue-50 p-6 rounded-xl">
-              <h3 className="font-semibold text-gray-900 mb-3">
-                Emergency Medical Travel
-              </h3>
+              <h3 className="font-semibold text-gray-900 mb-3">Emergency Medical Travel</h3>
               <p className="text-gray-600 mb-4">
-                For urgent medical situations requiring immediate travel
-                arrangements, call our emergency hotline.
+                For urgent medical situations requiring immediate travel arrangements, call our emergency hotline.
               </p>
               <button className="bg-red-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-red-700 transition-colors">
                 Emergency Hotline: +1 (555) 911-HELP
@@ -128,17 +160,14 @@ export default function Contact() {
           <div className="bg-white rounded-2xl shadow-xl p-8">
             <div className="flex items-center mb-6">
               <MessageSquare className="h-8 w-8 text-blue-600 mr-3" />
-              <h2 className="text-2xl font-bold text-gray-900">
-                Medical Travel Enquiry
-              </h2>
+              <h2 className="text-2xl font-bold text-gray-900">Medical Travel Enquiry</h2>
             </div>
 
+            {/* Use the same form element so Formspree can read fields when we pass the submit event */}
             <form onSubmit={handleSubmit} className="space-y-6">
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    First Name *
-                  </label>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">First Name *</label>
                   <input
                     type="text"
                     name="firstName"
@@ -150,9 +179,7 @@ export default function Contact() {
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Last Name *
-                  </label>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">Last Name *</label>
                   <input
                     type="text"
                     name="lastName"
@@ -167,9 +194,7 @@ export default function Contact() {
 
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Email Address *
-                  </label>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">Email Address *</label>
                   <input
                     type="email"
                     name="email"
@@ -179,11 +204,10 @@ export default function Contact() {
                     className="w-full px-3 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                     placeholder="your@email.com"
                   />
+                  <ValidationError prefix="Email" field="email" errors={formState.errors} />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Phone Number *
-                  </label>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">Phone Number *</label>
                   <input
                     type="tel"
                     name="phone"
@@ -197,9 +221,7 @@ export default function Contact() {
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Country/Region *
-                </label>
+                <label className="block text-sm font-medium text-gray-700 mb-2">Country/Region *</label>
                 <input
                   type="text"
                   name="country"
@@ -212,9 +234,7 @@ export default function Contact() {
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Medical Condition/Treatment Needed *
-                </label>
+                <label className="block text-sm font-medium text-gray-700 mb-2">Medical Condition/Treatment Needed *</label>
                 <input
                   type="text"
                   name="medicalCondition"
@@ -228,9 +248,7 @@ export default function Contact() {
 
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Urgency Level
-                  </label>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">Urgency Level</label>
                   <select
                     name="urgency"
                     value={formData.urgency}
@@ -243,9 +261,7 @@ export default function Contact() {
                   </select>
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Preferred Contact Method
-                  </label>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">Preferred Contact Method</label>
                   <select
                     name="preferredContact"
                     value={formData.preferredContact}
@@ -260,9 +276,7 @@ export default function Contact() {
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Additional Information
-                </label>
+                <label className="block text-sm font-medium text-gray-700 mb-2">Additional Information</label>
                 <textarea
                   name="message"
                   value={formData.message}
@@ -271,34 +285,33 @@ export default function Contact() {
                   className="w-full px-3 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                   placeholder="Please provide any additional details about your medical condition, preferred destinations, budget considerations, or specific questions..."
                 />
+                <ValidationError prefix="Message" field="message" errors={formState.errors} />
               </div>
 
               <div className="bg-gray-50 p-4 rounded-lg">
                 <p className="text-sm text-gray-600">
                   <strong>What happens next?</strong>
                   <br />
-                  1. Our medical specialists will review your enquiry
+                  1. Our medical specialists will review your enquiry and Contact you shortly.
                   <br />
-                  2. We'll contact you within 24 hours to discuss your options
+                  2. Receive a free second opinion and treatment plan
                   <br />
-                  3. Receive a free second opinion and treatment plan
-                  <br />
-                  4. Get assistance with travel arrangements and hospital
-                  bookings
+                  3. Get assistance with travel arrangements and hospital bookings
                 </p>
               </div>
 
               <button
                 type="submit"
-                className="w-full bg-blue-600 text-white py-4 px-6 rounded-lg font-semibold hover:bg-blue-700 transition-colors flex items-center justify-center"
+                disabled={formState.submitting}
+                className="w-full bg-blue-600 text-white py-4 px-6 rounded-lg font-semibold hover:bg-blue-700 transition-colors flex items-center justify-center disabled:opacity-60"
               >
                 <Send className="mr-2 h-5 w-5" />
-                Submit Enquiry
+                {formState.submitting ? 'Sending...' : 'Submit Enquiry'}
               </button>
             </form>
           </div>
         </div>
       </div>
     </div>
-  )
+  );
 }
