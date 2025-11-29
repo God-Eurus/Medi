@@ -31,7 +31,7 @@ export default function MedivoyageConcierge() {
 
   // --- DATA: DOCTORS ---
   const allDoctors = [
-    { name: "Dr. Swaraj Maharwal", specialty: "General Surgery", hospital: "Apollo Spectra", experience: "35 Years", location: "Jaipur", rating: "4.9", image: "https://meerahospital.com/wp-content/uploads/2022/08/Dr.-Swaraj-Prakash-Img.jpg" },
+    { name: "Dr. Swaraj Maharwal", specialty: "General Surgery", hospital: "Apollo Spectra", experience: "35 Years", location: "Jaipur", rating: "4.9", image: "/tauji.png" },
     { name: "Dr. G L Sharma", specialty: "Cardiology", hospital: "Fortis Escorts", experience: "22 Years", location: "Jaipur", rating: "5.0", image: "https://priyankahospital.com/wp-content/uploads/2024/06/9GL-1.jpg" },
     { name: "Dr. Naresh Somani", specialty: "Oncology", hospital: "Max Healthcare", experience: "12 Years", location: "Jaipur", rating: "4.8", image: "/Dr-Naresh-Somani.jpeg" },
     { name: "Dr. Manish Munjal", specialty: "Cardiology", hospital: "Medanta Hospital", experience: "25 Years", location: "Gurgaon", rating: "4.9", image: "/Dr-Manish-Munjal.JPG" },

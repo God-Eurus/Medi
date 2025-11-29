@@ -402,7 +402,7 @@ export default function Hero() {
             className="w-full h-full"
         >
             <img 
-            src="https://images.unsplash.com/photo-1544161515-4ab6ce6db874?q=80&w=2000&auto=format&fit=crop" 
+            src="/hospitalimage.jpg" 
             alt="Wellness Sanctuary" 
             className="w-full h-full object-cover"
             />
@@ -420,20 +420,21 @@ export default function Hero() {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="space-y-6 text-center lg:text-left pt-10 lg:pt-0 hidden lg:block"
         >
-            <div className="inline-flex items-center gap-3 border border-white/20 bg-white/5 backdrop-blur-sm px-4 py-1.5 rounded-full">
+            {/* <div className="inline-flex items-center gap-3 border border-white/20 bg-white/5 backdrop-blur-sm px-4 py-1.5 rounded-full">
                 <span className="w-1.5 h-1.5 rounded-full bg-[#D4C5A9] animate-pulse"></span>
                 <span className="text-white/80 text-[10px] tracking-[0.2em] uppercase">Global Medical Concierge</span>
-            </div>
+            </div> */}
 
             <h1 className="text-4xl lg:text-6xl font-serif text-white leading-tight">
-                Restorative care, <br />
-                <span className="text-[#D4C5A9] italic font-light">boundless</span> horizons.
+                DOCTOR LED. <br />
+                <span className="text-[#D4C5A9] font-light">WORLD CLASS HEALTHCARE.</span>
+            </h1>
+            <h1 className="text-4xl lg:text-6xl font-serif text-white leading-tight">
+                ZERO WAITING TIME. <br />
+                <span className="text-[#D4C5A9] font-light">TRANSPARENT PRICING.</span> 
             </h1>
 
-            <p className="text-white/60 text-base lg:text-lg max-w-lg font-light leading-relaxed mx-auto lg:mx-0">
-                Bridge the gap between world-class medical procedures and luxury travel. 
-                Your journey to wellness starts here.
-            </p>
+            
         </motion.div>
 
         {/* RIGHT COLUMN: Compact Glass Form */}
