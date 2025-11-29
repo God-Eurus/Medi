@@ -256,10 +256,13 @@ export default function MedivoyageConcierge() {
                   {/* Content Group */}
                   <div style={{ color: theme.textLight, fontFamily: fonts.body }} className="text-base lg:text-lg leading-relaxed space-y-4 font-light">
                     <p>
-                      "We founded My Concierge on a simple premise: your health journey should be as seamless as it is effective. Having navigated international healthcare ourselves, we saw a need for clinical excellence combined with high-touch hospitality."
+                      MediVoyage was created with a simple belief: every person deserves access to safe, honest, and world class healthcare.
+That means transparent, fixed pricing so you always know what to expect. 
                     </p>
                     <p>
-                      "We are a team of physicians and travel experts vetting every detail. This isn't just about access; it's about the peace of mind knowing your well-being is our only priority."
+                      You are not just a case or a file. You are someone with a story, a family, a future and you deserve care that honors that.
+As doctor founders, our promise is to stand by you at every step, making sure your medical journey is clear, comfortable, and truly centered around your well-being.
+
                     </p>
                   </div>
 
@@ -269,12 +272,12 @@ export default function MedivoyageConcierge() {
                   {/* Signatures */}
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 pt-2">
                     <div className="space-y-1">
-                      <p style={{ color: theme.primary, fontFamily: fonts.heading }} className="text-lg italic">Dr. Anya Sharma</p>
-                      <p style={{ color: theme.textLight, fontFamily: fonts.sans }} className="text-[9px] font-bold uppercase tracking-widest opacity-70">Co-Founder & CMO</p>
+                      <p style={{ color: theme.primary, fontFamily: fonts.heading }} className="text-lg italic">Dr. Garvit Maharwal</p>
+                      <p style={{ color: theme.textLight, fontFamily: fonts.sans }} className="text-[9px] font-bold uppercase tracking-widest opacity-70">Co-Founder & CEO</p>
                     </div>
                     <div className="space-y-1">
-                      <p style={{ color: theme.primary, fontFamily: fonts.heading }} className="text-lg italic">Marcus Chen</p>
-                      <p style={{ color: theme.textLight, fontFamily: fonts.sans }} className="text-[9px] font-bold uppercase tracking-widest opacity-70">Co-Founder & CEO</p>
+                      <p style={{ color: theme.primary, fontFamily: fonts.heading }} className="text-lg italic">Dr. Nandita Munjal</p>
+                      <p style={{ color: theme.textLight, fontFamily: fonts.sans }} className="text-[9px] font-bold uppercase tracking-widest opacity-70">Co-Founder & COO</p>
                     </div>
                   </div>
                 </div>
