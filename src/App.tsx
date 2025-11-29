@@ -12,10 +12,13 @@ import Contact from './components/Contact';
 import Treatment from './components/Treatment';
 import Wellness from './components/Wellness';
 import Hospitals from './components/Hospitalspages';
-import Doctors from './components/Doctorspage';
+
 import FlightBooking from './components/FlightBooking';
-import ChatAssistant from './components/ChatAssistant';
-import HospitalDetail from './components/HospitalDetail'; // ✅ 1. Import the HospitalDetail component
+
+import HospitalDetail from './components/HospitalDetail';
+import WhatsAppButton from "./components/WhatsAppButton";
+import MedivoyageConcierge from "./components/myconcierge"; 
+import ScrollToTop from "./components/ScrollToTop";// ✅ Import the Concierge component
 
 const HomePage = () => (
   <>
@@ -35,7 +38,7 @@ const MainLayout = () => {
         <Outlet />
       </main>
       <Footer />
-      <ChatAssistant isOpen={isChatOpen} onClose={() => setIsChatOpen(false)} />
+    
     </div>
   );
 };
@@ -43,6 +46,7 @@ const MainLayout = () => {
 function App() {
   return (
     <Router>
+      <ScrollToTop /> 
       <Routes>
         {/* Routes that should have the main Header and Footer */}
         <Route path="/" element={<MainLayout />}>
@@ -51,16 +55,19 @@ function App() {
           <Route path="treatment" element={<Treatment />} />
           <Route path="wellness" element={<Wellness />} />
           <Route path="hospitals" element={<Hospitals />} />
-          <Route path="doctors" element={<Doctors />} />
+          
           <Route path="flights" element={<FlightBooking />} />
           <Route path="contact" element={<Contact />} />
-          {/* ✅ 2. Activated the route for the hospital detail page */}
           <Route path="hospital/:hospitalId" element={<HospitalDetail />} />
+          
+          {/* ✅ Added route for Concierge */}
+          <Route path="myconcierge" element={<MedivoyageConcierge />} />
         </Route>
 
-        {/* Routes that might have a different layout */}
-        <Route path="/login" element={<Login />} />
+        {/* Routes that might have a different layout can go here */}
+        
       </Routes>
+      <WhatsAppButton />
     </Router>
   );
 }

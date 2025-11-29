@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom'; // ✅ 1. Import Link for navigation
-import { Menu, X, MessageCircle } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { Link, useLocation } from 'react-router-dom';
+import { Menu, X, Sparkles } from 'lucide-react';
 
 interface HeaderProps {
   onChatToggle: () => void;
@@ -8,94 +8,148 @@ interface HeaderProps {
 
 export default function Header({ onChatToggle }: HeaderProps) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+  const location = useLocation();
 
-  // ✅ 2. Updated navLinks to use URL paths instead of events
+  // Scroll effect listener
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 20);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  // Scroll to hash if present (Basic implementation for standard React Router)
+  useEffect(() => {
+    if (location.hash) {
+      const element = document.getElementById(location.hash.substring(1));
+      if (element) {
+        setTimeout(() => {
+          element.scrollIntoView({ behavior: 'smooth' });
+        }, 100); // Small delay to ensure page load
+      }
+    }
+  }, [location]);
+
   const navLinks = [
-    // { label: 'Home', path: '/' },
-    { label: 'Doctors', path: '/doctors' },
+    // UPDATED: Points to the 'doctors' ID on the About page
+    // { label: 'Doctors', path: '/allDoctors' }, 
     { label: 'Hospitals', path: '/hospitals' },
-    { label: 'Treatment', path: '/treatment' },
+    { label: 'Treatments', path: '/treatment' },
     { label: 'Wellness', path: '/wellness' },
   ];
-  
 
+  // Theme Colors
+  const theme = {
+    primary: '#1A3C34',     // Deep Cypress Green
+    secondary: '#C8B092',   // Gold/Sand
+    bg: '#F2F0EA',          // Alabaster
+  };
 
   return (
-    <header className="bg-white shadow-sm sticky top-0 z-40">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-16">
-          {/* Logo - can also be a link to home */}
-          <Link to="/" className="flex items-center">
-            <img src="/logo.png" alt="MediVoyage Logo" className="h-10 w-auto" />
-            <span className="ml-2 text-xl font-bold text-gray-900">MediVoyage</span>
+    // Outer Container
+    <div className={`fixed top-0 left-0 w-full z-50 transition-all duration-500 ${isScrolled ? 'py-2 md:py-4' : 'py-4 md:py-6'}`}>
+      
+      <header 
+        className={`
+          relative mx-auto transition-all duration-500 ease-[cubic-bezier(0.23,1,0.32,1)]
+          flex items-center justify-between
+          
+          /* Mobile Styles */
+          w-full px-6 py-4 border-b border-[#1A3C34]/5
+          bg-[#F2F0EA]/85 backdrop-blur-lg
+          
+          /* Desktop Styles (Floating Pill) */
+          md:w-[90%] md:max-w-6xl md:rounded-full md:px-8 md:py-3 md:border md:shadow-xl
+          
+          /* Desktop Transparency (60%) */
+          md:bg-[#F2F0EA]/60 md:backdrop-blur-xl md:border-[#1A3C34]/10 md:shadow-[#1A3C34]/5
+        `}
+      >
+        
+        {/* 1. LOGO */}
+        <Link to="/" className="flex items-center gap-2 group z-50 shrink-0">
+          <div className="w-8 h-8 bg-[#1A3C34] text-[#F2F0EA] rounded-full flex items-center justify-center font-serif italic font-bold text-lg shadow-sm group-hover:bg-[#C8B092] group-hover:text-[#1A3C34] transition-colors duration-500">
+            M
+          </div>
+          <span 
+            style={{ color: theme.primary, fontFamily: '"Playfair Display", serif' }}
+            className="ml-1 text-xl font-bold tracking-tight"
+          >
+            MediVoyage
+          </span>
+        </Link>
+
+        {/* 2. DESKTOP NAVIGATION */}
+        <nav className="hidden md:flex items-center gap-8">
+          {navLinks.map(({ label, path }) => (
+            <Link
+              key={label}
+              to={path}
+              style={{ color: theme.primary }}
+              className="text-[11px] font-bold uppercase tracking-[0.15em] hover:text-[#C8B092] transition-colors relative group"
+            >
+              {label}
+              <span className="absolute -bottom-1 left-1/2 w-1 h-1 bg-[#C8B092] rounded-full opacity-0 -translate-x-1/2 group-hover:opacity-100 transition-all duration-300"></span>
+            </Link>
+          ))}
+        </nav>
+
+        {/* 3. RIGHT ACTIONS */}
+        <div className="flex items-center gap-3 md:gap-4 shrink-0">
+          
+          {/* Concierge Button */}
+          <Link
+            to="/myconcierge"
+            className="hidden md:flex group relative items-center gap-2 px-5 py-2 rounded-full bg-[#1A3C34] border border-[#C8B092]/30 overflow-hidden transition-all duration-300 hover:shadow-lg hover:shadow-[#C8B092]/20 hover:-translate-y-0.5"
+          >
+            <div className="absolute inset-0 w-full h-full bg-[#C8B092] translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-[cubic-bezier(0.23,1,0.32,1)]"></div>
+            <Sparkles size={14} className="relative z-10 text-[#C8B092] group-hover:text-[#1A3C34] transition-colors duration-300" />
+            <span className="relative z-10 text-[10px] font-bold uppercase tracking-wider text-[#F2F0EA] group-hover:text-[#1A3C34] transition-colors duration-300">
+              Concierge
+            </span>
           </Link>
 
-          {/* Desktop Nav */}
-          <nav className="hidden md:flex space-x-6 items-center">
+          {/* Mobile Menu Toggle */}
+          <button
+            className="md:hidden p-1 text-[#1A3C34]"
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+          >
+            {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+          </button>
+        </div>
+
+        {/* 4. MOBILE MENU */}
+        <div className={`
+            md:hidden absolute top-full left-0 w-full bg-[#F2F0EA]/95 backdrop-blur-xl border-b border-gray-200 shadow-xl overflow-hidden transition-all duration-500 ease-in-out
+            ${isMenuOpen ? 'max-h-[500px] opacity-100' : 'max-h-0 opacity-0'}
+        `}>
+          <nav className="flex flex-col p-6 space-y-4">
             {navLinks.map(({ label, path }) => (
-              // ✅ 4. Replaced <a> tag with <Link>
               <Link
                 key={label}
                 to={path}
-                className="text-gray-700 hover:text-blue-600 transition-colors"
+                onClick={() => setIsMenuOpen(false)}
+                style={{ color: theme.primary }}
+                className="text-lg font-serif font-medium border-b border-[#1A3C34]/10 pb-2"
               >
                 {label}
               </Link>
             ))}
-            {/* ✅ 4. Replaced <button> with <Link> */}
+            
+            {/* Mobile Concierge Link */}
             <Link
-              to="/contact"
-              className="text-gray-700 hover:text-blue-600 transition-colors"
+              to="/myconcierge"
+              onClick={() => setIsMenuOpen(false)}
+              className="flex items-center justify-center gap-2 w-full py-3 mt-2 bg-[#1A3C34] text-[#C8B092] rounded-lg font-bold uppercase tracking-wider text-sm"
             >
-              Contact
+              <Sparkles size={16} /> Concierge Access
             </Link>
           </nav>
-
-          {/* Icons */}
-          <div className="flex items-center space-x-4">
-            <button
-              onClick={onChatToggle}
-              className="p-2 text-blue-600 hover:bg-blue-50 rounded-full transition-colors"
-              title="AI Assistant"
-            >
-              <MessageCircle className="h-6 w-6" />
-            </button>
-            <button
-              className="md:hidden p-2"
-              onClick={() => setIsMenuOpen(!isMenuOpen)}
-            >
-              {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
-            </button>
-          </div>
         </div>
 
-        {/* Mobile Nav */}
-        {isMenuOpen && (
-          <div className="md:hidden py-4 border-t">
-            <nav className="flex flex-col space-y-4">
-              {navLinks.map(({ label, path }) => (
-                // ✅ 4. Replaced <a> tag with <Link>
-                <Link
-                  key={label}
-                  to={path}
-                  // ✅ 5. Added onClick to close menu after navigation
-                  onClick={() => setIsMenuOpen(false)}
-                  className="text-gray-700 hover:text-blue-600 transition-colors px-2 py-1"
-                >
-                  {label}
-                </Link>
-              ))}
-              <Link
-                to="/contact"
-                onClick={() => setIsMenuOpen(false)}
-                className="text-gray-700 hover:text-blue-600 transition-colors text-left px-2 py-1"
-              >
-                Contact
-              </Link>
-            </nav>
-          </div>
-        )}
-      </div>
-    </header>
+      </header>
+    </div>
   );
 }
