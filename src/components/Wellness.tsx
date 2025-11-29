@@ -37,7 +37,6 @@ export default function Wellness({ onBack }: WellnessProps) {
         title: 'Anant Nidra (Deep Sleep)',
         subtitle: 'Restorative therapy for insomnia and stress.',
         description: 'Includes Meditation, Soothing Calm Facial, Marma Massage with Steam, Shirodhara, and Sound Healing Session.',
-        price: '9,999',
         duration: 'Multiple Sessions',
         image: 'https://images.unsplash.com/photo-1544161515-4ab6ce6db874?q=80&w=600&auto=format&fit=crop'
       },
@@ -45,7 +44,6 @@ export default function Wellness({ onBack }: WellnessProps) {
         title: 'Anant Shudi (Ultimate Detox)',
         subtitle: 'Comprehensive program to cleanse toxins.',
         description: 'Includes Seven Chakra Crystal Healing Massage, Salt Therapy, Signature Facial, and Lavender Pedicure.',
-        price: '11,999',
         duration: 'Full Day',
         image: 'https://images.unsplash.com/photo-1579126038374-6064e9370f0f?q=80&w=600&auto=format&fit=crop'
       },
@@ -53,7 +51,6 @@ export default function Wellness({ onBack }: WellnessProps) {
         title: 'Anti Cellulite Package',
         subtitle: 'Targeted treatment for smoother skin.',
         description: 'Features Aqua Yoga, Elakizi Massage with wooden rollers, and Steam/Sauna sessions.',
-        price: '5,999',
         duration: 'Single Session',
         image: 'https://images.unsplash.com/photo-1712725213051-8d7d6a52edaf?w=900&auto=format&fit=crop'
       }
@@ -63,7 +60,6 @@ export default function Wellness({ onBack }: WellnessProps) {
         title: 'Shirodhara',
         subtitle: 'Mental clarity and stress reduction.',
         description: 'Warm oil gently poured onto the forehead to calm the nervous system and induce deep relaxation.',
-        price: '3,000',
         duration: '30 Min',
         image: 'https://images.unsplash.com/photo-1600334089648-b0d9d3028eb2?q=80&w=600&auto=format&fit=crop'
       },
@@ -71,7 +67,7 @@ export default function Wellness({ onBack }: WellnessProps) {
         title: 'Janu Vasti',
         subtitle: 'Knee care and pain relief.',
         description: 'A dam-like structure filled with warm medicated oil is placed on the knee joints to relieve pain.',
-        price: '2,500',
+        
         duration: '30 Min',
         image: 'https://images.unsplash.com/photo-1512290923902-8a9f81dc236c?q=80&w=600&auto=format&fit=crop'
       },
@@ -79,7 +75,7 @@ export default function Wellness({ onBack }: WellnessProps) {
         title: 'Abhyanga',
         subtitle: 'Full-body herbal oil massage.',
         description: 'Improves circulation, detoxifies the body, and promotes balance through traditional techniques.',
-        price: '3,000',
+        
         duration: '60 Min',
         image: 'https://images.unsplash.com/photo-1540555700478-4be289fbecef?q=80&w=600&auto=format&fit=crop'
       },
@@ -87,7 +83,7 @@ export default function Wellness({ onBack }: WellnessProps) {
         title: 'Karnapoorana',
         subtitle: 'Ayurvedic ear therapy.',
         description: 'Warm oil therapy to enhance ear health, improve hearing, and relieve tinnitus and vertigo.',
-        price: '2,000',
+        
         duration: '15 Min',
         image: 'https://images.unsplash.com/photo-1515377905703-c4788e51af15?q=80&w=600&auto=format&fit=crop'
       }
@@ -97,7 +93,7 @@ export default function Wellness({ onBack }: WellnessProps) {
         title: 'Sound Healing',
         subtitle: 'Harmonizing body and soul.',
         description: 'Immerse in transformative sound journeys and healing melodies to restore profound balance.',
-        price: '3,500',
+        
         duration: '45 Min',
         image: 'https://images.unsplash.com/photo-1515023115689-589c33041d3c?q=80&w=600&auto=format&fit=crop'
       },
@@ -105,7 +101,7 @@ export default function Wellness({ onBack }: WellnessProps) {
         title: 'Ice Water Cryotherapy',
         subtitle: 'Circulation and energy boost.',
         description: 'Stimulates circulation and boosts well-being as your body responds to the rejuvenating cold.',
-        price: '1,500',
+        
         duration: '15 Min',
         image: 'https://images.unsplash.com/photo-1583416750470-965b2707b355?q=80&w=600&auto=format&fit=crop'
       },
@@ -113,7 +109,7 @@ export default function Wellness({ onBack }: WellnessProps) {
         title: 'Salt (Halo) Therapy',
         subtitle: 'Respiratory rejuvenation.',
         description: 'Immerse yourself in the healing properties of salt crystals for deep respiratory renewal.',
-        price: '1,500',
+        
         duration: '30 Min',
         image: 'https://images.unsplash.com/photo-1515377905703-c4788e51af15?q=80&w=600&auto=format&fit=crop'
       }
@@ -123,7 +119,7 @@ export default function Wellness({ onBack }: WellnessProps) {
         title: 'Signature Hydra Facial',
         subtitle: 'Extraction and micro-dermabrasion.',
         description: 'Three-phase treatment: extraction, diamond micro-dermabrasion, and LED serum infusion.',
-        price: '7,000',
+        
         duration: '90 Min',
         image: 'https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?q=80&w=600&auto=format&fit=crop'
       },
@@ -131,7 +127,7 @@ export default function Wellness({ onBack }: WellnessProps) {
         title: 'Chandan Mud Therapy',
         subtitle: 'Naturopathy for the full body.',
         description: 'A harmonious blend of mud enriched with Sandalwood to purify and nourish the skin.',
-        price: '5,000',
+        
         duration: '60 Min',
         image: 'https://images.unsplash.com/photo-1600334129128-685c5582fd35?q=80&w=600&auto=format&fit=crop'
       }

@@ -179,119 +179,411 @@
 
 
 
-import React from 'react';
+// import React from 'react';
+// import { useNavigate } from 'react-router-dom';
+// import { ArrowRight, Star, ShieldCheck } from 'lucide-react';
+// import { motion } from 'framer-motion';
+
+// export default function Hero() {
+//   const navigate = useNavigate();
+
+//   // Modern Elegant Palette
+//   const theme = {
+//     bg: '#F2F0EA',          // Soft Alabaster/Linen
+//     primary: '#1A3C34',     // Deep Cypress Green (Text/Buttons)
+//     secondary: '#C8B092',   // Muted Sand/Gold (Accents)
+//     white: '#FFFFFF',
+//     textLight: '#5A6C66'    // Muted Sage Grey for body text
+//   };
+
+//   // Animation Variants
+//   const fadeUp = {
+//     hidden: { opacity: 0, y: 30 },
+//     visible: (custom) => ({
+//       opacity: 1,
+//       y: 0,
+//       transition: { duration: 0.8, ease: [0.22, 1, 0.36, 1], delay: custom * 0.1 }
+//     })
+//   };
+
+//   return (
+//     <section 
+//       style={{ backgroundColor: theme.bg }} 
+//       className="relative min-h-[90vh] flex items-center overflow-hidden"
+//     >
+//       {/* 1. Background Ambience (Subtle Gradients) */}
+//       <div className="absolute top-0 right-0 w-[50vw] h-[50vw] bg-gradient-to-b from-[#E6E2D8] to-transparent rounded-full blur-[120px] opacity-60 -translate-y-1/2 translate-x-1/4 pointer-events-none" />
+      
+//       <div className="max-w-7xl mx-auto px-6 sm:px-6 lg:px-8 relative z-10 w-full py-20">
+//         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
+          
+//           {/* --- LEFT CONTENT (5 Columns) --- */}
+//           <motion.div 
+//             initial="hidden"
+//             animate="visible"
+//             className="lg:col-span-5 space-y-8"
+//           >
+//             {/* Elegant Badge */}
+//             <motion.div variants={fadeUp} custom={0}>
+//               <div 
+//                 style={{ borderColor: theme.primary }}
+//                 className="inline-flex items-center gap-2 px-3 py-1 border border-opacity-20 rounded-full"
+//               >
+//                 <span style={{ backgroundColor: theme.primary }} className="w-1.5 h-1.5 rounded-full" />
+//                 <span style={{ color: theme.primary }} className="text-xs font-semibold tracking-[0.15em] uppercase opacity-80">
+//                   MediVoyage Exclusive
+//                 </span>
+//               </div>
+//             </motion.div>
+
+//             {/* Headline */}
+//             <motion.div variants={fadeUp} custom={1} className="relative">
+//               <h1 style={{ color: theme.primary }} className="text-5xl lg:text-6xl xl:text-7xl font-serif font-medium leading-[1.1]">
+//                 Healing, <br />
+//                 <span className="italic font-light">curated</span> for you.
+//               </h1>
+//               {/* Decorative line */}
+//               <div style={{ backgroundColor: theme.secondary }} className="h-1 w-24 mt-6 rounded-full" />
+//             </motion.div>
+
+//             {/* Body */}
+//             <motion.p 
+//               variants={fadeUp} 
+//               custom={2}
+//               style={{ color: theme.textLight }} 
+//               className="text-lg leading-relaxed max-w-md font-sans"
+//             >
+//               Experience world-class healthcare seamlessly blended with premium hospitality. From JCI-accredited specialists to luxury recovery stays, we orchestrate every detail.
+//             </motion.p>
+
+//             {/* Buttons */}
+//             <motion.div variants={fadeUp} custom={3} className="flex flex-wrap gap-4 pt-4">
+//               <button
+//                 onClick={() => navigate('/services')}
+//                 style={{ backgroundColor: theme.primary, color: theme.bg }}
+//                 className="group relative px-8 py-4 rounded-full overflow-hidden transition-all hover:shadow-xl hover:shadow-[#1A3C34]/20"
+//               >
+//                 <span className="relative z-10 flex items-center gap-2 font-medium tracking-wide">
+//                   Explore Services <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+//                 </span>
+//               </button>
+              
+//               <button
+//                 onClick={() => navigate('/contact')}
+//                 style={{ color: theme.primary, borderColor: theme.primary }}
+//                 className="px-8 py-4 rounded-full border border-opacity-20 hover:bg-[#1A3C34] hover:text-[#F2F0EA] hover:border-transparent transition-all font-medium tracking-wide"
+//               >
+//                 Consult Advisor
+//               </button>
+//             </motion.div>
+
+//             {/* Trust Indicators */}
+//             <motion.div variants={fadeUp} custom={4} className="flex items-center gap-6 pt-6 opacity-80">
+//                 <div className="flex -space-x-3">
+//                     {[1,2,3].map((i) => (
+//                         <div key={i} className="w-10 h-10 rounded-full border-2 border-[#F2F0EA] overflow-hidden">
+//                              <img src={`https://i.pravatar.cc/100?img=${20+i}`} alt="Client" className="w-full h-full object-cover" />
+//                         </div>
+//                     ))}
+//                 </div>
+//                 <div style={{ color: theme.primary }} className="text-sm font-medium">
+//                     <div className="flex items-center gap-1">
+//                         <Star size={14} fill={theme.secondary} stroke="none" />
+//                         <span>4.9/5 Rating</span>
+//                     </div>
+//                     <span className="text-xs opacity-60">from 500+ patients</span>
+//                 </div>
+//             </motion.div>
+//           </motion.div>
+
+//           {/* --- RIGHT CONTENT (7 Columns) --- */}
+//           <div className="lg:col-span-7 relative h-[500px] lg:h-[700px] flex items-center justify-center lg:justify-end">
+            
+//             {/* Main Tall Image (Architectural/Sharp) */}
+//             <motion.div 
+//               initial={{ opacity: 0, clipPath: "inset(100% 0 0 0)" }}
+//               animate={{ opacity: 1, clipPath: "inset(0% 0 0 0)" }}
+//               transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
+//               className="relative w-[85%] lg:w-[70%] h-full z-10"
+//             >
+//               <img 
+//                 src="https://images.unsplash.com/photo-1600607686527-6fb886090705?q=80&w=1200&auto=format&fit=crop" 
+//                 alt="Luxury Recovery Suite" 
+//                 className="w-full h-full object-cover shadow-2xl"
+//               />
+//               {/* Subtle Overlay gradient */}
+//               <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent opacity-60"></div>
+//             </motion.div>
+
+//             {/* Floating Glass Card (Bottom Left) */}
+//             <motion.div 
+//               initial={{ opacity: 0, x: -50 }}
+//               animate={{ opacity: 1, x: 0 }}
+//               transition={{ delay: 0.6, duration: 0.8 }}
+//               className="absolute bottom-12 left-0 lg:left-12 z-20"
+//             >
+//                <div className="backdrop-blur-md bg-white/80 border border-white/40 p-6 shadow-[0_8px_32px_rgba(0,0,0,0.12)] max-w-[280px]">
+//                   <div className="flex items-start gap-4">
+//                     <div style={{ backgroundColor: theme.primary }} className="p-3 text-white">
+//                         <ShieldCheck size={24} strokeWidth={1.5} />
+//                     </div>
+//                     <div>
+//                         <h3 style={{ color: theme.primary }} className="font-serif text-lg leading-tight mb-1">JCI Accredited</h3>
+//                         <p style={{ color: theme.textLight }} className="text-xs leading-relaxed">
+//                             Partnered with India's top tier global standard hospitals.
+//                         </p>
+//                     </div>
+//                   </div>
+//                </div>
+//             </motion.div>
+
+//              {/* Decorative Element (Top Right) */}
+//              <motion.div
+//                 initial={{ opacity: 0, scale: 0.8 }}
+//                 animate={{ opacity: 1, scale: 1 }}
+//                 transition={{ delay: 0.8 }}
+//                 className="absolute top-12 right-12 lg:-right-4 z-20 hidden md:block"
+//              >
+//                  <img 
+//                     src="https://images.unsplash.com/photo-1579684385127-1ef15d508118?q=80&w=400&auto=format&fit=crop" 
+//                     alt="Detail" 
+//                     className="w-32 h-40 object-cover border-4 border-[#F2F0EA] shadow-xl" 
+//                 />
+//              </motion.div>
+
+//           </div>
+//         </div>
+//       </div>
+//     </section>
+//   );
+// }
+
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { ArrowRight } from 'lucide-react'; // Removed Play icon import
+import { 
+  Upload, 
+  ShieldCheck, 
+  Globe, 
+  Heart, 
+  ChevronDown,
+  Paperclip,
+  User,
+  Phone,
+  Mail
+} from 'lucide-react';
 
 export default function Hero() {
-  // Theme: Deep Emerald & Sand
-  const theme = {
-    text: '#FFFFFF',
-    accent: '#D4C5A9',      // Champagne gold
-    darkOverlay: '#0F2622', // Deep Green
+  const [formData, setFormData] = useState({
+    name: '',
+    phone: '',
+    email: '',
+    specialty: '',
+    treatment: '',
+    location: 'Jaipur'
+  });
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  return (
-    <section className="relative h-screen w-full overflow-hidden flex items-center">
-      
-      {/* 0. Font Import (Embedded for immediate rendering) */}
-      <style>
-        {`
-          @import url('https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap');
-          .font-garamond { font-family: 'EB Garamond', serif; }
-        `}
-      </style>
+  // Reusable styles for consistency
+  const inputBase = "w-full bg-black/20 border border-white/10 text-white text-sm rounded-lg px-3 py-2.5 placeholder:text-white/40 focus:outline-none focus:border-[#D4C5A9] transition-colors";
+  const labelBase = "text-[10px] text-[#D4C5A9] uppercase tracking-wider ml-1 mb-1 block";
 
+  return (
+    <section className="relative w-full min-h-screen overflow-hidden flex flex-col justify-center py-12 lg:py-0">
+      
       {/* 1. BACKGROUND LAYER */}
       <div className="absolute inset-0 z-0">
         <motion.div
-            initial={{ scale: 1.1 }}
+            initial={{ scale: 1.15 }}
             animate={{ scale: 1 }}
-            transition={{ duration: 12, ease: "easeOut" }}
+            transition={{ duration: 10, ease: "easeOut" }}
             className="w-full h-full"
         >
             <img 
-              // New Image: A calm, modern, luxury medical facility with nature integration
-              src="https://images.unsplash.com/photo-1586773860418-d37222d8fce3?q=80&w=2000&auto=format&fit=crop" 
-              alt="Serene Medical Facility" 
-              className="w-full h-full object-cover"
+            src="https://images.unsplash.com/photo-1544161515-4ab6ce6db874?q=80&w=2000&auto=format&fit=crop" 
+            alt="Wellness Sanctuary" 
+            className="w-full h-full object-cover"
             />
         </motion.div>
-        {/* Gradient Overlay: Heavy on the left for text readability, fading to reveal image on right */}
-        <div className="absolute inset-0 bg-gradient-to-r from-[#0F2622]/95 via-[#0F2622]/60 to-transparent"></div>
+        <div className="absolute inset-0 bg-gradient-to-r from-[#0F2622]/95 via-[#0F2622]/85 to-[#0F2622]/90"></div>
       </div>
 
-      {/* 2. LEFT ALIGNED CONTENT */}
-      <div className="relative z-10 w-full max-w-7xl mx-auto px-6 lg:px-8 h-full flex flex-col justify-center">
+      {/* 2. MAIN CONTENT GRID */}
+      <div className="relative z-10 w-full max-w-6xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-8 items-center h-full">
         
+        {/* LEFT COLUMN: Text Content */}
         <motion.div 
-            initial={{ opacity: 0, x: -30 }}
+            initial={{ opacity: 0, x: -40 }}
             animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 1, delay: 0.2 }}
-            className="max-w-2xl space-y-8"
+            transition={{ duration: 0.8, delay: 0.2 }}
+            className="space-y-6 text-center lg:text-left pt-10 lg:pt-0 hidden lg:block"
         >
-            {/* Small Label */}
-            <div className="inline-flex items-center gap-3 pl-1">
-                <span className="w-8 h-[1px] bg-[#D4C5A9]"></span>
-                <span className="text-[#D4C5A9] text-xs tracking-[0.2em] uppercase font-medium font-sans">
-                  Medical Concierge
-                </span>
+            <div className="inline-flex items-center gap-3 border border-white/20 bg-white/5 backdrop-blur-sm px-4 py-1.5 rounded-full">
+                <span className="w-1.5 h-1.5 rounded-full bg-[#D4C5A9] animate-pulse"></span>
+                <span className="text-white/80 text-[10px] tracking-[0.2em] uppercase">Global Medical Concierge</span>
             </div>
 
-            {/* Headline - Using Garamond */}
-            <h1 className="font-garamond text-5xl lg:text-7xl text-white leading-[1.1]">
-                World-class doctors, <br />
-                <span className="bold text-[#D4C5A9]">No waiting rooms.</span> 
+            <h1 className="text-4xl lg:text-6xl font-serif text-white leading-tight">
+                Restorative care, <br />
+                <span className="text-[#D4C5A9] italic font-light">boundless</span> horizons.
             </h1>
 
-            {/* Subtext - Using Garamond */}
-            <p className="font-garamond text-white/80 text-xl lg:text-2xl leading-relaxed max-w-lg font-light">
-                We bridge the gap between complex medical procedures and luxury travel. 
-                Experience healing in the world's most serene destinations.
+            <p className="text-white/60 text-base lg:text-lg max-w-lg font-light leading-relaxed mx-auto lg:mx-0">
+                Bridge the gap between world-class medical procedures and luxury travel. 
+                Your journey to wellness starts here.
             </p>
-            
-            {/* ACTION AREA */}
-            <div className="pt-4">
+        </motion.div>
+
+        {/* RIGHT COLUMN: Compact Glass Form */}
+        <motion.div 
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.4 }}
+            className="w-full max-w-[420px] mx-auto lg:ml-auto"
+        >
+            <div className="bg-white/10 backdrop-blur-xl border border-white/20 p-5 rounded-2xl shadow-2xl relative">
                 
-                {/* Book Consultation Button */}
-                <button 
-                  className="group relative px-8 py-4 bg-[#D4C5A9] text-[#0F2622] overflow-hidden rounded-full transition-all hover:pr-12 hover:bg-[#C8B89A]"
-                >
-                  <span className="relative z-10 text-sm font-bold uppercase tracking-widest font-sans">
-                    Book Consultation
-                  </span>
-                  <div className="absolute right-4 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 group-hover:translate-x-0 -translate-x-4 transition-all duration-300">
-                    <ArrowRight size={16} />
-                  </div>
-                </button>
+                <h3 className="text-xl font-serif text-white text-center mb-4">Get Personalized Help</h3>
+
+                <form className="space-y-3">
+                    
+                    {/* SECTION 1: Personal Details */}
+                    <div className="space-y-3">
+                        {/* Name & Phone in one row */}
+                        <div className="grid grid-cols-2 gap-3">
+                            <div>
+                                <input 
+                                    type="text" 
+                                    name="name"
+                                    placeholder="Name" 
+                                    className={inputBase}
+                                />
+                            </div>
+                            <div>
+                                <input 
+                                    type="tel" 
+                                    name="phone"
+                                    placeholder="Phone Number" 
+                                    className={inputBase}
+                                />
+                            </div>
+                        </div>
+                        {/* Email full width */}
+                        <div>
+                            <input 
+                                type="email" 
+                                name="email"
+                                placeholder="Email Address" 
+                                className={inputBase}
+                            />
+                        </div>
+                    </div>
+
+                    <div className="h-px bg-white/10 my-2"></div>
+
+                    {/* SECTION 2: Medical Details */}
+                    <div className="grid grid-cols-2 gap-3">
+                        <div>
+                            <label className={labelBase}>Specialty</label>
+                            <div className="relative">
+                                <select 
+                                    name="specialty"
+                                    value={formData.specialty} 
+                                    onChange={handleChange} 
+                                    className={`${inputBase} appearance-none`}
+                                >
+                                    <option value="" className="bg-[#0F2622]">Select...</option>
+                                    <option value="dental" className="bg-[#0F2622]">Dental</option>
+                                    <option value="cosmetic" className="bg-[#0F2622]">Cosmetic</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div>
+                            <label className={labelBase}>Treatment</label>
+                            <div className="relative">
+                                <select 
+                                    name="treatment"
+                                    value={formData.treatment}
+                                    onChange={handleChange}
+                                    disabled={!formData.specialty}
+                                    className={`${inputBase} appearance-none disabled:opacity-50`}
+                                >
+                                    <option value="" className="bg-[#0F2622]">Select...</option>
+                                    <option value="implants" className="bg-[#0F2622]">Implants</option>
+                                    <option value="veneers" className="bg-[#0F2622]">Veneers</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* Location */}
+                    <div>
+                        <label className={labelBase}>Preferred Location</label>
+                        <div className="relative">
+                            <select 
+                                name="location"
+                                value={formData.location}
+                                onChange={handleChange}
+                                className={`${inputBase} appearance-none`}
+                            >
+                                <option value="Jaipur" className="bg-[#0F2622]">Jaipur, India</option>
+                                <option value="Delhi" className="bg-[#0F2622]">Delhi, India</option>
+                                <option value="Mumbai" className="bg-[#0F2622]">Mumbai, India</option>
+                            </select>
+                            <ChevronDown className="absolute right-3 top-3.5 text-white/50 pointer-events-none" size={14} />
+                        </div>
+                    </div>
+
+                    {/* Message & File */}
+                    <div className="flex gap-2 items-center">
+                        <input 
+                            type="text" 
+                            placeholder="Describe your needs..." 
+                            className={`${inputBase} flex-1`}
+                        />
+                        <div className="relative group">
+                            <input type="file" id="file-upload" className="hidden" />
+                            <label htmlFor="file-upload" className="flex items-center justify-center w-10 h-[42px] border border-white/20 rounded-lg bg-black/10 hover:bg-black/20 text-white/60 hover:text-[#D4C5A9] cursor-pointer transition-colors" title="Upload Documents">
+                                <Paperclip size={18} />
+                            </label>
+                        </div>
+                    </div>
+
+                    {/* Action Buttons */}
+                    <div className="grid grid-cols-2 gap-3 pt-2">
+                        <button type="button" className="bg-[#D4C5A9] hover:bg-[#C0B090] text-[#0F2622] text-sm font-bold py-3 rounded-lg transition-all active:scale-95 shadow-lg shadow-[#D4C5A9]/20">
+                            Get Quotations
+                        </button>
+                        <button type="button" className="bg-white/5 hover:bg-white/10 border border-white/10 text-white text-sm font-medium py-3 rounded-lg transition-all">
+                            Consultation
+                        </button>
+                    </div>
+                </form>
+
+                {/* Footer Trust Icons */}
+                <div className="flex justify-center gap-6 mt-4 pt-3 border-t border-white/10 opacity-70">
+                    <div className="flex items-center gap-1.5">
+                        <ShieldCheck className="text-[#D4C5A9]" size={14} />
+                        <span className="text-[9px] uppercase tracking-widest text-white">Trusted</span>
+                    </div>
+                    <div className="flex items-center gap-1.5">
+                        <Globe className="text-[#D4C5A9]" size={14} />
+                        <span className="text-[9px] uppercase tracking-widest text-white">Global</span>
+                    </div>
+                    <div className="flex items-center gap-1.5">
+                        <Heart className="text-[#D4C5A9]" size={14} />
+                        <span className="text-[9px] uppercase tracking-widest text-white">Caring</span>
+                    </div>
+                </div>
 
             </div>
         </motion.div>
       </div>
-
-      {/* 3. SUBTLE BOTTOM STRIP */}
-      <div className="absolute bottom-0 left-0 w-full border-t border-white/10 bg-[#0F2622]/40 backdrop-blur-md">
-        <div className="max-w-7xl mx-auto px-6 lg:px-8 py-6 flex flex-col md:flex-row gap-8 md:gap-16 text-white/60 text-xs tracking-widest uppercase font-sans">
-            <div className="flex items-center gap-3">
-                <span className="w-1.5 h-1.5 rounded-full bg-[#D4C5A9]"></span>
-                JCI Accredited Facilities
-            </div>
-            <div className="flex items-center gap-3">
-                <span className="w-1.5 h-1.5 rounded-full bg-[#D4C5A9]"></span>
-                24/7 Clinical Support
-            </div>
-            <div className="flex items-center gap-3">
-                <span className="w-1.5 h-1.5 rounded-full bg-[#D4C5A9]"></span>
-                End-to-End Logistics
-            </div>
-        </div>
-      </div>
-
     </section>
   );
 }
-
-
 
 // import React from 'react';
 // import { motion } from 'framer-motion';
