@@ -35,16 +35,20 @@ export default function MedivoyageConcierge() {
     { name: "Dr. G L Sharma", specialty: "Cardiology", hospital: "Fortis Escorts", experience: "22 Years", location: "Jaipur", rating: "5.0", image: "https://priyankahospital.com/wp-content/uploads/2024/06/9GL-1.jpg" },
     { name: "Dr. Naresh Somani", specialty: "Oncology", hospital: "Max Healthcare", experience: "12 Years", location: "Jaipur", rating: "4.8", image: "/Dr-Naresh-Somani.jpeg" },
     { name: "Dr. Manish Munjal", specialty: "Cardiology", hospital: "Medanta Hospital", experience: "25 Years", location: "Gurgaon", rating: "4.9", image: "/Dr-Manish-Munjal.JPG" },
-    { name: "Dr. Manish Munjal", specialty: "Cardiology", hospital: "Medanta Hospital", experience: "25 Years", location: "Gurgaon", rating: "4.9", image: "https://images.unsplash.com/photo-1537368910025-700350fe46c7?q=80&w=800&auto=format&fit=crop" },
-    { name: "Dr. Manish Munjal", specialty: "Cardiology", hospital: "Medanta Hospital", experience: "25 Years", location: "Gurgaon", rating: "4.9", image: "https://images.unsplash.com/photo-1537368910025-700350fe46c7?q=80&w=800&auto=format&fit=crop" },
-    { name: "Dr. Manish Munjal", specialty: "Cardiology", hospital: "Medanta Hospital", experience: "25 Years", location: "Gurgaon", rating: "4.9", image: "https://images.unsplash.com/photo-1537368910025-700350fe46c7?q=80&w=800&auto=format&fit=crop" },
-    { name: "Dr. Manish Munjal", specialty: "Cardiology", hospital: "Medanta Hospital", experience: "25 Years", location: "Gurgaon", rating: "4.9", image: "https://images.unsplash.com/photo-1537368910025-700350fe46c7?q=80&w=800&auto=format&fit=crop" },
-    { name: "Dr. Manish Munjal", specialty: "Cardiology", hospital: "Medanta Hospital", experience: "25 Years", location: "Gurgaon", rating: "4.9", image: "https://images.unsplash.com/photo-1537368910025-700350fe46c7?q=80&w=800&auto=format&fit=crop" },
-    { name: "Dr. Manish Munjal", specialty: "Cardiology", hospital: "Medanta Hospital", experience: "25 Years", location: "Gurgaon", rating: "4.9", image: "https://images.unsplash.com/photo-1537368910025-700350fe46c7?q=80&w=800&auto=format&fit=crop" },
-    { name: "Dr. Manish Munjal", specialty: "Cardiology", hospital: "Medanta Hospital", experience: "25 Years", location: "Gurgaon", rating: "4.9", image: "https://images.unsplash.com/photo-1537368910025-700350fe46c7?q=80&w=800&auto=format&fit=crop" },
-    { name: "Dr. Manish Munjal", specialty: "Cardiology", hospital: "Medanta Hospital", experience: "25 Years", location: "Gurgaon", rating: "4.9", image: "https://images.unsplash.com/photo-1537368910025-700350fe46c7?q=80&w=800&auto=format&fit=crop" },
-    { name: "Dr. Manish Munjal", specialty: "Cardiology", hospital: "Medanta Hospital", experience: "25 Years", location: "Gurgaon", rating: "4.9", image: "https://images.unsplash.com/photo-1537368910025-700350fe46c7?q=80&w=800&auto=format&fit=crop" },
-    // ... add rest of your doctors here
+    { name: "Dr. Sarah Jenning", specialty: "Neurology", hospital: "Medanta Hospital", experience: "15 Years", location: "Gurgaon", rating: "4.9", image: "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?q=80&w=800&auto=format&fit=crop" },
+    { name: "Dr. James Wilson", specialty: "Orthopedics", hospital: "Fortis", experience: "20 Years", location: "Mumbai", rating: "4.7", image: "https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?q=80&w=800&auto=format&fit=crop" },
+  ];
+
+  // --- DATA: PARTNERS ---
+  const PARTNERS = [
+    { name: "Partner 1", logo: "aims.jpeg" },
+    { name: "Partner 2", logo: "amic.png" },
+    { name: "Partner 3", logo: "haasyamantra.png"},
+    { name: "Partner 4", logo: "image.png" },
+    { name: "Partner 5", logo: "images.png" },
+    { name: "Partner 6", logo: "mgmt.png" },
+    { name: "Partner 7", logo: "phcc.png" },
+    { name: "Partner 8", logo: "rishabh.jpeg" },
   ];
 
   // --- FILTER & CATEGORY LOGIC ---
@@ -189,14 +193,13 @@ export default function MedivoyageConcierge() {
       </section>
 
       {/* =========================================
-          SECTION 2: OUR FOUNDERS (RESTORED SHARP VERSION)
+          SECTION 2: OUR FOUNDERS
       ========================================= */}
       <section className="relative py-20 lg:py-28 px-6 overflow-hidden">
         <div className="max-w-6xl mx-auto">
-          {/* Reduced gap-16 to gap-8 for tighter spacing */}
           <div className="grid lg:grid-cols-12 gap-8 items-center">
 
-            {/* 1. LEFT COLUMN: IMAGE (Sharp, Reduced Height) */}
+            {/* 1. LEFT COLUMN: IMAGE */}
             <motion.div 
               initial={{ opacity: 0, x: -30 }}
               whileInView={{ opacity: 1, x: 0 }}
@@ -208,13 +211,13 @@ export default function MedivoyageConcierge() {
                 <div className="absolute inset-0 bg-black/5 z-10"></div>
                 <img 
                   src="/founders.JPG" 
-                  alt="Founders Dr. Anya Sharma and Marcus Chen" 
+                  alt="Founders" 
                   className="w-full h-full object-cover object-center grayscale-[10%] hover:grayscale-0 transition-all duration-700"
                 />
               </div>
             </motion.div>
 
-            {/* 2. RIGHT COLUMN: THE CONTENT "BOX" */}
+            {/* 2. RIGHT COLUMN: CONTENT */}
             <motion.div 
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -224,17 +227,8 @@ export default function MedivoyageConcierge() {
             >
               <div 
                 className="relative p-6 lg:p-10 border backdrop-blur-md shadow-sm bg-white/80"
-                style={{ 
-                  borderColor: theme.border,
-                }}
+                style={{ borderColor: theme.border }}
               >
-                {/* Decorative Quote Icon */}
-                <div className="absolute top-6 right-6 opacity-5 pointer-events-none">
-                  <svg width="60" height="60" viewBox="0 0 24 24" fill={theme.primary}>
-                    <path d="M14.017 21L14.017 18C14.017 16.8954 14.9124 16 16.017 16H19.017C19.5693 16 20.017 15.5523 20.017 15V9C20.017 8.44772 19.5693 8 19.017 8H15.017C14.4647 8 14.017 8.44772 14.017 9V11C14.017 11.5523 13.5693 12 13.017 12H12.017V5H22.017V15C22.017 18.3137 19.3307 21 16.017 21H14.017ZM5.0166 21L5.0166 18C5.0166 16.8954 5.91203 16 7.0166 16H10.0166C10.5689 16 11.0166 15.5523 11.0166 15V9C11.0166 8.44772 10.5689 8 10.0166 8H6.0166C5.46432 8 5.0166 8.44772 5.0166 9V11C5.0166 11.5523 4.56889 12 4.0166 12H3.0166V5H13.0166V15C13.0166 18.3137 10.3303 21 7.0166 21H5.0166Z" />
-                  </svg>
-                </div>
-
                 <div className="space-y-6 relative z-10">
                   {/* Header Group */}
                   <div>
@@ -255,19 +249,8 @@ export default function MedivoyageConcierge() {
 
                   {/* Content Group */}
                   <div style={{ color: theme.textLight, fontFamily: fonts.body }} className="text-base lg:text-lg leading-relaxed space-y-4 font-light">
-                    <p>
-                      MediVoyage was created with a simple belief: every person deserves access to safe, honest, and world class healthcare.
-That means transparent, fixed pricing so you always know what to expect. 
-                    </p>
-                    <p>
-                      You are not just a case or a file. You are someone with a story, a family, a future and you deserve care that honors that.
-As doctor founders, our promise is to stand by you at every step, making sure your medical journey is clear, comfortable, and truly centered around your well-being.
-
-                    </p>
+                    <p>MediVoyage was created with a simple belief: every person deserves access to safe, honest, and world class healthcare. That means transparent, fixed pricing so you always know what to expect.</p>
                   </div>
-
-                  {/* Divider */}
-                  <div className="w-full h-[1px] opacity-20" style={{ backgroundColor: theme.primary }}></div>
 
                   {/* Signatures */}
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 pt-2">
@@ -288,9 +271,8 @@ As doctor founders, our promise is to stand by you at every step, making sure yo
         </div>
       </section>
 
-      
       {/* =========================================
-          SECTION 4: CURATED SPECIALISTS
+          SECTION 3: CURATED SPECIALISTS
       ========================================= */}
       <section id="doctors" style={{ backgroundColor: theme.bg }} className="py-24 px-6 border-t" css={{ borderColor: theme.border }}>
         <div className="max-w-[1400px] mx-auto">
@@ -324,7 +306,8 @@ As doctor founders, our promise is to stand by you at every step, making sure yo
                           {selectedCategory === cat && (
                             <motion.div 
                                 layoutId="activeTab"
-                                className="absolute bottom-0 left-0 w-full h-0.5 bg-[#C8B092]"
+                                className="absolute bottom-0 left-0 w-full h-0.5"
+                                style={{ backgroundColor: theme.secondary }}
                             />
                           )}
                         </button>
@@ -376,7 +359,6 @@ As doctor founders, our promise is to stand by you at every step, making sure yo
                                 style={{ width: isSliderActive ? `${100 / displayDoctors.length}%` : `${100/visibleItems}%` }}
                             >
                                <div className="group relative bg-white cursor-pointer overflow-hidden h-full shadow-sm hover:shadow-xl transition-shadow duration-500">
-                                    {/* Image */}
                                     <div className="relative h-[320px] overflow-hidden">
                                         <img 
                                             src={doctor.image} 
@@ -390,7 +372,6 @@ As doctor founders, our promise is to stand by you at every step, making sure yo
                                         </div>
                                     </div>
 
-                                    {/* Content */}
                                     <div className="p-6 h-[180px] flex flex-col justify-between">
                                         <div>
                                             <div className="flex justify-between items-start mb-2">
@@ -428,7 +409,49 @@ As doctor founders, our promise is to stand by you at every step, making sure yo
                     </motion.div>
                 </div>
             </div>
-            
+        </div>
+      </section>
+
+      {/* =========================================
+          SECTION 4: PARTNERS (UPDATED SEAMLESS LOOP)
+      ========================================= */}
+      <section className="py-20 border-y bg-white" style={{ borderColor: theme.border }}>
+        <div className="max-w-7xl mx-auto px-6 mb-12 text-center">
+          <span
+            style={{ color: theme.primary, fontFamily: fonts.sans }}
+            className="text-[25px] font-bold tracking-[0.2em] uppercase opacity-60"
+          >
+            Our partners
+          </span>
+        </div>
+
+        <div className="relative flex overflow-hidden w-full mask-gradient-sides">
+          {/* Fade gradients on sides (can remove if you want edge-to-edge sharpness) */}
+          <div className="absolute inset-y-0 left-0 w-32 bg-gradient-to-r from-white to-transparent z-10 pointer-events-none"></div>
+          <div className="absolute inset-y-0 right-0 w-32 bg-gradient-to-l from-white to-transparent z-10 pointer-events-none"></div>
+
+          <motion.div
+            className="flex gap-16 whitespace-nowrap items-center" // Gap adjusted for continuous feel
+            // We duplicate the list 4 times below. We animate to -25% (moving 1 full set of the 4).
+            // NOTE: The previous logic was -50% for 2 sets. With 4 sets, -25% moves one full block.
+            animate={{ x: ["0%", "-50%"] }} 
+            transition={{ repeat: Infinity, ease: "linear", duration: 25 }}
+          >
+            {/* Duplicated 4 times to ensure no gaps on wide screens */}
+            {[...PARTNERS, ...PARTNERS, ...PARTNERS, ...PARTNERS].map((partner, index) => (
+              <div
+                key={index}
+                className="flex items-center justify-center shrink-0"
+              >
+                <img 
+                  src={partner.logo} 
+                  alt={partner.name} 
+                  // Removed grayscale, kept resizing
+                  className="h-12 w-auto object-contain"
+                />
+              </div>
+            ))}
+          </motion.div>
         </div>
       </section>
 
