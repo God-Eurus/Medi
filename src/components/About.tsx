@@ -31,12 +31,19 @@ export default function MedivoyageConcierge() {
 
   // --- DATA: DOCTORS ---
   const allDoctors = [
-    { name: "Dr. Swaraj Maharwal", specialty: "General Surgery", hospital: "Apollo Spectra", experience: "35 Years", location: "Jaipur", rating: "4.9", image: "/tauji.png" },
-    { name: "Dr. G L Sharma", specialty: "Cardiology", hospital: "Fortis Escorts", experience: "22 Years", location: "Jaipur", rating: "5.0", image: "https://priyankahospital.com/wp-content/uploads/2024/06/9GL-1.jpg" },
-    { name: "Dr. Naresh Somani", specialty: "Oncology", hospital: "Max Healthcare", experience: "12 Years", location: "Jaipur", rating: "4.8", image: "/Dr-Naresh-Somani.jpeg" },
-    { name: "Dr. Manish Munjal", specialty: "Cardiology", hospital: "Medanta Hospital", experience: "25 Years", location: "Gurgaon", rating: "4.9", image: "/Dr-Manish-Munjal.JPG" },
-    { name: "Dr. Sarah Jenning", specialty: "Neurology", hospital: "Medanta Hospital", experience: "15 Years", location: "Gurgaon", rating: "4.9", image: "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?q=80&w=800&auto=format&fit=crop" },
-    { name: "Dr. James Wilson", specialty: "Orthopedics", hospital: "Fortis", experience: "20 Years", location: "Mumbai", rating: "4.7", image: "https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?q=80&w=800&auto=format&fit=crop" },
+    { name: "Dr. Swaraj Maharwal", specialty: "General-Surgery", hospital: "Amar Jain Hospital ", experience: "35 Years", location: "Jaipur", rating: "4.9", image: "/tauji.png" },
+    { name: "Dr. G L Sharma", specialty: "Cardiology", hospital: "Priyanka Hospital & Cardiac Centre ", experience: "40 Years", location: "Jaipur", rating: "5.0", image: "https://priyankahospital.com/wp-content/uploads/2024/06/9GL-1.jpg" },
+    { name: "Dr. Gunjan Jain", specialty: "Obstetrics&Gynaecology", hospital: "Jain Fertility & Mother Care Hospital", experience: "35 Years", location: "Jaipur", rating: "4.9", image: "/gunjanjain.jpeg" },
+    { name: "Dr. Naresh Somani", specialty: "Medical-Oncology", hospital: "HCG Hospital", experience: "30 Years", location: "Jaipur", rating: "4.8", image: "/Dr-Naresh-Somani.jpeg" },
+    { name: "Dr. Manish Munjal", specialty: "Anesthesia&Critical-Care", hospital: "Priyanka Heart & Cardiac Centre", experience: "35 Years", location: "Jaipur", rating: "4.9", image: "/Dr-Manish-Munjal.JPG" },
+    { name: "Dr. Rajkumari Somani", specialty: "Obstetrics&Gynaecology", hospital: "Somani Hospital", experience: "30 Years", location: "Jaipur", rating: "4.9", image: "Rajkumari_Somani.png" },
+    { name: "Dr. Kanav Jain", specialty: "Fertility&IVF", hospital: "Jain Fertility & Mother Care Hospital", experience: "10 Years", location: "Mumbai", rating: "4.7", image: "kanavjain.jpeg" },
+    { name: "Dr. Bilal Mohammed", specialty: "Orthopedics", hospital: "S K Soni Hospital", experience: "5 Years", location: "Jaipur", rating: "4.7", image: "Dr.BilalMohammed.jpeg" },
+    { name: "Dr. Zoheb Naqvi", specialty: "Anesthesia-Critical-Care", hospital: "Mahatma Gandhi Hospital", experience: "5 Years", location: "Jaipur", rating: "4.7", image: "drzohebnaqvi.jpeg" },
+    { name: " Dr. Prachi Mathur", specialty: "Anesthesia-Pain-Management", hospital: "Jain Fertility & Mother Care Hospital", experience: "10 Years", location: "Jaipur", rating: "4.7", image: "prachimathur.jpeg" },
+    { name: "Dr. Rita Munjal", specialty: "Dentistry", hospital: "Munjal Dental Clinic", experience: "30 Years", location: "Jaipur", rating: "4.7", image: "Dr-Rita-Munjal.JPG" },
+    { name: "Dr. Shitanshu Shah", specialty: "Dentistry (Prosthodontist & Implantologist)", hospital: "Haasya Mantra Clinic & Implant Centre", experience: "5 Years", location: "Ahemdabad ", rating: "4.7", image: "Dr-Shitanshu-Shah.jpg" },
+    { name: "Dr. Dr. Jhanvi Patel", specialty: "Dentistry (Endodontist)", hospital: "Haasya Mantra Clinic & Implant Centre", experience: "5 Years", location: "Ahemdabad ", rating: "4.7", image: "Dr-Jahanvi-Patel.jpg" },
   ];
 
   // --- DATA: PARTNERS ---
