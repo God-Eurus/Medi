@@ -149,23 +149,43 @@ export default function MedivoyageConcierge() {
 
             {/* Trust Signals */}
             <div className="grid grid-cols-2 gap-px max-w-sm mt-6 border opacity-90" style={{ borderColor: theme.primary, backgroundColor: theme.primary }}>
-              {['HIPAA Compliant', 'JCI Hospitals', 'Doctor Vetted', 'Zero Wait Time'].map((item, i) => (
-                <div key={i} style={{ backgroundColor: theme.bg }} className="p-3 flex items-center gap-2">
-                  <ShieldCheck style={{ color: theme.primary }} size={16} strokeWidth={1} />
-                  <span style={{ color: theme.primary, fontFamily: fonts.sans }} className="text-xs font-bold tracking-wide">{item}</span>
-                </div>
-              ))}
-            </div>
+  {['HIPAA Compliant', 'JCI Hospitals', 'Doctor Vetted', 'Zero Wait Time'].map((item, i) => (
+    <div key={i} style={{ backgroundColor: theme.bg }} className="p-3 flex items-center gap-2">
+      <ShieldCheck style={{ color: theme.primary }} size={16} strokeWidth={1} />
+      <span style={{ color: theme.primary, fontFamily: fonts.sans }} className="text-xs font-bold tracking-wide">{item}</span>
+    </div>
+  ))}
+</div>
+
+{/* NEW SECTION: 3 SMALL LOGOS BELOW */}
+<div className="flex items-center gap-16 mt-10 max-w-sm ">
+  {/* Replace these src placeholders with your actual logo URLs */}
+  <img 
+    src="jcin.png" 
+    alt="Accreditation Logo 1" 
+    className="h-12 w-auto object-contain" 
+  />
+  <img 
+    src="/hipan.png" 
+    alt="Accreditation Logo 2" 
+    className="h-12 w-auto object-contain" 
+  />
+  <img 
+    src="nabh.png" 
+    alt="Accreditation Logo 3" 
+    className="h-12 w-auto object-contain" 
+  />
+</div>
 
             {/* CTA */}
-            <div className="pt-4">
+            {/* <div className="pt-4">
               <button 
                 style={{ backgroundColor: theme.primary, color: theme.bg, fontFamily: fonts.sans }}
                 className="px-6 py-4 text-xs font-bold uppercase tracking-widest hover:opacity-90 transition-opacity duration-300 flex items-center gap-2"
               >
                 Start Assessment <ArrowRight size={14} />
               </button>
-            </div>
+            </div> */}
           </motion.div>
 
           {/* Right Image */}
@@ -181,7 +201,7 @@ export default function MedivoyageConcierge() {
               alt="Consultation" 
               className="w-full h-full object-cover contrast-[1.1]"
             />
-            <div style={{ backgroundColor: theme.white }} className="absolute bottom-0 left-0 p-6 w-full md:w-auto md:max-w-xs border-t-2 z-20 shadow-lg" css={{ borderColor: theme.primary }}>
+            {/* <div style={{ backgroundColor: theme.white }} className="absolute bottom-0 left-0 p-6 w-full md:w-auto md:max-w-xs border-t-2 z-20 shadow-lg" css={{ borderColor: theme.primary }}>
                <div style={{ backgroundColor: theme.primary }} className="h-0.5 w-full absolute top-0 left-0"></div>
                <p style={{ color: theme.primary, fontFamily: fonts.heading }} className="text-lg italic mb-3">"This isn't tourism. It's healthcare."</p>
                <div className="flex items-center gap-3">
@@ -193,7 +213,7 @@ export default function MedivoyageConcierge() {
                     <p style={{ color: theme.textLight, fontFamily: fonts.sans }} className="text-[10px]">Chief Medical Officer</p>
                   </div>
                </div>
-            </div>
+            </div> */}
           </motion.div>
 
         </div>

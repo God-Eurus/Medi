@@ -99,18 +99,18 @@ export default function MyConcierge() {
                     className="text-3xl sm:text-4xl md:text-5xl font-black tracking-tighter uppercase leading-[1]"
                     style={{ color: theme.primary }}
                 >
-                    Transparent Pricing.<br />
-                    Trusted Care.
+                    One Price.<br />
+                    Unlimited Care.
                 </h2>
-                <p className="text-base md:text-lg font-serif italic" style={{ color: theme.textLight }}>
+                {/* <p className="text-base md:text-lg font-serif italic" style={{ color: theme.textLight }}>
                     ₹1999/year · Family of 4
-                </p>
+                </p> */}
             </div>
 
             <div className="bg-white rounded-[24px] md:rounded-[32px] p-6 md:p-12 shadow-sm border flex flex-col md:flex-row items-center gap-8 md:gap-16"
                  style={{ borderColor: theme.border }}
             >
-                <div className="w-full md:w-1/2">
+                {/* <div className="w-full md:w-1/2">
                     <motion.div 
                         whileHover={{ scale: 1.02, rotateY: 5 }}
                         className="w-full aspect-[1.586/1] rounded-xl md:rounded-2xl p-5 md:p-8 flex flex-col justify-between shadow-2xl relative overflow-hidden"
@@ -125,17 +125,19 @@ export default function MyConcierge() {
                             <h3 className="text-3xl sm:text-4xl md:text-5xl font-black text-white mix-blend-overlay opacity-60 tracking-tighter">VIP PASS</h3>
                         </div>
                     </motion.div>
-                </div>
+                </div> */}
 
                 <div className="w-full md:w-1/2 space-y-4 md:space-y-6 text-center md:text-left">
-                    <h3 className="text-xl md:text-2xl font-bold leading-tight" style={{ color: theme.primary }}>
-                        Just ₹1999/year for your entire family of 4
-                    </h3>
+                    <h6 className="text-xl md:text-2xl font-bold leading-tight" style={{ color: theme.primary }}>
+                        How to proceed?
+                    </h6>
                     <div className="space-y-3 md:space-y-4 text-sm md:text-base leading-relaxed" style={{ color: theme.textLight }}>
-                        <p>Experience peace of mind knowing every member from children to grandparents is protected under one simple plan.</p>
-                        <p>Affordable, reliable, and designed around your family's needs.</p>
+                        <p>Book a consultation and tell us what you seek from the comfort of your home.</p>
+                        <p>Get a fixed package tailor made to you medical needs(Includes Medical procedures, flights, visas, accomodations and translators.)</p>
+                        <p>Visit us. No Waiting. No Hidden Charges.</p>
+                        <p>Get Treated & Avail folllow up care. < br/ > Super Easy.</p>
                     </div>
-                    <div className="flex justify-center md:justify-start">
+                    {/* <div className="flex justify-center md:justify-start">
                         <button 
                             className="group flex items-center gap-2 px-6 py-3 md:px-8 rounded-full font-bold text-xs uppercase tracking-wider text-white transition-all hover:opacity-90 mt-2"
                             style={{ backgroundColor: theme.primary }}
@@ -145,7 +147,7 @@ export default function MyConcierge() {
                                 <ArrowRight size={12} />
                             </div>
                         </button>
-                    </div>
+                    </div> */}
                 </div>
             </div>
         </div>
@@ -188,7 +190,7 @@ export default function MyConcierge() {
             >
               <div className="absolute inset-0 bg-gradient-to-br from-white/10 to-transparent pointer-events-none"></div>
               <h2 className="text-white text-3xl sm:text-4xl md:text-5xl font-serif font-medium tracking-tight leading-[1.1] relative z-10">
-                Affordable, reliable <br/> tailor made for you.
+                Affordable.< br/> Reliable. <br/> Tailor made for you.
               </h2>
             </motion.div>
 
@@ -278,11 +280,11 @@ export default function MyConcierge() {
         <div className="space-y-2">
             <h3 
                className="text-lg font-black tracking-widest uppercase bg-clip-text text-transparent w-fit mx-auto md:mx-0"
-               style={{ backgroundImage: `linear-gradient(to right, #9333EA, #EC4899)` }} 
+               style={{ backgroundImage: `linear-gradient(to right, #1A3C34, #5A6C66)` }} 
             >
                 MEDIVOYAGE
             </h3>
-            <p className="text-xs font-medium text-gray-500">
+            <p className="text-xl font-medium text-gray-500">
                 Speak to a <strong className="text-gray-900">Medivoyage Concierge</strong> on +919799636757
             </p>
         </div>

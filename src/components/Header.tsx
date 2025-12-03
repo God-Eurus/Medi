@@ -70,16 +70,23 @@ export default function Header({ onChatToggle }: HeaderProps) {
         
         {/* 1. LOGO */}
         <Link to="/" className="flex items-center gap-2 group z-50 shrink-0">
-          <div className="w-8 h-8 bg-[#1A3C34] text-[#F2F0EA] rounded-full flex items-center justify-center font-serif italic font-bold text-lg shadow-sm group-hover:bg-[#C8B092] group-hover:text-[#1A3C34] transition-colors duration-500">
-            M
-          </div>
-          <span 
-            style={{ color: theme.primary, fontFamily: '"Playfair Display", serif' }}
-            className="ml-1 text-xl font-bold tracking-tight"
-          >
-            MediVoyage
-          </span>
-        </Link>
+  {/* Logo Icon Container */}
+  {/* <div className="w-8 h-8 bg-[#1A3C34] rounded-full flex items-center justify-center shadow-sm group-hover:bg-[#C8B092] transition-colors duration-500 overflow-hidden">
+   
+  </div> */}
+ <img 
+      src="/logo.png" 
+      alt="MediVoyage Logo" 
+      className="w-5 h-5 object-contain" 
+    />
+  {/* Text Brand Name */}
+  <span 
+    style={{ color: theme.primary, fontFamily: '"Playfair Display", serif' }}
+    className="ml-1 text-xl font-bold tracking-tight"
+  >
+    MediVoyage
+  </span>
+</Link>
 
         {/* 2. DESKTOP NAVIGATION */}
         <nav className="hidden md:flex items-center gap-8">
@@ -105,9 +112,9 @@ export default function Header({ onChatToggle }: HeaderProps) {
             className="hidden md:flex group relative items-center gap-2 px-5 py-2 rounded-full bg-[#1A3C34] border border-[#C8B092]/30 overflow-hidden transition-all duration-300 hover:shadow-lg hover:shadow-[#C8B092]/20 hover:-translate-y-0.5"
           >
             <div className="absolute inset-0 w-full h-full bg-[#C8B092] translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-[cubic-bezier(0.23,1,0.32,1)]"></div>
-            <Sparkles size={14} className="relative z-10 text-[#C8B092] group-hover:text-[#1A3C34] transition-colors duration-300" />
+            {/* <Sparkles size={14} className="relative z-10 text-[#C8B092] group-hover:text-[#1A3C34] transition-colors duration-300" /> */}
             <span className="relative z-10 text-[10px] font-bold uppercase tracking-wider text-[#F2F0EA] group-hover:text-[#1A3C34] transition-colors duration-300">
-              Concierge
+               MV Concierge
             </span>
           </Link>
 
@@ -144,7 +151,7 @@ export default function Header({ onChatToggle }: HeaderProps) {
               onClick={() => setIsMenuOpen(false)}
               className="flex items-center justify-center gap-2 w-full py-3 mt-2 bg-[#1A3C34] text-[#C8B092] rounded-lg font-bold uppercase tracking-wider text-sm"
             >
-              <Sparkles size={16} /> Concierge Access
+              MV Concierge 
             </Link>
           </nav>
         </div>
