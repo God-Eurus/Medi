@@ -1,295 +1,362 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Plus, ArrowRight } from 'lucide-react';
+import { useNavigate } from 'react-router-dom'; // ✅ Import useNavigate
+import { Plus, ArrowRight, Star, Shield, Activity, Calendar, Plane } from 'lucide-react';
+import Header from './Header';
+import Footer from './Footer'
+// Footer component removed to avoid duplication with the custom footer below
 
 export default function MyConcierge() {
-  
+  const navigate = useNavigate(); // ✅ Initialize hook
+
   // --- THEME CONSTANTS ---
   const theme = {
     bg: '#F2F0EA',          // Soft Alabaster
     primary: '#1A3C34',     // Deep Cypress Green
-    primaryDark: '#0F2622', // Darker Green for gradient
+    primaryDark: '#0F2622', // Darker Green
     secondary: '#C8B092',   // Muted Gold
     textLight: '#5A6C66',   // Sage Grey
     white: '#FFFFFF',
-    border: '#E2E0D8'
+    border: '#DCDAD3'       // Slightly darker border for contrast
+  };
+
+  // Animation Variants
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: { 
+      opacity: 1,
+      transition: { staggerChildren: 0.15 }
+    }
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 30 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] } }
   };
 
   return (
-    <div className="min-h-screen w-full font-sans overflow-x-hidden" style={{ backgroundColor: theme.bg }}>
-      
-      {/* =========================================
-          SECTION 1: HERO (RADICAL. MAGICAL.)
-      ========================================= */}
-      <section className="relative w-full pt-16 md:pt-20 pb-0 overflow-hidden flex flex-col items-center text-center">
-        {/* Dark Gradient Background */}
-        <div 
-            className="absolute inset-0 z-0" 
-            style={{ background: `linear-gradient(180deg, ${theme.primary} 0%, ${theme.primaryDark} 100%)` }}
-        ></div>
+    <div className="min-h-screen w-full font-sans overflow-x-hidden selection:bg-[#C8B092] selection:text-white" style={{ backgroundColor: theme.bg }}>
+      <Header />
+      {/* Decorative Background Blur */}
+      <div className="fixed top-0 left-1/2 -translate-x-1/2 w-[800px] h-[800px] bg-[#C8B092] opacity-[0.07] rounded-full blur-3xl -z-10 pointer-events-none" />
 
-        <div className="relative z-10 w-full max-w-4xl px-4 md:px-6 flex flex-col items-center">
+      {/* =========================================
+          SECTION 1: HERO
+      ========================================= */}
+      <section className="relative w-full pt-16 md:pt-28 pb-12 overflow-hidden flex flex-col items-center text-center">
+        
+        <motion.div 
+            initial="hidden"
+            animate="visible"
+            variants={containerVariants}
+            className="relative z-10 w-full max-w-5xl px-4 md:px-6 flex flex-col items-center"
+        >
+            <motion.div variants={itemVariants} className="flex items-center gap-2 mb-6">
+                <span className="h-[1px] w-8 bg-[#1A3C34] opacity-30"></span>
+                <span className="text-[10px] md:text-xs font-bold uppercase tracking-[0.2em] text-[#1A3C34]">Medivoyage Concierge</span>
+                <span className="h-[1px] w-8 bg-[#1A3C34] opacity-30"></span>
+            </motion.div>
+
             <motion.h1 
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8 }}
-                className="text-4xl sm:text-5xl md:text-7xl font-black tracking-tighter text-white leading-[0.95] md:leading-[0.9] mb-4 md:mb-6"
+                variants={itemVariants}
+                className="text-5xl sm:text-6xl md:text-8xl font-serif font-medium tracking-tight text-[#1A3C34] leading-[0.95] mb-6"
             >
-                SMOOTH.<br />
-                TRANSPARENT.<br />
-                REVOLUTIONARY.
+                Smooth. <span className="italic text-[#C8B092]">Transparent.</span><br />
+                 Revolutionary.
             </motion.h1>
 
             <motion.p 
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 0.3, duration: 0.8 }}
-                className="text-[10px] md:text-xs font-bold uppercase tracking-widest mb-8 opacity-60 text-white px-4"
+                variants={itemVariants}
+                className="text-sm md:text-base font-medium max-w-lg leading-relaxed mb-8"
+                style={{ color: theme.textLight }}
             >
-                 Available in Jaipur, Mumbai, Ahemdabad & Bangalore
+                 The first premium medical concierge available in Jaipur, Mumbai, Ahmedabad & Bangalore.
             </motion.p>
 
-            <motion.button
-                initial={{ scale: 0.9, opacity: 0 }}
-                animate={{ scale: 1, opacity: 1 }}
-                transition={{ delay: 0.5, duration: 0.5 }}
-                whileHover={{ scale: 1.05 }}
-                className="group flex items-center gap-3 bg-white text-[#1A3C34] px-6 py-3 md:px-8 md:py-3 rounded-full font-bold text-[10px] md:text-xs uppercase tracking-wider shadow-lg hover:shadow-xl transition-all"
-            >
-                Book Consultation
-                <div className="bg-[#1A3C34] text-white rounded-full p-1">
-                    <ArrowRight size={12} />
-                </div>
-            </motion.button>
+            <motion.div variants={itemVariants} className="flex gap-4">
+                {/* ✅ Button now redirects to Home */}
+                <motion.button
+                    onClick={() => navigate('/')} 
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    className="group flex items-center gap-3 px-8 py-4 rounded-full font-bold text-xs uppercase tracking-wider shadow-xl hover:shadow-2xl transition-all text-white"
+                    style={{ backgroundColor: theme.primary }}
+                >
+                    Start Consultation
+                    <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform"/>
+                </motion.button>
+            </motion.div>
 
-            {/* Phone Mockup */}
+            {/* Phone Mockup - Floats over content */}
             <motion.div 
-                initial={{ y: 100, opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
-                transition={{ delay: 0.6, duration: 0.8, type: "spring" }}
-                className="mt-12 md:mt-16 relative w-[280px] h-[380px] sm:w-[300px] sm:h-[400px] md:w-[350px] md:h-[450px] bg-gray-900 rounded-t-[30px] md:rounded-t-[40px] border-[6px] md:border-[8px] border-gray-900 shadow-2xl overflow-hidden"
+                initial={{ y: 100, opacity: 0, rotateX: 20 }}
+                animate={{ y: 0, opacity: 1, rotateX: 0 }}
+                transition={{ delay: 0.4, duration: 1, type: "spring" }}
+                className="mt-16 md:mt-20 relative z-20"
+                style={{ perspective: '1000px' }}
             >
-                <div className="absolute top-0 left-0 right-0 h-5 md:h-6 bg-black z-20 flex justify-center">
-                    <div className="w-20 md:w-24 h-3 md:h-4 bg-black rounded-b-xl"></div>
-                </div>
-                <div className="w-full h-full bg-white relative flex flex-col pt-10 md:pt-12 px-4 md:px-6">
-                    <div className="w-full h-[180px] md:h-[220px] rounded-2xl p-5 md:p-6 flex flex-col justify-between shadow-lg"
-                         style={{ background: `linear-gradient(135deg, ${theme.secondary}, #E6D5BC, #F2F0EA)` }}
-                    >
-                        <span className="text-[9px] md:text-[10px] font-bold tracking-widest text-[#1A3C34]">Medivoyage</span>
-                        <div>
-                             <div className="w-6 h-6 md:w-8 md:h-8 text-white mb-2">
-                                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" /></svg>
+                <div className="relative w-[280px] h-[550px] sm:w-[320px] sm:h-[600px] bg-[#050505] rounded-[40px] md:rounded-[50px] border-[8px] border-[#151515] shadow-2xl overflow-hidden ring-1 ring-white/10">
+                    {/* Screen Content */}
+                    <div className="w-full h-full bg-[#F2F0EA] relative flex flex-col">
+                        
+                        {/* Status Bar Mock */}
+                        <div className="flex justify-between items-center px-6 pt-4 pb-2">
+                             <span className="text-[10px] font-bold text-black">9:41</span>
+                             <div className="flex gap-1">
+                                <div className="w-4 h-2 bg-black rounded-sm"></div>
                              </div>
-                             <h3 className="text-2xl md:text-3xl font-black text-white mix-blend-overlay opacity-90 tracking-tighter">CONCIERGE</h3>
                         </div>
+
+                        {/* App Header */}
+                        <div className="px-6 py-4">
+                            <h3 className="text-2xl font-serif text-[#1A3C34]">Hello, Traveler.</h3>
+                        </div>
+
+                        {/* Card 1 in Phone */}
+                        <div className="mx-4 p-5 rounded-2xl mb-3 shadow-lg flex flex-col justify-between h-40"
+                             style={{ background: `linear-gradient(135deg, ${theme.primary}, ${theme.primaryDark})` }}>
+                             <div className="flex justify-between items-start">
+                                <Activity size={20} className="text-[#C8B092]" />
+                                <span className="text-[10px] text-white/60 uppercase tracking-widest">Premium</span>
+                             </div>
+                             <div className="text-white">
+                                <div className="text-2xl font-medium">Full Coverage</div>
+                                <div className="text-xs opacity-70">Active Membership</div>
+                             </div>
+                        </div>
+
+                        {/* Card 2 in Phone */}
+                        <div className="mx-4 p-5 rounded-2xl bg-white shadow-sm border border-stone-200">
+                             <div className="flex gap-3 items-center mb-3">
+                                <div className="w-10 h-10 rounded-full bg-stone-100 flex items-center justify-center">
+                                    <Plane size={18} className="text-[#1A3C34]" />
+                                </div>
+                                <div>
+                                    <div className="text-xs font-bold text-[#1A3C34]">Flight to Mumbai</div>
+                                    <div className="text-[10px] text-stone-500">Scheduled for Tomorrow</div>
+                                </div>
+                             </div>
+                             <div className="w-full bg-stone-100 h-1 rounded-full overflow-hidden">
+                                <div className="w-2/3 h-full bg-[#C8B092]"></div>
+                             </div>
+                        </div>
+
                     </div>
                 </div>
+                
+                {/* Shadow underneath phone */}
+                <div className="absolute -bottom-10 left-1/2 -translate-x-1/2 w-[80%] h-12 bg-[#1A3C34] opacity-20 blur-2xl rounded-[100%] z-[-1]"></div>
             </motion.div>
-        </div>
+
+        </motion.div>
       </section>
 
-      {/* =========================================
-          SECTION 2: LIMITED PRICE (VIP PASS)
-      ========================================= */}
-      <section className="py-16 md:py-20 px-4 md:px-6">
-        <div className="max-w-5xl mx-auto">
-            <div className="text-center mb-8 md:mb-12 space-y-2">
-                <h2 
-                    className="text-3xl sm:text-4xl md:text-5xl font-black tracking-tighter uppercase leading-[1]"
-                    style={{ color: theme.primary }}
-                >
-                    One Price.<br />
-                    Unlimited Care.
-                </h2>
-                {/* <p className="text-base md:text-lg font-serif italic" style={{ color: theme.textLight }}>
-                    ₹1999/year · Family of 4
-                </p> */}
-            </div>
 
-            <div className="bg-white rounded-[24px] md:rounded-[32px] p-6 md:p-12 shadow-sm border flex flex-col md:flex-row items-center gap-8 md:gap-16"
-                 style={{ borderColor: theme.border }}
-            >
-                {/* <div className="w-full md:w-1/2">
+      {/* =========================================
+          SECTION 2: VIP PASS (Split Layout)
+      ========================================= */}
+      <section className="py-20 px-4 md:px-6 relative z-10">
+        <div className="max-w-6xl mx-auto bg-white rounded-[32px] md:rounded-[48px] p-8 md:p-16 shadow-xl border border-[#EAE8E0]">
+            
+            <div className="flex flex-col lg:flex-row gap-12 lg:gap-20">
+                {/* Left: The Typography */}
+                <div className="lg:w-1/2 space-y-8">
+                    <h2 className="text-4xl md:text-6xl font-serif font-medium leading-[0.95]" style={{ color: theme.primary }}>
+                        One Price.<br />
+                        <span className="text-[#C8B092] italic">Unlimited</span> Care.
+                    </h2>
+                    <p className="text-lg leading-relaxed text-[#5A6C66]">
+                        No hidden fees. No surprise bills. A fixed package tailor-made to your needs covering procedures, flights, visas, and accommodation.
+                    </p>
+
+                    <div className="grid gap-6 mt-8">
+                        {[
+                            { title: "Consultation", desc: "Tell us what you seek from home." },
+                            { title: "Curated Package", desc: "We build your all-inclusive plan." },
+                            { title: "Arrival", desc: "No waiting lines. Zero hassle." },
+                            { title: "Recovery", desc: "Treatment & follow-up care included." }
+                        ].map((step, idx) => (
+                            <div key={idx} className="flex gap-4 group">
+                                <div className="flex-shrink-0 w-8 h-8 rounded-full border border-[#C8B092] text-[#C8B092] flex items-center justify-center text-sm font-bold group-hover:bg-[#C8B092] group-hover:text-white transition-colors">
+                                    {idx + 1}
+                                </div>
+                                <div>
+                                    <h4 className="font-bold text-[#1A3C34] text-sm uppercase tracking-wide">{step.title}</h4>
+                                    <p className="text-sm text-[#5A6C66]">{step.desc}</p>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+
+                {/* Right: The "Card" Graphic */}
+                <div className="lg:w-1/2 flex items-center justify-center">
                     <motion.div 
                         whileHover={{ scale: 1.02, rotateY: 5 }}
-                        className="w-full aspect-[1.586/1] rounded-xl md:rounded-2xl p-5 md:p-8 flex flex-col justify-between shadow-2xl relative overflow-hidden"
-                        style={{ background: `linear-gradient(135deg, ${theme.secondary}, #E6D5BC, #F2F0EA)` }}
+                        className="w-full max-w-md aspect-[1.586/1] rounded-2xl md:rounded-3xl p-8 flex flex-col justify-between shadow-2xl relative overflow-hidden"
+                        style={{ background: `linear-gradient(135deg, ${theme.primary}, #0F2622)` }}
                     >
-                        <div className="absolute inset-0 bg-gradient-to-tr from-white/0 via-white/20 to-white/0 opacity-0 hover:opacity-100 transition-opacity duration-700 pointer-events-none"></div>
-                        <span className="text-[10px] md:text-xs font-bold tracking-[0.2em] text-[#1A3C34] uppercase">SuperHealth</span>
-                        <div className="relative z-10">
-                            <div className="w-6 h-6 md:w-8 md:h-8 text-white mb-2 opacity-80">
-                                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" /></svg>
-                            </div>
-                            <h3 className="text-3xl sm:text-4xl md:text-5xl font-black text-white mix-blend-overlay opacity-60 tracking-tighter">VIP PASS</h3>
+                        {/* Noise Texture */}
+                        <div className="absolute inset-0 opacity-10 mix-blend-overlay" style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")` }}></div>
+                        
+                        <div className="flex justify-between items-start z-10">
+                            <span className="text-xs font-bold tracking-[0.2em] text-[#C8B092] uppercase">Medivoyage</span>
+                            <Star className="text-[#C8B092]" fill="#C8B092" size={20} />
                         </div>
-                    </motion.div>
-                </div> */}
+                        
+                        <div className="relative z-10">
+                            <h3 className="text-4xl md:text-5xl font-serif text-white mb-2">PRIORITY PASS</h3>
+                            <p className="text-white/60 text-xs tracking-wider uppercase">Global Access • Priority Queue</p>
+                        </div>
 
-                <div className="w-full md:w-1/2 space-y-4 md:space-y-6 text-center md:text-left">
-                    <h6 className="text-xl md:text-2xl font-bold leading-tight" style={{ color: theme.primary }}>
-                        How to proceed?
-                    </h6>
-                    <div className="space-y-3 md:space-y-4 text-sm md:text-base leading-relaxed" style={{ color: theme.textLight }}>
-                        <p>Book a consultation and tell us what you seek from the comfort of your home.</p>
-                        <p>Get a fixed package tailor made to you medical needs(Includes Medical procedures, flights, visas, accomodations and translators.)</p>
-                        <p>Visit us. No Waiting. No Hidden Charges.</p>
-                        <p>Get Treated & Avail folllow up care. < br/ > Super Easy.</p>
-                    </div>
-                    {/* <div className="flex justify-center md:justify-start">
-                        <button 
-                            className="group flex items-center gap-2 px-6 py-3 md:px-8 rounded-full font-bold text-xs uppercase tracking-wider text-white transition-all hover:opacity-90 mt-2"
-                            style={{ backgroundColor: theme.primary }}
-                        >
-                            Buy VIP Pass
-                            <div className="bg-white/20 rounded-full p-1 group-hover:bg-white/30 transition-colors">
-                                <ArrowRight size={12} />
-                            </div>
-                        </button>
-                    </div> */}
+                        {/* Glossy Overlay */}
+                        <div className="absolute inset-0 bg-gradient-to-tr from-white/0 via-white/10 to-white/0 pointer-events-none"></div>
+                    </motion.div>
                 </div>
             </div>
         </div>
       </section>
 
       {/* =========================================
-          SECTION 3: 4-CARD GRID
+          SECTION 3: BENTO GRID
       ========================================= */}
-      <section className="flex items-center justify-center px-4 md:px-6 pb-16 md:pb-20">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-5xl w-full">
+      <section className="px-4 md:px-6 pb-20">
+          <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
             
-            {/* Card 1 */}
+            {/* Card 1: MRI/Tests */}
             <motion.div 
-              initial={{ opacity: 0, scale: 0.95 }}
-              whileInView={{ opacity: 1, scale: 1 }}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: 0.1 }}
-              className="bg-white p-6 md:p-10 rounded-[24px] md:rounded-[32px] min-h-[220px] md:min-h-[280px] flex flex-col justify-between relative shadow-sm border"
-              style={{ borderColor: theme.border }}
+              className="bg-white p-8 md:p-12 rounded-[32px] min-h-[300px] flex flex-col justify-between border border-[#EAE8E0] hover:shadow-lg transition-shadow duration-500"
             >
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-serif font-medium tracking-tight leading-[1.2]" style={{ color: theme.textLight }}>
-                All Tests and Scans are covered. <br />
-                <span style={{ color: theme.primary }} className="font-semibold italic">Yes, even MRIs & discharge medicines too.</span>
-              </h2>
-              <div className="self-end mt-4">
-                 <div className="rounded-full p-2 cursor-pointer transition-colors duration-300" style={{ backgroundColor: theme.secondary }}>
-                    <Plus size={18} className="text-[#1A3C34]" />
-                 </div>
+              <div className="w-12 h-12 rounded-full bg-[#F2F0EA] flex items-center justify-center mb-6">
+                <Activity className="text-[#1A3C34]" size={24} />
               </div>
+              <h3 className="text-3xl md:text-4xl font-serif leading-tight text-[#1A3C34]">
+                All Tests Covered.<br />
+                <span className="text-[#C8B092] italic">Yes, even MRIs.</span>
+              </h3>
+              <p className="mt-4 text-[#5A6C66]">Includes discharge medicines and pre-op scans.</p>
             </motion.div>
             
-            {/* Card 2 */}
+            {/* Card 2: Dark Promo */}
             <motion.div 
-              initial={{ opacity: 0, scale: 0.95 }}
-              whileInView={{ opacity: 1, scale: 1 }}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.5 }}
-              className="relative overflow-hidden p-6 md:p-10 rounded-[24px] md:rounded-[32px] min-h-[220px] md:min-h-[280px] flex flex-col justify-center shadow-sm group"
+              transition={{ delay: 0.1 }}
+              className="relative overflow-hidden p-8 md:p-12 rounded-[32px] min-h-[300px] flex flex-col justify-center text-center group"
               style={{ backgroundColor: theme.primary }}
             >
-              <div className="absolute inset-0 bg-gradient-to-br from-white/10 to-transparent pointer-events-none"></div>
-              <h2 className="text-white text-3xl sm:text-4xl md:text-5xl font-serif font-medium tracking-tight leading-[1.1] relative z-10">
-                Affordable.< br/> Reliable. <br/> Tailor made for you.
-              </h2>
+              <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,_var(--tw-gradient-stops))] from-white/10 to-transparent"></div>
+              <h3 className="text-white text-3xl md:text-5xl font-serif leading-tight relative z-10">
+                Affordable.<br />
+                Reliable.<br />
+                <span className="italic text-[#C8B092]">Tailor made.</span>
+              </h3>
             </motion.div>
 
-            {/* Card 3 */}
+            {/* Card 3: Doctors */}
             <motion.div 
-              initial={{ opacity: 0, scale: 0.95 }}
-              whileInView={{ opacity: 1, scale: 1 }}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: 0.3 }}
-              className="bg-white p-6 md:p-10 rounded-[24px] md:rounded-[32px] min-h-[220px] md:min-h-[320px] flex flex-col justify-between shadow-sm border"
-              style={{ borderColor: theme.border }}
+              transition={{ delay: 0.2 }}
+              className="bg-[#FBFBF9] p-8 md:p-12 rounded-[32px] min-h-[300px] flex flex-col justify-between border border-[#EAE8E0]"
             >
-              <h2 className="text-4xl sm:text-5xl md:text-6xl font-serif font-medium tracking-tight leading-[1]" style={{ color: theme.primary }}>
-                Consult<br /> your doctors<br /> As many times <br /> <span className="italic">As you need</span>
-              </h2>
+              <h3 className="text-3xl md:text-5xl font-serif leading-[0.9] text-[#1A3C34]">
+                Consult <br />
+                as many times <br />
+                <span className="italic text-[#C8B092]">as you need.</span>
+              </h3>
+              <div className="flex items-center gap-2 mt-4 text-[#1A3C34] font-bold text-xs uppercase tracking-widest">
+                <div className="w-2 h-2 bg-[#1A3C34] rounded-full"></div>
+                Unlimited Access
+              </div>
             </motion.div>
 
-            {/* Card 4 */}
+            {/* Card 4: Airport to Airport */}
             <motion.div 
-              initial={{ opacity: 0, scale: 0.95 }}
-              whileInView={{ opacity: 1, scale: 1 }}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: 0.2 }}
-              className="bg-white p-6 md:p-10 rounded-[24px] md:rounded-[32px] min-h-[220px] md:min-h-[320px] flex flex-col justify-center shadow-sm border"
-              style={{ borderColor: theme.border }}
+              transition={{ delay: 0.3 }}
+              className="bg-white p-8 md:p-12 rounded-[32px] min-h-[300px] flex flex-col justify-center border border-[#EAE8E0] relative overflow-hidden"
             >
-              <h2 
-                className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight leading-[1.15] bg-clip-text text-transparent"
-                style={{ backgroundImage: `linear-gradient(to bottom, ${theme.secondary}, #A68A68)` }}
-              >
-                Best in class doctors.<br /> State of the art hospitals.<br /> Seamless experience.<br />(airport to airport.)
-              </h2>
+              <div className="absolute top-0 right-0 p-8 opacity-5">
+                  <Plane size={140} />
+              </div>
+              <h3 className="text-2xl md:text-3xl font-bold leading-snug text-[#1A3C34] relative z-10">
+                Best in class doctors.<br/>
+                State of the art hospitals.<br/>
+                <span className="text-[#C8B092]">Seamless Experience.<br/>(Airport to Airport) </span>
+              </h3>
             </motion.div>
             
           </div>
       </section>
 
       {/* =========================================
-          SECTION 4: RESPONSIBILITY & EXCLUSIONS
+          SECTION 4: RESPONSIBILITY
       ========================================= */}
-      <section className="flex items-center justify-center px-4 md:px-6 pb-16 md:pb-20">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-5xl w-full">
-
-            {/* LEFT: RESPONSIBILITY (Dark Card) */}
-            <motion.div 
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-              className="p-8 md:p-12 rounded-[24px] md:rounded-[32px] min-h-[300px] md:min-h-[350px] flex flex-col justify-center shadow-md"
-              style={{ backgroundColor: '#050505' }}
-            >
-              <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight leading-[1.05] mb-4 md:mb-6" style={{ color: theme.secondary }}>
-                Great power <br/>
-                brings great <br/>
-                responsibility
-              </h2>
-              <p className="text-xs md:text-base leading-relaxed opacity-90" style={{ color: theme.secondary }}>
-                VIP Pass gives you instant and unlimited access to care. We request you to be respectful to your fellow patients and avoid last minute changes to appointments to minimize care delay to other patients who could've otherwise booked the slot you had.
-              </p>
-            </motion.div>
-
-            {/* RIGHT: NOT INCLUDED (White Card) */}
-            <motion.div 
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.1 }}
-              className="bg-white p-8 md:p-12 rounded-[24px] md:rounded-[32px] min-h-[300px] md:min-h-[350px] flex flex-col justify-center shadow-sm border"
-              style={{ borderColor: theme.border }}
-            >
-              <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight leading-[1.05] mb-4 md:mb-6" style={{ color: '#262626' }}>
-                What's not included?
-              </h2>
-              <p className="text-xs md:text-base leading-relaxed" style={{ color: theme.textLight }}>
-                Any procedures other than explicitly mentioned in the packages, in case of any complication stay extends the stipulated timeframe (extended stay policy Will cover you if you opt for it)
-              </p>
-            </motion.div>
+      <section className="px-4 md:px-6 pb-20">
+          <div className="max-w-6xl mx-auto bg-[#1A3C34] rounded-[32px] md:rounded-[48px] p-8 md:p-16 text-white relative overflow-hidden">
+             
+             <div className="grid md:grid-cols-2 gap-12 items-center relative z-10">
+                 <div>
+                    <Shield className="text-[#C8B092] mb-6" size={40} />
+                    <h2 className="text-4xl md:text-5xl font-serif leading-tight mb-6">
+                        Great power brings <br/>
+                        <span className="text-[#C8B092]">great responsibility.</span>
+                    </h2>
+                    <p className="text-white/70 leading-relaxed text-sm md:text-base">
+                        VIP Pass gives you instant access. We request you to be respectful to fellow patients. Avoiding last-minute changes minimizes care delay for others who need the slot.
+                    </p>
+                 </div>
+                 
+                 <div className="bg-white/5 p-8 rounded-3xl border border-white/10">
+                    <h4 className="text-xl font-bold mb-4">What's not included?</h4>
+                    <p className="text-white/60 text-sm leading-relaxed">
+                        Any procedures other than explicitly mentioned in the packages. However, our <strong>Extended Stay Policy</strong> will cover you if you opt for it in case of complications.
+                    </p>
+                 </div>
+             </div>
 
           </div>
       </section>
 
       {/* =========================================
-          SECTION 5: FOOTER
+          SECTION 5: FOOTER (Custom)
       ========================================= */}
-      <footer className="w-full max-w-5xl mx-auto px-6 pb-12 pt-8 border-t text-center md:text-left" style={{ borderColor: theme.border }}>
-        <div className="space-y-2">
-            <h3 
-               className="text-lg font-black tracking-widest uppercase bg-clip-text text-transparent w-fit mx-auto md:mx-0"
-               style={{ backgroundImage: `linear-gradient(to right, #1A3C34, #5A6C66)` }} 
-            >
-                MEDIVOYAGE
-            </h3>
-            <p className="text-xl font-medium text-gray-500">
-                Speak to a <strong className="text-gray-900">Medivoyage Concierge</strong> on +919799636757
-            </p>
+      <footer className="w-full bg-[#1A3C34] text-[#F2F0EA] pt-20 pb-12 rounded-t-[40px] mt-10">
+        <div className="max-w-6xl mx-auto px-6 text-center md:text-left">
+            <div className="flex flex-col md:flex-row justify-between items-end gap-10">
+                <div className="space-y-4">
+                    <h3 className="text-xs font-bold tracking-[0.3em] uppercase opacity-50">
+                        Medivoyage India
+                    </h3>
+                    <p className="text-3xl md:text-5xl font-serif">
+                        Your health,<br/> our voyage.
+                    </p>
+                </div>
+                
+                <div className="bg-white/10 backdrop-blur-md p-6 rounded-2xl border border-white/10 w-full md:w-auto">
+                    <p className="text-sm opacity-70 uppercase tracking-widest mb-2">Concierge Hotline</p>
+                    <p className="text-2xl md:text-3xl font-mono font-medium">+91 97996 36757</p>
+                </div>
+            </div>
+            
+            <div className="border-t border-white/10 mt-16 pt-8 flex flex-col md:flex-row justify-between text-xs opacity-40">
+                <p>&copy; 2024 Medivoyage. All rights reserved.</p>
+                <div className="flex gap-6 mt-4 md:mt-0">
+                    <span>Privacy Policy</span>
+                    <span>Terms of Service</span>
+                </div>
+            </div>
         </div>
       </footer>
-
+    <Footer />
     </div>
   );
 }

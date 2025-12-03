@@ -15,6 +15,8 @@ import {
   Sparkles
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
+import Header from './Header';
+import Footer from './Footer';
 
 export default function Treatment() {
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
@@ -76,8 +78,9 @@ export default function Treatment() {
   );
 
   return (
+
     <div style={{ backgroundColor: theme.bg }} className="min-h-screen pt-24 pb-20 font-sans selection:bg-[#1A3C34] selection:text-[#F2F0EA]">
-      
+      <Header />
       {/* === HERO SECTION (New) === */}
       <div className="max-w-[1400px] mx-auto px-6 lg:px-8 mb-16">
         <div className="bg-[#1A3C34] rounded-[2rem] p-10 md:p-16 relative overflow-hidden text-white shadow-2xl">

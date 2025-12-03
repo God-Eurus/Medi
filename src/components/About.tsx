@@ -276,7 +276,11 @@ export default function MedivoyageConcierge() {
 
                   {/* Content Group */}
                   <div style={{ color: theme.textLight, fontFamily: fonts.body }} className="text-base lg:text-lg leading-relaxed space-y-4 font-light">
-                    <p>MediVoyage was created with a simple belief: every person deserves access to safe, honest, and world class healthcare. That means transparent, fixed pricing so you always know what to expect.</p>
+                    <p>MediVoyage was created with a simple belief: every person deserves access to safe, honest, and world class healthcare. That means transparent, fixed pricing so you always know what to expect.
+                      You are not just a case or a file. You are someone with a story, a family, a future—and you deserve care that honors that.
+                      <br/> <br/>
+                      As doctor founders, our promise is to stand by you at every step, making sure your medical journey is clear, comfortable, and truly centered around your well-being.
+                    </p>
                   </div>
 
                   {/* Signatures */}
@@ -442,7 +446,7 @@ export default function MedivoyageConcierge() {
       {/* =========================================
           SECTION 4: PARTNERS (UPDATED SEAMLESS LOOP)
       ========================================= */}
-      <section className="py-20 border-y bg-white" style={{ borderColor: theme.border }}>
+      <section id ="hospitals" className="py-20 border-y bg-white" style={{ borderColor: theme.border }}>
         <div className="max-w-7xl mx-auto px-6 mb-12 text-center">
           <span
             style={{ color: theme.primary, fontFamily: fonts.sans }}
