@@ -10,10 +10,14 @@ import {
   Phone,
   User,
   MessageSquare,
-  Calendar, // Added Icon
+  Calendar,
+  Loader2 // ✅ Added Loader Icon
 } from 'lucide-react';
 import Header from './Header';
 import Footer from './Footer';
+
+// 🔴 TODO: REPLACE THIS WITH YOUR DEPLOYED GOOGLE SCRIPT WEB APP URL
+const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbygVKMboL03fpLVzKvxismJVg0bq47sT8HBtqclVaWpcDESusO2EH71TZuhHKwAuDadGA/exec";
 
 interface WellnessProps {
   onBack: () => void;
@@ -26,11 +30,13 @@ export default function Wellness({ onBack }: WellnessProps) {
   // --- STATE: CONSULTATION MODAL ---
   const [isConsultModalOpen, setIsConsultModalOpen] = useState(false);
   const [consultSuccess, setConsultSuccess] = useState(false);
+  const [isConsultSubmitting, setIsConsultSubmitting] = useState(false); // ✅ New Loading State
   const [consultForm, setConsultForm] = useState({ name: '', phone: '', concern: '' });
 
-  // --- STATE: BOOKING MODAL (NEW) ---
-  const [selectedTherapy, setSelectedTherapy] = useState<string | null>(null); // Functions as "isOpen" for booking
+  // --- STATE: BOOKING MODAL ---
+  const [selectedTherapy, setSelectedTherapy] = useState<string | null>(null);
   const [bookingSuccess, setBookingSuccess] = useState(false);
+  const [isBookingSubmitting, setIsBookingSubmitting] = useState(false); // ✅ New Loading State
   const [bookingForm, setBookingForm] = useState({ name: '', phone: '', date: '', time: '' });
 
   // --- THEME CONFIGURATION ---
@@ -49,20 +55,43 @@ export default function Wellness({ onBack }: WellnessProps) {
     sans: 'ui-sans-serif, system-ui, sans-serif'
   };
 
-  // --- HANDLERS: CONSULTATION ---
+  // --- HANDLER: CONSULTATION SUBMIT ---
   const handleConsultSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    setConsultSuccess(true);
-    setTimeout(() => {
-        setIsConsultModalOpen(false);
+    setIsConsultSubmitting(true); // ✅ Start Loading Immediately
+
+    const formData = new FormData();
+    formData.append('name', consultForm.name);
+    formData.append('phone', consultForm.phone);
+    formData.append('concern', consultForm.concern);
+    formData.append('therapy', 'General Consultation Request'); 
+    formData.append('date', 'N/A');
+    formData.append('time', 'N/A');
+
+    fetch(GOOGLE_SCRIPT_URL, {
+      method: "POST",
+      body: formData,
+      mode: "no-cors"
+    })
+    .then(() => {
+        setIsConsultSubmitting(false); // ✅ Stop Loading
+        setConsultSuccess(true);
         setTimeout(() => {
-          setConsultSuccess(false);
-          setConsultForm({ name: '', phone: '', concern: '' });
-        }, 300);
-    }, 3000);
+            setIsConsultModalOpen(false);
+            setTimeout(() => {
+              setConsultSuccess(false);
+              setConsultForm({ name: '', phone: '', concern: '' });
+            }, 300);
+        }, 3000);
+    })
+    .catch((error) => {
+        setIsConsultSubmitting(false); // ✅ Stop Loading on Error
+        console.error("Error submitting form", error);
+        alert("There was an error submitting your request. Please try again.");
+    });
   };
 
-  // --- HANDLERS: BOOKING (NEW) ---
+  // --- HANDLER: BOOKING SUBMIT ---
   const handleOpenBooking = (therapyName: string) => {
     setSelectedTherapy(therapyName);
   };
@@ -77,11 +106,33 @@ export default function Wellness({ onBack }: WellnessProps) {
 
   const handleBookingSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("Booking Request:", { therapy: selectedTherapy, ...bookingForm });
-    setBookingSuccess(true);
-    setTimeout(() => {
-        handleCloseBooking();
-    }, 3000);
+    setIsBookingSubmitting(true); // ✅ Start Loading Immediately
+    
+    const formData = new FormData();
+    formData.append('name', bookingForm.name);
+    formData.append('phone', bookingForm.phone);
+    formData.append('date', bookingForm.date);
+    formData.append('time', bookingForm.time);
+    formData.append('therapy', selectedTherapy || 'Unknown Therapy');
+    formData.append('concern', 'Booking Request');
+
+    fetch(GOOGLE_SCRIPT_URL, {
+        method: "POST",
+        body: formData,
+        mode: "no-cors"
+      })
+      .then(() => {
+          setIsBookingSubmitting(false); // ✅ Stop Loading
+          setBookingSuccess(true);
+          setTimeout(() => {
+              handleCloseBooking();
+          }, 3000);
+      })
+      .catch((error) => {
+          setIsBookingSubmitting(false); // ✅ Stop Loading on Error
+          console.error("Error submitting form", error);
+          alert("There was an error submitting your booking. Please try again.");
+      });
   };
 
   // --- DATA ---
@@ -285,7 +336,7 @@ export default function Wellness({ onBack }: WellnessProps) {
                   {program.description}
                 </p>
 
-                {/* ✅ UPDATED BOOKING BUTTON */}
+                {/* ✅ BOOKING BUTTON */}
                 <button 
                   onClick={() => handleOpenBooking(program.title)}
                   className="mt-auto w-full py-3 border border-[#1A3C34] text-[10px] font-bold uppercase tracking-widest hover:bg-[#1A3C34] hover:text-white transition-all duration-300 flex items-center justify-center gap-2 rounded"
@@ -382,7 +433,20 @@ export default function Wellness({ onBack }: WellnessProps) {
                             <MessageSquare className="absolute left-3 top-3 text-gray-400" size={16} />
                             <textarea placeholder="Specific concerns? (e.g. Back pain)" value={consultForm.concern} onChange={(e) => setConsultForm({...consultForm, concern: e.target.value})} className="w-full pl-10 pr-4 py-3 bg-[#F2F0EA] border border-[#E2E0D8] rounded-lg text-sm text-[#1A3C34] focus:outline-none focus:border-[#C8B092] h-24 resize-none" />
                         </div>
-                        <button type="submit" className="w-full py-3 mt-2 text-white text-xs font-bold uppercase tracking-widest rounded-lg shadow-lg hover:opacity-90 transition-all duration-300" style={{ backgroundColor: theme.primary }}>Request Call</button>
+                        
+                        {/* ✅ Button with Loading State */}
+                        <button 
+                            type="submit" 
+                            disabled={isConsultSubmitting}
+                            className="w-full py-3 mt-2 text-white text-xs font-bold uppercase tracking-widest rounded-lg shadow-lg hover:opacity-90 transition-all duration-300 disabled:opacity-70 disabled:cursor-not-allowed flex items-center justify-center gap-2" 
+                            style={{ backgroundColor: theme.primary }}
+                        >
+                            {isConsultSubmitting ? (
+                                <>Sending... <Loader2 className="animate-spin" size={14} /></>
+                            ) : (
+                                "Request Call"
+                            )}
+                        </button>
                     </form>
                   </motion.div>
                 )}
@@ -393,7 +457,7 @@ export default function Wellness({ onBack }: WellnessProps) {
       </AnimatePresence>
 
       {/* =========================================
-          BOOKING MODAL (NEW)
+          BOOKING MODAL (SPECIFIC THERAPY)
       ========================================= */}
       <AnimatePresence>
         {selectedTherapy && (
@@ -455,7 +519,19 @@ export default function Wellness({ onBack }: WellnessProps) {
                             </div>
                         </div>
 
-                        <button type="submit" className="w-full py-3 mt-4 text-white text-xs font-bold uppercase tracking-widest rounded-lg shadow-lg hover:opacity-90 transition-all duration-300" style={{ backgroundColor: theme.primary }}>Confirm Booking</button>
+                        {/* ✅ Button with Loading State */}
+                        <button 
+                            type="submit" 
+                            disabled={isBookingSubmitting}
+                            className="w-full py-3 mt-4 text-white text-xs font-bold uppercase tracking-widest rounded-lg shadow-lg hover:opacity-90 transition-all duration-300 disabled:opacity-70 disabled:cursor-not-allowed flex items-center justify-center gap-2" 
+                            style={{ backgroundColor: theme.primary }}
+                        >
+                            {isBookingSubmitting ? (
+                                <>Sending... <Loader2 className="animate-spin" size={14} /></>
+                            ) : (
+                                "Confirm Booking"
+                            )}
+                        </button>
                     </form>
                   </motion.div>
                 )}
