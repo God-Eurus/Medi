@@ -17,17 +17,455 @@ const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwxJMtZ41V-eX
 
 // Common Country Codes List
 const COUNTRY_CODES = [
-  { code: "+91", country: "IN", label: "🇮🇳 India (+91)" },
-  { code: "+1", country: "US", label: "🇺🇸 United States (+1)" },
-  { code: "+44", country: "GB", label: "🇬🇧 United Kingdom (+44)" },
-  { code: "+971", country: "AE", label: "🇦🇪 UAE (+971)" },
-  { code: "+880", country: "BD", label: "🇧🇩 Bangladesh (+880)" },
-  { code: "+1", country: "CA", label: "🇨🇦 Canada (+1)" },
-  { code: "+61", country: "AU", label: "🇦🇺 Australia (+61)" },
-  { code: "+966", country: "SA", label: "🇸🇦 Saudi Arabia (+966)" },
-  { code: "+234", country: "NG", label: "🇳🇬 Nigeria (+234)" },
-  { code: "+254", country: "KE", label: "🇰🇪 Kenya (+254)" },
-  // ... (You can keep your full list here, shortened for brevity)
+
+{ code: "+93", country: "AF", label: "🇦🇫 Afghanistan (+93)" },
+
+{ code: "+355", country: "AL", label: "🇦🇱 Albania (+355)" },
+
+{ code: "+213", country: "DZ", label: "🇩🇿 Algeria (+213)" },
+
+{ code: "+1", country: "AS", label: "🇦🇸 American Samoa (+1)" },
+
+{ code: "+376", country: "AD", label: "🇦🇩 Andorra (+376)" },
+
+{ code: "+244", country: "AO", label: "🇦🇴 Angola (+244)" },
+
+{ code: "+1", country: "AI", label: "🇦🇮 Anguilla (+1)" },
+
+{ code: "+1", country: "AG", label: "🇦🇬 Antigua & Barbuda (+1)" },
+
+{ code: "+54", country: "AR", label: "🇦🇷 Argentina (+54)" },
+
+{ code: "+374", country: "AM", label: "🇦🇲 Armenia (+374)" },
+
+{ code: "+297", country: "AW", label: "🇦🇼 Aruba (+297)" },
+
+{ code: "+61", country: "AU", label: "🇦🇺 Australia (+61)" },
+
+{ code: "+43", country: "AT", label: "🇦🇹 Austria (+43)" },
+
+{ code: "+994", country: "AZ", label: "🇦🇿 Azerbaijan (+994)" },
+
+{ code: "+1", country: "BS", label: "🇧🇸 Bahamas (+1)" },
+
+{ code: "+973", country: "BH", label: "🇧🇭 Bahrain (+973)" },
+
+{ code: "+880", country: "BD", label: "🇧🇩 Bangladesh (+880)" },
+
+{ code: "+1", country: "BB", label: "🇧🇧 Barbados (+1)" },
+
+{ code: "+375", country: "BY", label: "🇧🇾 Belarus (+375)" },
+
+{ code: "+32", country: "BE", label: "🇧🇪 Belgium (+32)" },
+
+{ code: "+501", country: "BZ", label: "🇧🇿 Belize (+501)" },
+
+{ code: "+229", country: "BJ", label: "🇧🇯 Benin (+229)" },
+
+{ code: "+1", country: "BM", label: "🇧🇲 Bermuda (+1)" },
+
+{ code: "+975", country: "BT", label: "🇧🇹 Bhutan (+975)" },
+
+{ code: "+591", country: "BO", label: "🇧🇴 Bolivia (+591)" },
+
+{ code: "+387", country: "BA", label: "🇧🇦 Bosnia & Herzegovina (+387)" },
+
+{ code: "+267", country: "BW", label: "🇧🇼 Botswana (+267)" },
+
+{ code: "+55", country: "BR", label: "🇧🇷 Brazil (+55)" },
+
+{ code: "+1", country: "VG", label: "🇻🇬 British Virgin Islands (+1)" },
+
+{ code: "+673", country: "BN", label: "🇧🇳 Brunei (+673)" },
+
+{ code: "+359", country: "BG", label: "🇧🇬 Bulgaria (+359)" },
+
+{ code: "+226", country: "BF", label: "🇧🇫 Burkina Faso (+226)" },
+
+{ code: "+257", country: "BI", label: "🇧🇮 Burundi (+257)" },
+
+{ code: "+855", country: "KH", label: "🇰🇭 Cambodia (+855)" },
+
+{ code: "+237", country: "CM", label: "🇨🇲 Cameroon (+237)" },
+
+{ code: "+1", country: "CA", label: "🇨🇦 Canada (+1)" },
+
+{ code: "+238", country: "CV", label: "🇨🇻 Cape Verde (+238)" },
+
+{ code: "+1", country: "KY", label: "🇰🇾 Cayman Islands (+1)" },
+
+{ code: "+236", country: "CF", label: "🇨🇫 Central African Republic (+236)" },
+
+{ code: "+235", country: "TD", label: "🇹🇩 Chad (+235)" },
+
+{ code: "+56", country: "CL", label: "🇨🇱 Chile (+56)" },
+
+{ code: "+86", country: "CN", label: "🇨🇳 China (+86)" },
+
+{ code: "+57", country: "CO", label: "🇨🇴 Colombia (+57)" },
+
+{ code: "+269", country: "KM", label: "🇰🇲 Comoros (+269)" },
+
+{ code: "+242", country: "CG", label: "🇨🇬 Congo (+242)" },
+
+{ code: "+243", country: "CD", label: "🇨🇩 Congo, Democratic Republic (+243)" },
+
+{ code: "+682", country: "CK", label: "🇨🇰 Cook Islands (+682)" },
+
+{ code: "+506", country: "CR", label: "🇨🇷 Costa Rica (+506)" },
+
+{ code: "+385", country: "HR", label: "🇭🇷 Croatia (+385)" },
+
+{ code: "+53", country: "CU", label: "🇨🇺 Cuba (+53)" },
+
+{ code: "+599", country: "CW", label: "🇨🇼 Curaçao (+599)" },
+
+{ code: "+357", country: "CY", label: "🇨🇾 Cyprus (+357)" },
+
+{ code: "+420", country: "CZ", label: "🇨🇿 Czech Republic (+420)" },
+
+{ code: "+45", country: "DK", label: "🇩🇰 Denmark (+45)" },
+
+{ code: "+253", country: "DJ", label: "🇩🇯 Djibouti (+253)" },
+
+{ code: "+1", country: "DM", label: "🇩🇲 Dominica (+1)" },
+
+{ code: "+1", country: "DO", label: "🇩🇴 Dominican Republic (+1)" },
+
+{ code: "+593", country: "EC", label: "🇪🇨 Ecuador (+593)" },
+
+{ code: "+20", country: "EG", label: "🇪🇬 Egypt (+20)" },
+
+{ code: "+503", country: "SV", label: "🇸🇻 El Salvador (+503)" },
+
+{ code: "+240", country: "GQ", label: "🇬🇶 Equatorial Guinea (+240)" },
+
+{ code: "+291", country: "ER", label: "🇪🇷 Eritrea (+291)" },
+
+{ code: "+372", country: "EE", label: "🇪🇪 Estonia (+372)" },
+
+{ code: "+251", country: "ET", label: "🇪🇹 Ethiopia (+251)" },
+
+{ code: "+500", country: "FK", label: "🇫🇰 Falkland Islands (+500)" },
+
+{ code: "+298", country: "FO", label: "🇫🇴 Faroe Islands (+298)" },
+
+{ code: "+679", country: "FJ", label: "🇫🇯 Fiji (+679)" },
+
+{ code: "+358", country: "FI", label: "🇫🇮 Finland (+358)" },
+
+{ code: "+33", country: "FR", label: "🇫🇷 France (+33)" },
+
+{ code: "+594", country: "GF", label: "🇬🇫 French Guiana (+594)" },
+
+{ code: "+689", country: "PF", label: "🇵🇫 French Polynesia (+689)" },
+
+{ code: "+241", country: "GA", label: "🇬🇦 Gabon (+241)" },
+
+{ code: "+220", country: "GM", label: "🇬🇲 Gambia (+220)" },
+
+{ code: "+995", country: "GE", label: "🇬🇪 Georgia (+995)" },
+
+{ code: "+49", country: "DE", label: "🇩🇪 Germany (+49)" },
+
+{ code: "+233", country: "GH", label: "🇬🇭 Ghana (+233)" },
+
+{ code: "+350", country: "GI", label: "🇬🇮 Gibraltar (+350)" },
+
+{ code: "+30", country: "GR", label: "🇬🇷 Greece (+30)" },
+
+{ code: "+299", country: "GL", label: "🇬🇱 Greenland (+299)" },
+
+{ code: "+1", country: "GD", label: "🇬🇩 Grenada (+1)" },
+
+{ code: "+590", country: "GP", label: "🇬🇵 Guadeloupe (+590)" },
+
+{ code: "+1", country: "GU", label: "🇬🇺 Guam (+1)" },
+
+{ code: "+502", country: "GT", label: "🇬🇹 Guatemala (+502)" },
+
+{ code: "+224", country: "GN", label: "🇬🇳 Guinea (+224)" },
+
+{ code: "+245", country: "GW", label: "🇬🇼 Guinea-Bissau (+245)" },
+
+{ code: "+592", country: "GY", label: "🇬🇾 Guyana (+592)" },
+
+{ code: "+509", country: "HT", label: "🇭🇹 Haiti (+509)" },
+
+{ code: "+504", country: "HN", label: "🇭🇳 Honduras (+504)" },
+
+{ code: "+852", country: "HK", label: "🇭🇰 Hong Kong (+852)" },
+
+{ code: "+36", country: "HU", label: "🇭🇺 Hungary (+36)" },
+
+{ code: "+354", country: "IS", label: "🇮🇸 Iceland (+354)" },
+
+{ code: "+91", country: "IN", label: "🇮🇳 India (+91)" },
+
+{ code: "+62", country: "ID", label: "🇮🇩 Indonesia (+62)" },
+
+{ code: "+98", country: "IR", label: "🇮🇷 Iran (+98)" },
+
+{ code: "+964", country: "IQ", label: "🇮🇶 Iraq (+964)" },
+
+{ code: "+353", country: "IE", label: "🇮🇪 Ireland (+353)" },
+
+{ code: "+972", country: "IL", label: "🇮🇱 Israel (+972)" },
+
+{ code: "+39", country: "IT", label: "🇮🇹 Italy (+39)" },
+
+{ code: "+225", country: "CI", label: "🇨🇮 Ivory Coast (+225)" },
+
+{ code: "+1", country: "JM", label: "🇯🇲 Jamaica (+1)" },
+
+{ code: "+81", country: "JP", label: "🇯🇵 Japan (+81)" },
+
+{ code: "+962", country: "JO", label: "🇯🇴 Jordan (+962)" },
+
+{ code: "+7", country: "KZ", label: "🇰🇿 Kazakhstan (+7)" },
+
+{ code: "+254", country: "KE", label: "🇰🇪 Kenya (+254)" },
+
+{ code: "+686", country: "KI", label: "🇰🇮 Kiribati (+686)" },
+
+{ code: "+383", country: "XK", label: "🇽🇰 Kosovo (+383)" },
+
+{ code: "+965", country: "KW", label: "🇰🇼 Kuwait (+965)" },
+
+{ code: "+996", country: "KG", label: "🇰🇬 Kyrgyzstan (+996)" },
+
+{ code: "+856", country: "LA", label: "🇱🇦 Laos (+856)" },
+
+{ code: "+371", country: "LV", label: "🇱🇻 Latvia (+371)" },
+
+{ code: "+961", country: "LB", label: "🇱🇧 Lebanon (+961)" },
+
+{ code: "+266", country: "LS", label: "🇱🇸 Lesotho (+266)" },
+
+{ code: "+231", country: "LR", label: "🇱🇷 Liberia (+231)" },
+
+{ code: "+218", country: "LY", label: "🇱🇾 Libya (+218)" },
+
+{ code: "+423", country: "LI", label: "🇱🇮 Liechtenstein (+423)" },
+
+{ code: "+370", country: "LT", label: "🇱🇹 Lithuania (+370)" },
+
+{ code: "+352", country: "LU", label: "🇱🇺 Luxembourg (+352)" },
+
+{ code: "+853", country: "MO", label: "🇲🇴 Macau (+853)" },
+
+{ code: "+389", country: "MK", label: "🇲🇰 Macedonia (+389)" },
+
+{ code: "+261", country: "MG", label: "🇲🇬 Madagascar (+261)" },
+
+{ code: "+265", country: "MW", label: "🇲🇼 Malawi (+265)" },
+
+{ code: "+60", country: "MY", label: "🇲🇾 Malaysia (+60)" },
+
+{ code: "+960", country: "MV", label: "🇲🇻 Maldives (+960)" },
+
+{ code: "+223", country: "ML", label: "🇲🇱 Mali (+223)" },
+
+{ code: "+356", country: "MT", label: "🇲🇹 Malta (+356)" },
+
+{ code: "+692", country: "MH", label: "🇲🇭 Marshall Islands (+692)" },
+
+{ code: "+596", country: "MQ", label: "🇲🇶 Martinique (+596)" },
+
+{ code: "+222", country: "MR", label: "🇲🇷 Mauritania (+222)" },
+
+{ code: "+230", country: "MU", label: "🇲🇺 Mauritius (+230)" },
+
+{ code: "+52", country: "MX", label: "🇲🇽 Mexico (+52)" },
+
+{ code: "+691", country: "FM", label: "🇫🇲 Micronesia (+691)" },
+
+{ code: "+373", country: "MD", label: "🇲🇩 Moldova (+373)" },
+
+{ code: "+377", country: "MC", label: "🇲🇨 Monaco (+377)" },
+
+{ code: "+976", country: "MN", label: "🇲🇳 Mongolia (+976)" },
+
+{ code: "+382", country: "ME", label: "🇲🇪 Montenegro (+382)" },
+
+{ code: "+1", country: "MS", label: "🇲🇸 Montserrat (+1)" },
+
+{ code: "+212", country: "MA", label: "🇲🇦 Morocco (+212)" },
+
+{ code: "+258", country: "MZ", label: "🇲🇿 Mozambique (+258)" },
+
+{ code: "+95", country: "MM", label: "🇲🇲 Myanmar (+95)" },
+
+{ code: "+264", country: "NA", label: "🇳🇦 Namibia (+264)" },
+
+{ code: "+674", country: "NR", label: "🇳🇷 Nauru (+674)" },
+
+{ code: "+977", country: "NP", label: "🇳🇵 Nepal (+977)" },
+
+{ code: "+31", country: "NL", label: "🇳🇱 Netherlands (+31)" },
+
+{ code: "+687", country: "NC", label: "🇳🇨 New Caledonia (+687)" },
+
+{ code: "+64", country: "NZ", label: "🇳🇿 New Zealand (+64)" },
+
+{ code: "+505", country: "NI", label: "🇳🇮 Nicaragua (+505)" },
+
+{ code: "+227", country: "NE", label: "🇳🇪 Niger (+227)" },
+
+{ code: "+234", country: "NG", label: "🇳🇬 Nigeria (+234)" },
+
+{ code: "+683", country: "NU", label: "🇳🇺 Niue (+683)" },
+
+{ code: "+850", country: "KP", label: "🇰🇵 North Korea (+850)" },
+
+{ code: "+1", country: "MP", label: "🇲🇵 Northern Mariana Islands (+1)" },
+
+{ code: "+47", country: "NO", label: "🇳🇴 Norway (+47)" },
+
+{ code: "+968", country: "OM", label: "🇴🇲 Oman (+968)" },
+
+{ code: "+92", country: "PK", label: "🇵🇰 Pakistan (+92)" },
+
+{ code: "+680", country: "PW", label: "🇵🇼 Palau (+680)" },
+
+{ code: "+970", country: "PS", label: "🇵🇸 Palestine (+970)" },
+
+{ code: "+507", country: "PA", label: "🇵🇦 Panama (+507)" },
+
+{ code: "+675", country: "PG", label: "🇵🇬 Papua New Guinea (+675)" },
+
+{ code: "+595", country: "PY", label: "🇵🇾 Paraguay (+595)" },
+
+{ code: "+51", country: "PE", label: "🇵🇪 Peru (+51)" },
+
+{ code: "+63", country: "PH", label: "🇵🇭 Philippines (+63)" },
+
+{ code: "+48", country: "PL", label: "🇵🇱 Poland (+48)" },
+
+{ code: "+351", country: "PT", label: "🇵🇹 Portugal (+351)" },
+
+{ code: "+1", country: "PR", label: "🇵🇷 Puerto Rico (+1)" },
+
+{ code: "+974", country: "QA", label: "🇶🇦 Qatar (+974)" },
+
+{ code: "+262", country: "RE", label: "🇷🇪 Réunion (+262)" },
+
+{ code: "+40", country: "RO", label: "🇷🇴 Romania (+40)" },
+
+{ code: "+7", country: "RU", label: "🇷🇺 Russia (+7)" },
+
+{ code: "+250", country: "RW", label: "🇷🇼 Rwanda (+250)" },
+
+{ code: "+685", country: "WS", label: "🇼🇸 Samoa (+685)" },
+
+{ code: "+378", country: "SM", label: "🇸🇲 San Marino (+378)" },
+
+{ code: "+239", country: "ST", label: "🇸🇹 São Tomé & Príncipe (+239)" },
+
+{ code: "+966", country: "SA", label: "🇸🇦 Saudi Arabia (+966)" },
+
+{ code: "+221", country: "SN", label: "🇸🇳 Senegal (+221)" },
+
+{ code: "+381", country: "RS", label: "🇷🇸 Serbia (+381)" },
+
+{ code: "+248", country: "SC", label: "🇸🇨 Seychelles (+248)" },
+
+{ code: "+232", country: "SL", label: "🇸🇱 Sierra Leone (+232)" },
+
+{ code: "+65", country: "SG", label: "🇸🇬 Singapore (+65)" },
+
+{ code: "+1", country: "SX", label: "🇸🇽 Sint Maarten (+1)" },
+
+{ code: "+421", country: "SK", label: "🇸🇰 Slovakia (+421)" },
+
+{ code: "+386", country: "SI", label: "🇸🇮 Slovenia (+386)" },
+
+{ code: "+677", country: "SB", label: "🇸🇧 Solomon Islands (+677)" },
+
+{ code: "+27", country: "ZA", label: "🇿🇦 South Africa (+27)" },
+
+{ code: "+82", country: "KR", label: "🇰🇷 South Korea (+82)" },
+
+{ code: "+211", country: "SS", label: "🇸🇸 South Sudan (+211)" },
+
+{ code: "+34", country: "ES", label: "🇪🇸 Spain (+34)" },
+
+{ code: "+94", country: "LK", label: "🇱🇰 Sri Lanka (+94)" },
+
+{ code: "+1", country: "KN", label: "🇰🇳 St Kitts & Nevis (+1)" },
+
+{ code: "+1", country: "LC", label: "🇱🇨 St Lucia (+1)" },
+
+{ code: "+1", country: "VC", label: "🇻🇨 St Vincent & Grenadines (+1)" },
+
+{ code: "+249", country: "SD", label: "🇸🇩 Sudan (+249)" },
+
+{ code: "+597", country: "SR", label: "🇸🇷 Suriname (+597)" },
+
+{ code: "+268", country: "SZ", label: "🇸🇿 Swaziland (+268)" },
+
+{ code: "+46", country: "SE", label: "🇸🇪 Sweden (+46)" },
+
+{ code: "+41", country: "CH", label: "🇨🇭 Switzerland (+41)" },
+
+{ code: "+963", country: "SY", label: "🇸🇾 Syria (+963)" },
+
+{ code: "+886", country: "TW", label: "🇹🇼 Taiwan (+886)" },
+
+{ code: "+992", country: "TJ", label: "🇹🇯 Tajikistan (+992)" },
+
+{ code: "+255", country: "TZ", label: "🇹🇿 Tanzania (+255)" },
+
+{ code: "+66", country: "TH", label: "🇹🇭 Thailand (+66)" },
+
+{ code: "+670", country: "TL", label: "🇹🇱 Timor-Leste (+670)" },
+
+{ code: "+228", country: "TG", label: "🇹🇬 Togo (+228)" },
+
+{ code: "+690", country: "TK", label: "🇹🇰 Tokelau (+690)" },
+
+{ code: "+676", country: "TO", label: "🇹🇴 Tonga (+676)" },
+
+{ code: "+1", country: "TT", label: "🇹🇹 Trinidad & Tobago (+1)" },
+
+{ code: "+216", country: "TN", label: "🇹🇳 Tunisia (+216)" },
+
+{ code: "+90", country: "TR", label: "🇹🇷 Turkey (+90)" },
+
+{ code: "+993", country: "TM", label: "🇹🇲 Turkmenistan (+993)" },
+
+{ code: "+1", country: "TC", label: "🇹🇨 Turks & Caicos (+1)" },
+
+{ code: "+688", country: "TV", label: "🇹🇻 Tuvalu (+688)" },
+
+{ code: "+256", country: "UG", label: "🇺🇬 Uganda (+256)" },
+
+{ code: "+380", country: "UA", label: "🇺🇦 Ukraine (+380)" },
+
+{ code: "+971", country: "AE", label: "🇦🇪 United Arab Emirates (+971)" },
+
+{ code: "+44", country: "GB", label: "🇬🇧 United Kingdom (+44)" },
+
+{ code: "+1", country: "US", label: "🇺🇸 United States (+1)" },
+
+{ code: "+598", country: "UY", label: "🇺🇾 Uruguay (+598)" },
+
+{ code: "+1", country: "VI", label: "🇻🇮 US Virgin Islands (+1)" },
+
+{ code: "+998", country: "UZ", label: "🇺🇿 Uzbekistan (+998)" },
+
+{ code: "+678", country: "VU", label: "🇻🇺 Vanuatu (+678)" },
+
+{ code: "+58", country: "VE", label: "🇻🇪 Venezuela (+58)" },
+
+{ code: "+84", country: "VN", label: "🇻🇳 Vietnam (+84)" },
+
+{ code: "+681", country: "WF", label: "🇼🇫 Wallis & Futuna (+681)" },
+
+{ code: "+967", country: "YE", label: "🇾🇪 Yemen (+967)" },
+{ code: "+260", country: "ZM", label: "🇿🇲 Zambia (+260)" },
+{ code: "+263", country: "ZW", label: "🇿🇼 Zimbabwe (+263)" }
+
 ];
 
 export default function Hero() {
@@ -48,19 +486,298 @@ export default function Hero() {
   });
 
   const treatmentsMap = {
-    "CARDIAC SCIENCES": ["Angioplasty", "CABG", "Valve Replacement", "Pacemaker"],
-    "ORTHOPAEDICS": ["Knee Replacement", "Hip Replacement", "ACL Reconstruction", "Spine Surgery"],
-    "NEURO SCIENCES": ["Brain Tumour Surgery", "Spine Surgery", "Epilepsy Surgery"],
-    "ONCOLOGY": ["Chemotherapy", "Radiation", "Surgical Oncology", "PET Scan"],
-    "GENERAL SURGERY": ["Hernia Repair", "Gallbladder Removal", "Appendectomy"],
-    "ENT": ["Cochlear Implant", "Sinus Surgery", "Tonsillectomy"],
-    "GYNAECOLOGY": ["IVF", "Hysterectomy", "C-Section", "Fibroid Removal"],
-    "UROLOGY": ["Kidney Transplant", "Kidney Stones", "Prostate Surgery"],
-    "GASTROENTEROLOGY": ["Liver Transplant", "Endoscopy", "Colonoscopy"],
-    "COSMETIC SURGERY": ["Hair Transplant", "Liposuction", "Rhinoplasty"],
-    "DENTAL": ["Implants", "Root Canal", "Veneers"],
-    "OTHERS": ["General Inquiry"]
-  };
+
+"CARDIAC SCIENCES (CARDIOLOGY AND CTVS)": [
+
+"Angiography including Non-ionic Contrast", "Angioplasty", "Arterial Switch Surgery",
+
+"Atrial Septal Defect (ASD)", "Balloon valvuloplasty", "Balloon Angioplasty",
+
+"Balloon Atrial Septostomy", "Balloon mitral valvotomy", "Bentall Procedure",
+
+"CABG - Redo", "Cardiac Ablation", "Cardiac Catheterization", "Cardiac Valve Replacement",
+
+"Closed heart Surgery", "CABG (Coronary Artery Bypass Grafting)",
+
+"Pacemaker-supported cardiac resynchronisation treatment (CRT-P)",
+
+"Cardiac resynchronisation therapy with a defibrillator (CRT-D)", "Device Closure of ASD",
+
+"Dual Chamber Pacemaker", "Electrophysiology (EP) study AND Radiofrequency ablation (RFA)",
+
+"Glenn procedure", "Double Valve Replacement", "Heart Port Surgery", "ICD Combo Device",
+
+"Impella implantation", "Intra-aortic balloon pump", "Left Ventricular Assist Device",
+
+"Left Ventricular Restoration Surgery", "Pacemaker Implant Single Chamber", "PDA Closure",
+
+"Pediatric cardiomyopathy with implant", "Pulmonary Valve Replacement", "Ross Procedure",
+
+"TAPVC", "TOF Repair", "Trans Aortic Valve Replacement", "TAVI", "VSD Closure Repair",
+
+"Fontan Procedure", "Transmyocardial Revascularization", "Atherectomy", "Norwood Surgery",
+
+],
+
+"ORTHOPAEDICS": [
+
+"Acromioclavicular (AC) joint separation", "Adolescent idiopathic scoliosis",
+
+"Ankle arthroscopy", "Ankle Arthrodesis", "Anterior Cruciate Ligament (ACL) Reconstruction",
+
+"Arthrodesis", "Arthroscopic (minimally invasive) ankle surgery", "Boutonniere deformity treatment",
+
+"Bow Leg Correction", "Carpel Tunnel Release", "Congenital Limb defect surgery",
+
+"Congenital Pseudarthrosis of the Tibia (CPT)", "Corrective Osteotomy and fixation with bone graft",
+
+"Corrective Osteotomy Fixation and Ligament Reconstruction Surgery", "Debridement of the Achilles tendon",
+
+"Disc Replacement (Cervical/Lumber)", "Distal Clavicle Excision", "Femoroacetabular Impingement (FAI) surgery",
+
+"High Tibial Osteotomy(HTO)", "Hip Dysplasia Treatment", "Hip Resurfacing Surgery", "Knee Arthroscopy",
+
+"Knock-knee surgery", "Lateral ankle ligament reconstruction", "Legg-Calve-Perthes Disease (LCPD)",
+
+"Meniscectomy", "Meniscus Repair", "Minimally invasive hip replacement", "Invasive Knee Replacement Surgery",
+
+"Open Reduction and Internal Fixation (Orif)", "Osteotomy", "Palmar Fasciectomy", "PCL Reconstruction",
+
+"Shoulder arthroscopy", "Shoulder labral tear surgery", "Shoulder Replacement",
+
+"Shoulder Tendon Repair Rotator Cuff", "Thumb Replacement (Wrist Arthroplasty)",
+
+"Transforaminal Lumbar Interbody Fusion", "Total Hip Replacement (B/L)", "Total Hip Replacement (U/L)",
+
+"Total Knee Replacement (B/L)", "Total Knee Replacement (U/L)", "Arthroscopic Bankart Repair",
+
+"Autologous Chondrocyte Implantation (ACI)", "Limb Lengthening Shortening surgery",
+
+],
+
+"NEURO SCIENCES (NEUROLOGY AND NEUROSURGERY)": [
+
+"Anterior Lumbar Interbody Fusion (ALIF) surgery", "Aneurysm clipping", "Anterior Cervical Discectomy",
+
+"Anterior Cervical Discectomy and Fusion (ACDF)", "Artificial Lumber Disc Replacement",
+
+"Brachial Plexus Injuries/Stereotactic Procedure", "Brain Tumour", "Carotid endarterectomy",
+
+"Cerebral Angiogram", "Carotid Angioplasty Procedure", "Cerebral Dosrsal Rhizotomy",
+
+"Cervical Corpectomy Procedure", "Cervical Decompression", "Cervical Disc Replacement Surgery",
+
+"Cervical Fusion Procedure", "Cervical Fusion for tumors", "Cervical Laminoplasty", "Cranioplasty",
+
+"Craniotomy", "Deep Brain Stimulation", "Endoscopic Spine Surgery", "Endoscopic Third Ventriculostomy",
+
+"Endovascular Embolisation of AVM", "Endovascular surgery Embolisation of AVM", "Epilepsy Surgery",
+
+"External Ventricular Drainage", "Foraminotomy", "Keyhole spine surgery", "Kyphoplasty", "Laminectomy",
+
+"Lesionectomy", "Lumbar Decompression", "Lumbar discectomy", "Lumbar Puncture", "Management of Seizures",
+
+"Microdiscectomy", "Microvascular Decompression (MVD)", "Rhizotomy", "Scoliosis surgery",
+
+"Spinal Cord Detethering", "Spinal Cord Stimulation", "Spinal Decompression and fixation operation",
+
+"Spinal Fusion", "Stroke Treatment", "Spina Bifida", "Thoracic Interbody Fusion", "Pars Repair Surgery",
+
+"Corpus Callostomy", "Vagal Nerve Stimulation", "Chronic Cerebrospinal Venous Insufficiency (CCSVI)",
+
+"Hemispherectomy",
+
+],
+
+"GENERAL SURGERY": [
+
+"Appendectomy", "Abdominal Hysterectomy Surgery", "Kasai Procedure", "Laparoscopic Gall Bladder removal",
+
+"Hernia Repair", "Microwave Endometrial Ablation", "Rectal Polyp Removal", "Thyroidectomy",
+
+"Varicose Vein", "Whipple Procedure", "EVLT - Varicose Veins (Single Extremity)", "Haemorrhoids",
+
+],
+
+"ENT": [
+
+"Cochlear Implant", "Laryngectomy", "Nasal Polyp Surgery", "Septoplasty", "Tympanoplasty",
+
+"Tonsillectomy", "Adenoidectomy", "Peritonsillar abscess drainage", "Parotidectomy",
+
+"Anterior skull base surgery", "Advanced lateral skull base surgery", "Resection of nasopharyngeal tumour",
+
+"Open reduction and internal fixation of maxilla / mandible / zygoma", "Canalopasty For EAC Atresia",
+
+"Stapedectomy / tympanotomy", "Open sinus surgery", "Functional Endoscopic Sinus (FESS)",
+
+],
+
+"GYNAECOLOGY": [
+
+"C-Section", "Fibroid Removal Surgery", "Laparoscopic Abdominal Hysterectomy", "Normal delivery",
+
+"Polycystic Ovarian Syndrome (PCOS)", "Vaginal Myomectomy", "Class III radical hysterctomy + BPLND",
+
+"Vulvectomy + reconstruction procedures", "Vaginal repair for vesico-vaginal fistula (Repair for VVF)",
+
+"Laparotomy for Broad Ligament Hematoma", "Closure of Burst Abdomen",
+
+"Uretero-vaginal / Uterine fistula repair", "Reversal of Sterilisation/ Tuboplasty (lap/ open)",
+
+"Sling Surgeries for Prolapse", "Salpingoophorectomy for both BPLN + NORMAL", "Burch",
+
+"Rectovaginal fistula repair", "Hysteroscopic Myomectomy", "Urethrovaginal fistula repair",
+
+],
+
+"UROLOGY": [
+
+"ESWL (Extracorporeal Shock Wave Lithotripsy)", "Hypospadias Surgery", "Kidney Stone Removal",
+
+"Management of Erectile Dysfunction", "Nephrectomy", "Penile Implant", "Reversal of Vasectomy",
+
+"Trans Urethral Resection of Bladder Tumour (TURBT)", "Transurethral resection of the prostate (TURP)",
+
+"Vasectomy",
+
+],
+
+"GASTROENTEROLOGY": [
+
+"ERCP (Diagnostic)", "Capsule Endoscopy", "Endoscopy (UGI Endoscopy)", "Choledochoduodenostomy",
+
+"Porto Caval Anastomosis", "Gastrectomy", "Oesophagectomy", "Heller Myotomy", "Sigmoid Resection",
+
+"Gastrojejunostomy", "Hiatus Hernia Repair",
+
+],
+
+"BARIATRIC SURGERIES": ["Gastric Bypass", "Lap Gastric Banding", "Sleeve Gastrectomy"],
+
+"INFERTILITY": ["Intrauterine insemination", "In vitro fertilisation (IVF)"],
+
+"OPTHALMOLOGY": [
+
+"Cornea Transplant", "Lasik Surgery", "Macular Degeneration Surgery", "Vitrectomy", "Cataract",
+
+],
+
+"PLASTIC AND RECONSTRUCTIVE SURGERIES": [
+
+"Ear Correction", "Scar Revision", "Spider Veins (Sclerotherapy)", "Liposuction Surgery",
+
+"Hair transplant", "Cleft Lip and Palate Repair", "Hand Microsurgery",
+
+],
+
+"PSYCHIATRY": [
+
+"Anxiety Disorder Treatment", "Bipolar Disorder Treatment", "Depression Disorder Treatment",
+
+"Obsessive-Compulsive Disorder", "Schizophrenia Disorder Treatment", "Substance Use Disorder Treatment",
+
+],
+
+"RADIATIONAL ONCOLOGY": [
+
+"Proton Therapy", "Chimeric Antigen Receptor T-cell therapy", "Cyberknife Treatment",
+
+"Stereotactic Radio Therapy", "Intensity-modulated radiotherapy (IMRT)", "Gamma Knife Treatment",
+
+],
+
+"SURGICAL ONCOLOGY": [],
+
+"PAEDIATRIC SURGERIES": [],
+
+"DENTISTRY": [],
+
+"ONCOLOGY (MEDICAL, SURGICAL AND RADTIONAL ONCOLOGY)": [
+
+"Cancer Therapy", "Chemotherapy", "Radiotherapy", "Bone Marrow Transplant", "Surgical Oncology"
+
+],
+
+"GYNAECOLOGY AND OBSTETRICS": [
+
+"Normal Delivery", "C-Section", "Hysterectomy", "Fibroid Removal", "Endometriosis Surgery"
+
+],
+
+"GASTROENTEROLOGY (AND SURGRICAL GASTRO)": [
+
+"Colonoscopy", "Liver Transplant", "Endoscopy", "Gallbladder Surgery", "Bariatric Surgery"
+
+],
+
+"UROLOGY AND NEPHROLOGY": [
+
+"Kidney Transplant", "Dialysis", "Prostate Surgery", "Stone Removal", "Urethral Reconstruction"
+
+],
+
+"IVF AND INFERTILITY": [
+
+"IVF", "ICSI", "Egg Freezing", "Surrogacy", "Embryo Transfer"
+
+],
+
+"PAEDIATRIC SURGERIES (ALL)": [
+
+"Pediatric Heart Surgery", "Pediatric Urology", "Cleft Lip/Palate Repair",
+
+"Pediatric Neurosurgery", "Pediatric Orthopedics"
+
+],
+
+"GENERAL MEDICINE": [
+
+"Diabetes Management", "Hypertension Treatment", "Thyroid Disorders",
+
+"Infectious Diseases", "Routine Check-ups"
+
+],
+
+"INTERVENTIONAL RADIOLOGY": [
+
+"Angioplasty", "Embolization", "Biopsy", "Stent Placement", "Vertebroplasty"
+
+],
+
+"ORAL AND MAXILLOFACIAL SURGERY": [
+
+"Jaw Surgery", "Dental Implants", "Facial Trauma Repair", "Wisdom Tooth Extraction", "Cleft Jaw Surgery"
+
+],
+
+"PALLIATIVE CARE": [
+
+"Pain Management", "End-of-Life Care", "Symptom Control", "Counseling", "Home Care Support"
+
+],
+
+"GERAITRIC MEDICINE": [
+
+"Elderly Care", "Dementia Management", "Arthritis Care", "Chronic Disease Management", "Fall Prevention"
+
+],
+
+"PHYSICAL MEDICINE AND REHABILITATION": [
+
+"Physiotherapy", "Stroke Rehabilitation", "Sports Injury Rehab", "Occupational Therapy", "Speech Therapy"
+
+],
+
+"RESPIRATORY AND PULMONOLOGY MEDICINE": [
+
+"Asthma Management", "COPD Treatment", "Lung Cancer Care", "Pulmonary Rehabilitation", "Bronchoscopy"
+
+],
+
+"OTHERS": ["Custom / Not Listed"],
+
+};
 
   const handleChange = (e) => {
     const { name, value } = e.target;
