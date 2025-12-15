@@ -9,8 +9,8 @@ import HomePage from './pages/HomePage';
 import MyConcierge from './components/myconcierge'; // Matches your lowercase filename
 import Wellness from './components/Wellness';
 import Treatment from './components/Treatment';
-// If you haven't created these yet, they can be simple placeholders for now
-// import BookingPage from './pages/BookingPage'; 
+import VideoCall from './components/VideoCall';
+import OrthopaedicsLanding from './components/Orthopaedicslanding';
 
 function App() {
   return (
@@ -33,7 +33,9 @@ function App() {
           element={<Wellness onBack={() => window.history.back()} />} 
         />
 
-       
+        {/* --- NEW TELECONSULTATION ROUTE --- */}
+        <Route path="/consultation" element={<VideoCall />} />
+        <Route path="/ortho-care" element={<OrthopaedicsLanding />} />
       </Routes>
     </Router>
   );
