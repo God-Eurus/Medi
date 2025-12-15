@@ -17,6 +17,7 @@ import {
 import { motion, AnimatePresence } from 'framer-motion';
 import Header from './Header';
 import Footer from './Footer';
+import WhatsAppButton from '../components/WhatsAppButton';
 
 export default function Treatment() {
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
@@ -225,7 +226,8 @@ export default function Treatment() {
           </motion.div>
         )}
         </AnimatePresence>
-
+        <WhatsAppButton />
+        <Footer />
       </div>
     </div>
   );

@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom'; // ✅ Import useNavigate
 import { Plus, ArrowRight, Star, Shield, Activity, Calendar, Plane } from 'lucide-react';
 import Header from './Header';
 import Footer from './Footer'
+import WhatsAppButton from '../components/WhatsAppButton';
 // Footer component removed to avoid duplication with the custom footer below
 
 export default function MyConcierge() {
@@ -357,6 +358,7 @@ export default function MyConcierge() {
         </div>
       </footer>
     <Footer />
+    <WhatsAppButton />
     </div>
   );
 }

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Phone, CheckCircle, ShieldCheck, Activity, ArrowRight, Star } from 'lucide-react';
+import WhatsAppButton from '../components/WhatsAppButton';
 
 export default function OrthopaedicsLanding() {
   const navigate = useNavigate();
@@ -235,7 +236,7 @@ export default function OrthopaedicsLanding() {
           Book Free Opinion
         </button>
       </div>
-
+<WhatsAppButton />
     </div>
   );
 }

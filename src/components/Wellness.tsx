@@ -15,6 +15,7 @@ import {
 } from 'lucide-react';
 import Header from './Header';
 import Footer from './Footer';
+import WhatsAppButton from '../components/WhatsAppButton';
 
 // 🔴 TODO: REPLACE THIS WITH YOUR DEPLOYED GOOGLE SCRIPT WEB APP URL
 const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbygVKMboL03fpLVzKvxismJVg0bq47sT8HBtqclVaWpcDESusO2EH71TZuhHKwAuDadGA/exec";
@@ -540,7 +541,7 @@ export default function Wellness({ onBack }: WellnessProps) {
           </motion.div>
         )}
       </AnimatePresence>
-
+        <WhatsAppButton />
     </div>
   );
 }
