@@ -10,7 +10,7 @@ import MyConcierge from './components/myconcierge'; // Matches your lowercase fi
 import Wellness from './components/Wellness';
 import Treatment from './components/Treatment';
 import VideoCall from './components/VideoCall';
-import OrthopaedicsLanding from './components/Orthopaedicslanding';
+import OrthopaedicsLanding from './pages/OrthopaedicsLanding';
 
 function App() {
   return (
