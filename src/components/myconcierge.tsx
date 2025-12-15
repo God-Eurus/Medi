@@ -349,11 +349,8 @@ export default function MyConcierge() {
             </div>
             
             <div className="border-t border-white/10 mt-16 pt-8 flex flex-col md:flex-row justify-between text-xs opacity-40">
-                <p>&copy; 2024 Medivoyage. All rights reserved.</p>
-                <div className="flex gap-6 mt-4 md:mt-0">
-                    <span>Privacy Policy</span>
-                    <span>Terms of Service</span>
-                </div>
+                
+                
             </div>
         </div>
       </footer>
