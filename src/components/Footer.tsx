@@ -60,16 +60,16 @@ export default function Footer() {
           {/* Column 1: Brand (4 cols) */}
           <div className="lg:col-span-4 space-y-4">
             <div className="flex items-center gap-2">
-              <div 
-                style={{ backgroundColor: theme.cream, color: theme.dark }} 
-                className="w-8 h-8 flex items-center justify-center font-serif italic font-bold text-lg"
-              >
-                M
-              </div>
-              <span className="text-xl font-bold font-serif tracking-tight">
-                MediVoyage
-              </span>
-            </div>
+  {/* Replaced the placeholder div with an img tag */}
+  <img
+    src="/logo.png" // TODO: Replace with your actual logo file path (e.g., /assets/logo.svg)
+    alt="MediVoyage Logo"
+    className="w-8 h-8 object-contain" // Kept w-8 h-8 to match previous size, added object-contain
+  />
+  <span className="text-xl font-bold font-serif tracking-tight">
+    MediVoyage
+  </span>
+</div>
             
             <p className="opacity-80 leading-snug max-w-sm font-light text-sm">
               Redefining medical travel through clinical precision and concierge luxury.

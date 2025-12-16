@@ -129,7 +129,7 @@ export default function MedivoyageConcierge() {
       {/* =========================================
           SECTION 1: HERO
       ========================================= */}
-      <section className="relative pt-20 pb-16 px-4 md:px-6 lg:pt-28 lg:pb-24 border-b" style={{ borderColor: theme.border }}>
+ <section className="relative pt-20 pb-16 px-4 md:px-6 lg:pt-28 lg:pb-24 border-b" style={{ borderColor: theme.border }}>
   <div className="max-w-[1280px] mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
     
     {/* LEFT CONTENT */}
@@ -171,11 +171,7 @@ export default function MedivoyageConcierge() {
       </div>
     </motion.div>
 
-    {/* RIGHT IMAGE WITH FLIP EFFECT */}
-    {/* Responsive Fix: 
-        1. Used h-[500px] on mobile (lg:h-[550px]) to ensure enough room for the text. 
-        2. 3D Flip requires a defined height container.
-    */}
+    {/* RIGHT IMAGE WITH FLIP EFFECT (Safari Fix applied) */}
     <div className="relative h-[500px] lg:h-[550px] w-full mt-8 lg:mt-0 perspective-1000 group mx-auto max-w-lg lg:max-w-none">
       <motion.div 
           initial={{ opacity: 0 }}
@@ -184,14 +180,22 @@ export default function MedivoyageConcierge() {
             rotateY: isFlipped ? 180 : 0 
           }}
           transition={{ duration: 0.8, type: "spring", stiffness: 260, damping: 20 }}
-          className="w-full h-full relative preserve-3d"
-          style={{ transformStyle: 'preserve-3d' }}
+          className="w-full h-full relative"
+          style={{ 
+            transformStyle: 'preserve-3d',
+            WebkitTransformStyle: 'preserve-3d', // Safari prefix
+          }}
       >
         
         {/* --- FRONT FACE --- */}
         <div 
             className={`absolute inset-0 backface-hidden ${isFlipped ? 'pointer-events-none' : 'pointer-events-auto'}`} 
-            style={{ backfaceVisibility: 'hidden' }}
+            style={{ 
+              backfaceVisibility: 'hidden', 
+              WebkitBackfaceVisibility: 'hidden', // Safari prefix
+              // Fix: Lower z-index when flipped so it doesn't bleed through
+              zIndex: isFlipped ? 0 : 10 
+            }}
         >
           <div className="absolute inset-0 bg-[#1A3C34]/10 z-10 pointer-events-none"></div>
           <img 
@@ -202,7 +206,8 @@ export default function MedivoyageConcierge() {
 
           {/* OVERLAY CARD */}
           <div className="absolute bottom-4 left-4 right-4 md:bottom-6 md:left-6 md:right-6 z-20">
-            <div className="bg-white/95 backdrop-blur-md p-4 md:p-5 rounded-sm shadow-xl border border-[#1A3C34]/10 flex items-center justify-between">
+            {/* FIX: Removed 'backdrop-blur-md' to fix Safari render bug */}
+            <div className="bg-white/95 p-4 md:p-5 rounded-sm shadow-xl border border-[#1A3C34]/10 flex items-center justify-between">
                 <div>
                     <h3 style={{ fontFamily: fonts.heading, color: theme.primary }} className="text-base md:text-xl font-medium">
                       Global Patient Support 
@@ -227,17 +232,18 @@ export default function MedivoyageConcierge() {
           className={`absolute inset-0 h-full w-full rounded-sm shadow-xl p-6 md:p-10 flex flex-col justify-between items-center text-center backface-hidden ${!isFlipped ? 'pointer-events-none' : 'pointer-events-auto'}`}
           style={{ 
               backgroundColor: theme.primary, 
-              backfaceVisibility: 'hidden', 
-              transform: 'rotateY(180deg)' 
+              backfaceVisibility: 'hidden',
+              WebkitBackfaceVisibility: 'hidden', // Safari prefix
+              transform: 'rotateY(180deg)',
+              WebkitTransform: 'rotateY(180deg)', // Safari prefix
+              // Fix: Raise z-index when flipped to force it on top
+              zIndex: isFlipped ? 10 : 0
           }}
         >
-            {/* Top Icon */}
             <div className="mb-2 shrink-0 opacity-30">
                 <Quote className="w-8 h-8 md:w-10 md:h-10" color={theme.secondary} />
             </div>
 
-            {/* Scrollable Text Container */}
-            {/* This ensures text never overflows the card, even on small screens */}
             <div className="flex-1 overflow-y-auto scrollbar-hide px-2 my-2 w-full flex items-center">
                 <p 
                     style={{ fontFamily: fonts.heading, color: theme.white }} 
@@ -248,7 +254,6 @@ export default function MedivoyageConcierge() {
                 </p>
             </div>
 
-            {/* Bottom Info & Button */}
             <div className="shrink-0 space-y-4 w-full">
                 <div className="space-y-1">
                     <p style={{ fontFamily: fonts.sans, color: theme.secondary }} className="text-xs md:text-sm font-bold uppercase tracking-widest">
@@ -268,7 +273,6 @@ export default function MedivoyageConcierge() {
                 </button>
             </div>
             
-            {/* Decorative border */}
             <div className="absolute inset-4 border border-white/10 pointer-events-none rounded-sm"></div>
         </div>
 
