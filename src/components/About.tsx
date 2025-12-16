@@ -7,7 +7,9 @@ import {
   ChevronRight,
   Star,
   Check,
-  ChevronDown
+  ChevronDown,
+  Quote,
+  Undo2 // Added Undo2 for the back button
 } from 'lucide-react';
 
 export default function MedivoyageConcierge() {
@@ -39,6 +41,9 @@ export default function MedivoyageConcierge() {
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
   }, []);
+
+  // --- FLIP STATE ---
+  const [isFlipped, setIsFlipped] = useState(false);
 
   // --- DATA: DOCTORS ---
   const allDoctors = [
@@ -99,9 +104,7 @@ export default function MedivoyageConcierge() {
 
   const nextDoctor = () => {
     if (!isSliderActive) return;
-    // Prevent scrolling past the last set of items
     if (currentDocIndex >= filteredList.length - visibleItems) {
-        // Optional: Loop back to start
         setCurrentDocIndex(0);
     } else {
         setIsTransitioning(true);
@@ -112,13 +115,13 @@ export default function MedivoyageConcierge() {
   const prevDoctor = () => {
     if (!isSliderActive) return;
     if (currentDocIndex <= 0) {
-        // Optional: Loop to end
         setCurrentDocIndex(filteredList.length - visibleItems);
     } else {
         setIsTransitioning(true);
         setCurrentDocIndex((prev) => prev - 1);
     }
   };
+  
 
   return (
     <div style={{ backgroundColor: theme.bg }} className="selection:bg-[#1A3C34] selection:text-[#F2F0EA] min-h-screen overflow-x-hidden">
@@ -127,143 +130,158 @@ export default function MedivoyageConcierge() {
           SECTION 1: HERO
       ========================================= */}
       <section className="relative pt-20 pb-16 px-4 md:px-6 lg:pt-28 lg:pb-24 border-b" style={{ borderColor: theme.border }}>
-        <div className="max-w-[1280px] mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-          
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="space-y-6 text-center lg:text-left"
-          >
-            <div className="flex items-center justify-center lg:justify-start gap-3">
-              <span className="h-[1px] w-6" style={{ backgroundColor: theme.primary }}></span>
-              <span style={{ color: theme.primary, fontFamily: fonts.sans }} className="text-[10px] font-bold tracking-[0.25em] uppercase opacity-80">
-                The Medical Concierge
-              </span>
-            </div>
+  <div className="max-w-[1280px] mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+    
+    {/* LEFT CONTENT */}
+    <motion.div 
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.8 }}
+      className="space-y-6 text-center lg:text-left"
+    >
+      <div className="flex items-center justify-center lg:justify-start gap-3">
+        <span className="h-[1px] w-6" style={{ backgroundColor: theme.primary }}></span>
+        <span style={{ color: theme.primary, fontFamily: fonts.sans }} className="text-[10px] font-bold tracking-[0.25em] uppercase opacity-80">
+          The Medical Concierge
+        </span>
+      </div>
 
-            <h1 style={{ color: theme.primary, fontFamily: fonts.heading }} className="text-4xl lg:text-5xl xl:text-6xl font-medium leading-[1.1]">
-              We are doctors. <br />
-              <span style={{ color: theme.secondary, fontStyle: 'italic' }}>Not brokers.</span>
-            </h1>
+      <h1 style={{ color: theme.primary, fontFamily: fonts.heading }} className="text-4xl lg:text-5xl xl:text-6xl font-medium leading-[1.1]">
+        We are doctors. <br />
+        <span style={{ color: theme.secondary, fontStyle: 'italic' }}>Not brokers.</span>
+      </h1>
 
-            <p style={{ color: theme.textLight, fontFamily: fonts.body }} className="text-base md:text-lg lg:text-xl max-w-md mx-auto lg:mx-0 leading-relaxed">
-              Your health journey shouldn't be a transaction. We ensure end-to-end clinical oversight, JCI-accredited care, and zero hidden margins.
-            </p>
+      <p style={{ color: theme.textLight, fontFamily: fonts.body }} className="text-base md:text-lg lg:text-xl max-w-md mx-auto lg:mx-0 leading-relaxed">
+        Your health journey shouldn't be a transaction. We ensure end-to-end clinical oversight, JCI-accredited care, and zero hidden margins.
+      </p>
 
-            <div className="grid grid-cols-2 gap-px max-w-sm mt-6 border opacity-90 mx-auto lg:mx-0" style={{ borderColor: theme.primary, backgroundColor: theme.primary }}>
-              {['HIPAA Compliant', 'JCI Hospitals', 'Doctor Vetted', 'Zero Wait Time'].map((item, i) => (
-                <div key={i} style={{ backgroundColor: theme.bg }} className="p-3 flex items-center justify-center lg:justify-start gap-2">
-                  <ShieldCheck style={{ color: theme.primary }} size={16} strokeWidth={1} />
-                  <span style={{ color: theme.primary, fontFamily: fonts.sans }} className="text-xs font-bold tracking-wide">{item}</span>
-                </div>
-              ))}
-            </div>
+      <div className="grid grid-cols-2 gap-px max-w-sm mt-6 border opacity-90 mx-auto lg:mx-0" style={{ borderColor: theme.primary, backgroundColor: theme.primary }}>
+        {['HIPAA Compliant', 'JCI Hospitals', 'Doctor Vetted', 'Zero Wait Time'].map((item, i) => (
+          <div key={i} style={{ backgroundColor: theme.bg }} className="p-3 flex items-center justify-center lg:justify-start gap-2">
+            <ShieldCheck style={{ color: theme.primary }} size={16} strokeWidth={1} />
+            <span style={{ color: theme.primary, fontFamily: fonts.sans }} className="text-xs font-bold tracking-wide">{item}</span>
+          </div>
+        ))}
+      </div>
 
-            <div className="flex flex-wrap items-center justify-center lg:justify-start gap-8 lg:gap-16 mt-10 max-w-md mx-auto lg:mx-0">
-              <img src="jcin.png" alt="Accreditation" className="h-10 lg:h-12 w-auto object-contain" />
-              <img src="/hipan.png" alt="Accreditation" className="h-10 lg:h-12 w-auto object-contain" />
-              <img src="nabh.png" alt="Accreditation" className="h-10 lg:h-12 w-auto object-contain" />
-            </div>
-          </motion.div>
+      <div className="flex flex-wrap items-center justify-center lg:justify-start gap-8 lg:gap-16 mt-10 max-w-md mx-auto lg:mx-0">
+        <img src="jcin.png" alt="Accreditation" className="h-10 lg:h-12 w-auto object-contain" />
+        <img src="/hipan.png" alt="Accreditation" className="h-10 lg:h-12 w-auto object-contain" />
+        <img src="nabh.png" alt="Accreditation" className="h-10 lg:h-12 w-auto object-contain" />
+      </div>
+    </motion.div>
 
-          <motion.div 
-             initial={{ opacity: 0 }}
-             animate={{ opacity: 1 }}
-             transition={{ duration: 1 }}
-             className="relative h-[300px] md:h-[450px] lg:h-[550px] w-full mt-8 lg:mt-0"
-          >
-            <div className="absolute inset-0 bg-[#1A3C34]/10 z-10 pointer-events-none"></div>
-            <img 
-              src="https://images.unsplash.com/photo-1666214280557-f1b5022eb634?q=80&w=1200&auto=format&fit=crop" 
-              alt="Consultation" 
-              className="w-full h-full object-cover contrast-[1.1] rounded-sm"
-            />
-          </motion.div>
+    {/* RIGHT IMAGE WITH FLIP EFFECT */}
+    {/* Responsive Fix: 
+        1. Used h-[500px] on mobile (lg:h-[550px]) to ensure enough room for the text. 
+        2. 3D Flip requires a defined height container.
+    */}
+    <div className="relative h-[500px] lg:h-[550px] w-full mt-8 lg:mt-0 perspective-1000 group mx-auto max-w-lg lg:max-w-none">
+      <motion.div 
+          initial={{ opacity: 0 }}
+          animate={{ 
+            opacity: 1, 
+            rotateY: isFlipped ? 180 : 0 
+          }}
+          transition={{ duration: 0.8, type: "spring", stiffness: 260, damping: 20 }}
+          className="w-full h-full relative preserve-3d"
+          style={{ transformStyle: 'preserve-3d' }}
+      >
+        
+        {/* --- FRONT FACE --- */}
+        <div 
+            className={`absolute inset-0 backface-hidden ${isFlipped ? 'pointer-events-none' : 'pointer-events-auto'}`} 
+            style={{ backfaceVisibility: 'hidden' }}
+        >
+          <div className="absolute inset-0 bg-[#1A3C34]/10 z-10 pointer-events-none"></div>
+          <img 
+            src="/sg.jpeg" 
+            alt="Consultation" 
+            className="w-full h-full object-cover contrast-[1.1] rounded-sm shadow-lg"
+          />
 
-        </div>
-      </section>
-
-      {/* =========================================
-          SECTION 2: OUR FOUNDERS
-      ========================================= */}
-      <section className="relative py-16 lg:py-28 px-4 md:px-6 overflow-hidden">
-        <div className="max-w-6xl mx-auto">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-
-            <motion.div 
-              initial={{ opacity: 0, x: -30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8, ease: "easeOut" }}
-              className="lg:col-span-5 relative h-[300px] md:h-[400px] lg:h-[500px] w-full"
-            >
-              <div className="w-full h-full overflow-hidden relative shadow-sm border" style={{ borderColor: theme.border }}>
-                <div className="absolute inset-0 bg-black/5 z-10"></div>
-                <img 
-                  src="/founders.JPG" 
-                  alt="Founders" 
-                  className="w-full h-full object-cover object-top md:object-center grayscale-[10%] hover:grayscale-0 transition-all duration-700"
-                />
-              </div>
-            </motion.div>
-
-            <motion.div 
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8, delay: 0.2 }}
-              className="lg:col-span-7 relative"
-            >
-              <div 
-                className="relative p-6 lg:p-10 border backdrop-blur-md shadow-sm bg-white/80"
-                style={{ borderColor: theme.border }}
-              >
-                <div className="space-y-6 relative z-10">
-                  <div>
-                    <div className="flex items-center gap-3 mb-3">
-                      <span className="h-[1px] w-6" style={{ backgroundColor: theme.secondary }}></span>
-                      <span style={{ color: theme.primary, fontFamily: fonts.sans }} className="text-[10px] font-bold tracking-[0.2em] uppercase">
-                        Who We Are
-                      </span>
-                    </div>
-                    <h2 
-                      style={{ color: theme.primary, fontFamily: fonts.heading }} 
-                      className="text-3xl lg:text-4xl font-medium leading-[1.15]"
-                    >
-                      Driven by Purpose. <br />
-                      <span style={{ color: theme.secondary }} className="italic">Guided by Science.</span>
-                    </h2>
-                  </div>
-
-                  <div style={{ color: theme.textLight, fontFamily: fonts.body }} className="text-base lg:text-lg leading-relaxed space-y-4 font-light">
-                    <p>MediVoyage was created with a simple belief: every person deserves access to safe, honest, and world class healthcare. That means transparent, fixed pricing so you always know what to expect.
-                      You are not just a case or a file. You are someone with a story, a family, a future—and you deserve care that honors that.
-                      <br/> <br/>
-                      As doctor founders, our promise is to stand by you at every step, making sure your medical journey is clear, comfortable, and truly centered around your well-being.
+          {/* OVERLAY CARD */}
+          <div className="absolute bottom-4 left-4 right-4 md:bottom-6 md:left-6 md:right-6 z-20">
+            <div className="bg-white/95 backdrop-blur-md p-4 md:p-5 rounded-sm shadow-xl border border-[#1A3C34]/10 flex items-center justify-between">
+                <div>
+                    <h3 style={{ fontFamily: fonts.heading, color: theme.primary }} className="text-base md:text-xl font-medium">
+                      Global Patient Support 
+                    </h3>
+                    <p style={{ fontFamily: fonts.sans, color: theme.textLight }} className="text-[10px] md:text-xs uppercase tracking-widest mt-1">
+                      Shivam Aanghan, Canada 🇨🇦
                     </p>
-                  </div>
-
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 pt-2">
-                    <div className="space-y-1">
-                      <p style={{ color: theme.primary, fontFamily: fonts.heading }} className="text-lg italic">Dr. Garvit Maharwal</p>
-                      <p style={{ color: theme.textLight, fontFamily: fonts.sans }} className="text-[9px] font-bold uppercase tracking-widest opacity-70">Co-Founder & CEO</p>
-                    </div>
-                    <div className="space-y-1">
-                      <p style={{ color: theme.primary, fontFamily: fonts.heading }} className="text-lg italic">Dr. Nandita Munjal</p>
-                      <p style={{ color: theme.textLight, fontFamily: fonts.sans }} className="text-[9px] font-bold uppercase tracking-widest opacity-70">Co-Founder & COO</p>
-                    </div>
-                  </div>
                 </div>
-              </div>
-            </motion.div>
-
+                <button 
+                  onClick={() => setIsFlipped(true)}
+                  className="h-10 w-10 flex items-center justify-center rounded-full transition-transform hover:scale-110 active:scale-95 cursor-pointer z-30 shadow-md" 
+                  style={{ backgroundColor: theme.secondary }}
+                >
+                    <ArrowRight className="text-[#1A3C34]" size={18} />
+                </button>
+            </div>
           </div>
         </div>
-      </section>
+
+        {/* --- BACK FACE (Patient Story) --- */}
+        <div 
+          className={`absolute inset-0 h-full w-full rounded-sm shadow-xl p-6 md:p-10 flex flex-col justify-between items-center text-center backface-hidden ${!isFlipped ? 'pointer-events-none' : 'pointer-events-auto'}`}
+          style={{ 
+              backgroundColor: theme.primary, 
+              backfaceVisibility: 'hidden', 
+              transform: 'rotateY(180deg)' 
+          }}
+        >
+            {/* Top Icon */}
+            <div className="mb-2 shrink-0 opacity-30">
+                <Quote className="w-8 h-8 md:w-10 md:h-10" color={theme.secondary} />
+            </div>
+
+            {/* Scrollable Text Container */}
+            {/* This ensures text never overflows the card, even on small screens */}
+            <div className="flex-1 overflow-y-auto scrollbar-hide px-2 my-2 w-full flex items-center">
+                <p 
+                    style={{ fontFamily: fonts.heading, color: theme.white }} 
+                    className="text-sm md:text-base lg:text-lg italic leading-relaxed opacity-90"
+                >
+                    “A huge shout-out to the MediVoyage team for an exceptional experience. My family doctor in Canada suspected an ACL tear, but the waiting time for a specialist appointment and MRI was extremely long. While visiting India for a wedding, I was referred to MediVoyage by a friend and it turned out to be the best decision.
+                    The team ensured that my hospital in-time and out-time for both the consultation and MRI were under 90 minutes. Everything was impeccably coordinated with complete medical oversight, and they supported me every step of the way right until the airport.”
+                </p>
+            </div>
+
+            {/* Bottom Info & Button */}
+            <div className="shrink-0 space-y-4 w-full">
+                <div className="space-y-1">
+                    <p style={{ fontFamily: fonts.sans, color: theme.secondary }} className="text-xs md:text-sm font-bold uppercase tracking-widest">
+                        Shivam Aanghan 🇨🇦
+                    </p>
+                    <p className="text-white/60 text-[10px] md:text-xs">Full Body Checkup • Jaipur</p>
+                </div>
+
+                <button 
+                    onClick={(e) => {
+                        e.stopPropagation(); 
+                        setIsFlipped(false);
+                    }}
+                    className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-white/10 hover:bg-white/20 transition-colors text-white text-xs uppercase tracking-widest font-bold cursor-pointer"
+                >
+                    <Undo2 size={14} /> Back to View
+                </button>
+            </div>
+            
+            {/* Decorative border */}
+            <div className="absolute inset-4 border border-white/10 pointer-events-none rounded-sm"></div>
+        </div>
+
+      </motion.div>
+    </div>
+
+  </div>
+</section>
+
+
 
       {/* =========================================
-          SECTION 3: CURATED SPECIALISTS (FIXED SCROLL)
+          SECTION 3: CURATED SPECIALISTS
       ========================================= */}
       <section id="doctors" style={{ backgroundColor: theme.bg }} className="py-16 md:py-24 px-4 md:px-6 border-t" css={{ borderColor: theme.border }}>
         <div className="max-w-[1400px] mx-auto">
@@ -444,7 +462,91 @@ export default function MedivoyageConcierge() {
           </motion.div>
         </div>
       </section>
+      {/* =========================================
+          SECTION 2: OUR FOUNDERS
+      ========================================= */}
+      <section className="relative py-20 lg:py-32 px-4 md:px-8 overflow-hidden bg-white">
+        <div className="max-w-[1280px] mx-auto">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+            
+            {/* IMAGE SIDE */}
+            <motion.div 
+              initial={{ opacity: 0, scale: 0.95 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8, ease: "easeOut" }}
+              className="relative order-2 lg:order-1"
+            >
+              {/* Decorative Background Box */}
+              <div className="absolute -top-4 -left-4 w-full h-full border border-[#C8B092] opacity-40 rounded-sm"></div>
+              
+              <div className="relative aspect-[4/5] overflow-hidden rounded-sm shadow-2xl">
+                <img 
+                  src="/founders.JPG" 
+                  alt="Founders" 
+                  className="w-full h-full object-cover object-top hover:scale-105 transition-transform duration-1000 ease-in-out"
+                />
+                <div className="absolute inset-0 bg-[#1A3C34]/5 mix-blend-multiply"></div>
+              </div>
+            </motion.div>
 
+            {/* TEXT SIDE */}
+            <motion.div 
+              initial={{ opacity: 0, x: 30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+              className="space-y-8 order-1 lg:order-2"
+            >
+              <div className="space-y-4">
+                <div className="flex items-center gap-3">
+                  <span className="w-8 h-[1px] bg-[#C8B092]"></span>
+                  <span style={{ fontFamily: fonts.sans, color: theme.secondary }} className="text-xs font-bold tracking-[0.2em] uppercase">
+                    Our Story
+                  </span>
+                </div>
+                
+                <h2 
+                  style={{ color: theme.primary, fontFamily: fonts.heading }} 
+                  className="text-4xl lg:text-5xl font-medium leading-[1.1]"
+                >
+                  Driven by Purpose. <br />
+                  <span className="italic text-[#C8B092]">Guided by Science.</span>
+                </h2>
+              </div>
+
+              <div style={{ color: theme.textLight, fontFamily: fonts.body }} className="text-lg leading-relaxed space-y-6">
+                <p>
+                  MediVoyage was created with a simple yet profound belief: every person deserves access to safe, honest, and world-class healthcare. 
+                </p>
+                <p>
+                  We realized that medical travel shouldn't be about sales—it should be about 
+                  <span className="italic font-semibold text-[#1A3C34]"> care.</span> That means transparent, fixed pricing so you always know what to expect. You are not just a case file to us. You are someone with a story, a family, and a future.
+                </p>
+              </div>
+
+              {/* Founders Signature Block */}
+              <div className="pt-8 border-t border-[#E2E0D8]">
+                <p style={{ fontFamily: fonts.heading, color: theme.primary }} className="text-xl italic mb-6">
+                  "Our promise is to stand by you at every step, centered around your well-being."
+                </p>
+                
+                <div className="flex flex-wrap gap-8 md:gap-16">
+                  <div>
+                    <h4 style={{ fontFamily: fonts.sans, color: theme.primary }} className="font-bold text-sm tracking-wide uppercase">Dr. Garvit Maharwal</h4>
+                    <p style={{ fontFamily: fonts.sans, color: theme.secondary }} className="text-[10px] tracking-widest uppercase font-bold mt-1">Co-Founder & CEO</p>
+                  </div>
+                  <div>
+                    <h4 style={{ fontFamily: fonts.sans, color: theme.primary }} className="font-bold text-sm tracking-wide uppercase">Dr. Nandita Munjal</h4>
+                    <p style={{ fontFamily: fonts.sans, color: theme.secondary }} className="text-[10px] tracking-widest uppercase font-bold mt-1">Co-Founder & COO</p>
+                  </div>
+                </div>
+              </div>
+
+            </motion.div>
+          </div>
+        </div>
+      </section>
     </div>
   );
 }

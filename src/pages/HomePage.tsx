@@ -37,7 +37,7 @@ export default function HomePage() {
         {/* 1. Hero Section */}
         <Hero />
 
-        {/* 2. Services */}
+  
         
 
         {/* 3. About Us */}

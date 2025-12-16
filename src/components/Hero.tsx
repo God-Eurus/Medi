@@ -864,7 +864,7 @@ export default function Hero() {
   const labelBase = "text-[10px] text-[#D4C5A9] uppercase tracking-wider ml-1 mb-1 block";
 
   return (
-    <section className="relative w-full min-h-screen overflow-hidden flex flex-col justify-center py-12 lg:py-0">
+   <section className="relative w-full min-h-screen overflow-hidden flex flex-col items-center justify-center py-12">
       
       {/* BACKGROUND */}
       <div className="absolute inset-0 z-0">
@@ -875,56 +875,58 @@ export default function Hero() {
             className="w-full h-full"
         >
            {/* Replace with your actual image path */}
-            <img src="/hospitalimage.jpg" alt="Medical Tourism" className="w-full h-full object-cover"/>
+            <img src="/bgimgg.png" alt="Medical Tourism" className="w-full h-full object-cover"/>
         </motion.div>
-        <div className="absolute inset-0 bg-gradient-to-r from-[#0F2622]/95 via-[#0F2622]/85 to-[#0F2622]/90"></div>
+        {/* Darker overlay for better text contrast since text is now center over image */}
+        <div className="absolute inset-0 bg-[#0F2622]/60"></div>
       </div>
 
-      {/* MAIN CONTENT */}
-      <div className="relative z-10 w-full max-w-6xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-8 items-center h-full">
+      {/* MAIN CONTENT WRAPPER */}
+      <div className="relative z-10 w-full max-w-7xl mx-auto px-4 flex flex-col items-center gap-8">
         
-        {/* LEFT TEXT */}
+        {/* 1. TEXT ON TOP */}
         <motion.div 
-            initial={{ opacity: 0, x: -40 }}
-            animate={{ opacity: 1, x: 0 }}
+            initial={{ opacity: 0, y: -30 }}
+            animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="space-y-6 text-center lg:text-left pt-10 lg:pt-0 hidden lg:block"
+            className="text-center space-y-4 max-w-4xl mx-auto pt-10"
         >
-            <h1 className="text-4xl lg:text-6xl font-serif text-white leading-tight">
-                DOCTOR LED. <br />
-                <span className="text-[#D4C5A9] font-light">WORLD CLASS HEALTHCARE.</span>
+            <h1 className="text-3xl md:text-5xl font-serif text-white leading-tight">
+                DOCTOR LED. <span className="text-[#D4C5A9] font-light">World Class HealthCare.</span>
             </h1>
-            <h1 className="text-4xl lg:text-6xl font-serif text-white leading-tight">
-                ZERO WAITING TIME. <br />
-                <span className="text-[#D4C5A9] font-light">TRANSPARENT PRICING.</span> 
-            </h1>
+            <h2 className="text-2xl md:text-4xl font-serif text-white leading-tight">
+                ZERO WAITING TIME. <span className="text-[#D4C5A9] font-light">Transparent Pricing.</span> 
+            </h2>
         </motion.div>
 
-        {/* RIGHT FORM */}
+        {/* 2. EXPANDED FORM IN MIDDLE */}
         <motion.div 
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
-            className="w-full max-w-[420px] mx-auto lg:ml-auto"
+            className="w-full max-w-5xl" 
         >
-            <div className="bg-white/10 backdrop-blur-xl border border-white/20 p-5 rounded-2xl shadow-2xl relative">
-                <h3 className="text-xl font-serif text-white text-center mb-4">Get Personalized Help</h3>
+            <div className=" backdrop-blur-xl border border-white/20 p-6 md:p-8 rounded-3xl shadow-2xl relative">
                 
-                <form className="space-y-3" onSubmit={(e) => e.preventDefault()}>
-                    <div className="space-y-3">
+                <h3 className="text-2xl font-serif text-white text-center mb-6">Get Personalized Quotation</h3>
+                
+                <form className="space-y-5" onSubmit={(e) => e.preventDefault()}>
+                    
+                    {/* ROW 1: Name, Phone, Email (3 Columns) */}
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                         {/* Name */}
                         <input 
                             type="text" 
                             name="name"
                             value={formData.name}
                             onChange={handleChange}
-                            placeholder="Name *" 
+                            placeholder="Patient Name *" 
                             className={`${inputBase} w-full`}
                         />
                         
-                        {/* Phone with Country Code */}
+                        {/* Phone */}
                         <div className="flex gap-2">
-                             <div className="relative w-[110px] shrink-0">
+                             <div className="relative w-[100px] shrink-0">
                                 <select
                                     name="countryCode"
                                     value={formData.countryCode}
@@ -959,40 +961,35 @@ export default function Hero() {
                             className={`${inputBase} w-full`}
                         />
                     </div>
-                    
-                    <div className="h-px bg-white/10 my-2"></div>
-                    
-                    {/* Specialty & Treatment */}
-                    <div className="grid grid-cols-2 gap-3">
-                        <div>
-                            <label className={labelBase}>Specialty <span className="text-red-400">*</span></label>
-                            <div className="relative">
-                                <select name="specialty" value={formData.specialty} onChange={handleChange} className={`${inputBase} w-full appearance-none`}>
-                                    <option value="" className="bg-[#0F2622]">Select...</option>
-                                    {Object.keys(treatmentsMap).map(specialty => (
-                                        <option key={specialty} value={specialty} className="bg-[#0F2622]">{specialty}</option>
-                                    ))}
-                                </select>
-                            </div>
-                        </div>
-                        <div>
-                            <label className={labelBase}>Treatment <span className="text-red-400">*</span></label>
-                            <div className="relative">
-                                <select name="treatment" value={formData.treatment} onChange={handleChange} disabled={!formData.specialty} className={`${inputBase} w-full appearance-none disabled:opacity-50`}>
-                                    <option value="" className="bg-[#0F2622]">{formData.specialty ? "Select..." : "Select Specialty"}</option>
-                                    {availableTreatments.map(treat => (
-                                        <option key={treat} value={treat} className="bg-[#0F2622]">{treat}</option>
-                                    ))}
-                                </select>
-                            </div>
-                        </div>
-                    </div>
 
-                    {/* Location */}
-                    <div>
-                        <label className={labelBase}>Preferred Location <span className="text-red-400">*</span></label>
+                    {/* ROW 2: Specialty, Treatment, Location (3 Columns) */}
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        {/* Specialty */}
+                        <div className="relative">
+                            <select name="specialty" value={formData.specialty} onChange={handleChange} className={`${inputBase} w-full appearance-none`}>
+                                <option value="" className="bg-[#0F2622]">Select Specialty *</option>
+                                {Object.keys(treatmentsMap).map(specialty => (
+                                    <option key={specialty} value={specialty} className="bg-[#0F2622]">{specialty}</option>
+                                ))}
+                            </select>
+                            <ChevronDown className="absolute right-3 top-3.5 text-white/50 pointer-events-none" size={14} />
+                        </div>
+
+                        {/* Treatment */}
+                        <div className="relative">
+                            <select name="treatment" value={formData.treatment} onChange={handleChange} disabled={!formData.specialty} className={`${inputBase} w-full appearance-none disabled:opacity-50`}>
+                                <option value="" className="bg-[#0F2622]">{formData.specialty ? "Select Treatment *" : "Select Specialty First"}</option>
+                                {availableTreatments.map(treat => (
+                                    <option key={treat} value={treat} className="bg-[#0F2622]">{treat}</option>
+                                ))}
+                            </select>
+                            <ChevronDown className="absolute right-3 top-3.5 text-white/50 pointer-events-none" size={14} />
+                        </div>
+
+                        {/* Location */}
                         <div className="relative">
                             <select name="location" value={formData.location} onChange={handleChange} className={`${inputBase} w-full appearance-none`}>
+                              <option value="" className="bg-[#0F2622]">Preferred Location</option>
                               <option value="Jaipur" className="bg-[#0F2622]">Jaipur, India</option>
                                 <option value="Bangalore" className="bg-[#0F2622]">Bangalore, India</option>
                                 <option value="Delhi" className="bg-[#0F2622]">Delhi, India</option>
@@ -1002,41 +999,51 @@ export default function Hero() {
                         </div>
                     </div>
 
-                    {/* Comments & File */}
-                    <div className="flex gap-2 items-center">
-                        <input name="comments" value={formData.comments} onChange={handleChange} type="text" placeholder="Describe your needs..." className={`${inputBase} flex-1`}/>
-                        <div className="relative group">
+                    {/* ROW 3: Comments & File Upload */}
+                    <div className="flex gap-4 items-center">
+                        <input 
+                            name="comments" 
+                            value={formData.comments} 
+                            onChange={handleChange} 
+                            type="text" 
+                            placeholder="Describe your medical needs or specific requirements..." 
+                            className={`${inputBase} flex-1`}
+                        />
+                        <div className="relative group shrink-0">
                             <input type="file" id="file-upload" className="hidden" onChange={handleFileChange}/>
-                            <label htmlFor="file-upload" className="flex items-center justify-center w-10 h-[42px] border border-white/20 rounded-lg bg-black/10 hover:bg-black/20 text-white/60 hover:text-[#D4C5A9] cursor-pointer transition-colors" title="Upload Documents">
+                            <label htmlFor="file-upload" className="flex items-center gap-2 px-4 h-[42px] border border-white/20 rounded-lg bg-black/10 hover:bg-black/20 text-white/70 hover:text-[#D4C5A9] cursor-pointer transition-colors" title="Upload Documents">
                                 <Paperclip size={18} />
+                                <span className="text-sm hidden sm:inline">Attach Reports</span>
                             </label>
                         </div>
                     </div>
+                    
+                    <div className="h-px bg-white/10 my-4"></div>
 
-                    {/* Submit Buttons */}
-                    <div className="grid  gap-3 pt-2">
+                    {/* Submit Button */}
+                    <div className="flex justify-center">
                         <button 
                             type="button" 
                             disabled={isSubmitting}
                             onClick={() => handleSubmit('quotation')} 
-                            className="bg-[#D4C5A9] hover:bg-[#C0B090] text-[#0F2622] text-sm font-bold py-3 rounded-lg transition-all active:scale-95 shadow-lg shadow-[#D4C5A9]/20 disabled:opacity-70 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                            className="w-full md:w-1/3 bg-[#D4C5A9] hover:bg-[#C0B090] text-[#0F2622] text-base font-bold py-3.5 rounded-lg transition-all active:scale-95 shadow-lg shadow-[#D4C5A9]/20 disabled:opacity-70 disabled:cursor-not-allowed flex items-center justify-center gap-2"
                         >
-                            {isSubmitting ? <Loader2 className="animate-spin" size={16} /> : "Get Quotations"}
+                            {isSubmitting ? <Loader2 className="animate-spin" size={18} /> : "Get Free Quotation"}
                         </button>
-                        
                     </div>
                 </form>
 
-                <div className="flex justify-center gap-6 mt-4 pt-3 border-t border-white/10 opacity-70">
-                    <div className="flex items-center gap-1.5"><ShieldCheck className="text-[#D4C5A9]" size={14} /><span className="text-[9px] uppercase tracking-widest text-white">Trusted</span></div>
-                    <div className="flex items-center gap-1.5"><Globe className="text-[#D4C5A9]" size={14} /><span className="text-[9px] uppercase tracking-widest text-white">Global</span></div>
-                    <div className="flex items-center gap-1.5"><Heart className="text-[#D4C5A9]" size={14} /><span className="text-[9px] uppercase tracking-widest text-white">Caring</span></div>
+                {/* Trust Badges */}
+                <div className="flex justify-center gap-8 mt-6 pt-4 border-t border-white/10 opacity-70">
+                    <div className="flex items-center gap-2"><ShieldCheck className="text-[#D4C5A9]" size={16} /><span className="text-[10px] md:text-xs uppercase tracking-widest text-white">Verified Hospitals</span></div>
+                    <div className="flex items-center gap-2"><Globe className="text-[#D4C5A9]" size={16} /><span className="text-[10px] md:text-xs uppercase tracking-widest text-white">Intl. Standards</span></div>
+                    <div className="flex items-center gap-2"><Heart className="text-[#D4C5A9]" size={16} /><span className="text-[10px] md:text-xs uppercase tracking-widest text-white">24/7 Support</span></div>
                 </div>
             </div>
         </motion.div>
       </div>
 
-      {/* SUCCESS POPUP */}
+      {/* SUCCESS POPUP (Unchanged) */}
       <AnimatePresence>
         {showSuccess && (
           <motion.div 
