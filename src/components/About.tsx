@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
   ArrowRight, 
@@ -9,7 +9,7 @@ import {
   Check,
   ChevronDown,
   Quote,
-  Undo2 // Added Undo2 for the back button
+  Undo2 
 } from 'lucide-react';
 
 export default function MedivoyageConcierge() {
@@ -31,7 +31,7 @@ export default function MedivoyageConcierge() {
     sans: 'ui-sans-serif, system-ui, sans-serif'
   };
 
-  // --- RESPONSIVE HOOK ---
+  // --- RESPONSIVE HOOK (Global) ---
   const [windowWidth, setWindowWidth] = useState(
     typeof window !== 'undefined' ? window.innerWidth : 1200
   );
@@ -74,54 +74,51 @@ export default function MedivoyageConcierge() {
     { name: "Partner 8", logo: "rishabh.jpeg" },
   ];
 
-  // --- FILTER & CATEGORY LOGIC ---
+  // --- SLIDER LOGIC (FIXED) ---
   const [selectedCategory, setSelectedCategory] = useState("All");
+  const [currentDocIndex, setCurrentDocIndex] = useState(0);
+  const [visibleItems, setVisibleItems] = useState(4);
   const categories = ["All", ...new Set(allDoctors.map(d => d.specialty))];
 
-  const filteredList = selectedCategory === "All" 
-    ? allDoctors 
-    : allDoctors.filter(d => d.specialty === selectedCategory);
+  // 1. Responsive Visible Items Logic
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth < 640) setVisibleItems(1);
+      else if (window.innerWidth < 1024) setVisibleItems(2);
+      else setVisibleItems(4);
+    };
 
-  // --- SLIDER LOGIC ---
-  let visibleItems = 4;
-  if (windowWidth < 640) visibleItems = 1;      
-  else if (windowWidth < 1024) visibleItems = 2; 
-  else visibleItems = 4;                         
+    handleResize(); // Set initial
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
-  const isSliderActive = filteredList.length > visibleItems;
-  
-  const displayDoctors = isSliderActive 
-    ? filteredList 
-    : filteredList;
+  // 2. Filter Doctors (Memoized)
+  const displayDoctors = useMemo(() => {
+    if (selectedCategory === "All") return allDoctors;
+    return allDoctors.filter(doc => doc.specialty === selectedCategory);
+  }, [selectedCategory]);
 
-  const [currentDocIndex, setCurrentDocIndex] = useState(0);
-  const [isTransitioning, setIsTransitioning] = useState(true);
-
+  // 3. Reset index when category changes
   useEffect(() => {
     setCurrentDocIndex(0);
-    setIsTransitioning(true);
-  }, [selectedCategory, visibleItems]);
+  }, [selectedCategory]);
+
+  // 4. Navigation Logic
+  const isSliderActive = displayDoctors.length > visibleItems;
+  const maxIndex = Math.max(0, displayDoctors.length - visibleItems);
 
   const nextDoctor = () => {
-    if (!isSliderActive) return;
-    if (currentDocIndex >= filteredList.length - visibleItems) {
-        setCurrentDocIndex(0);
-    } else {
-        setIsTransitioning(true);
-        setCurrentDocIndex((prev) => prev + 1);
+    if (currentDocIndex < maxIndex) {
+      setCurrentDocIndex(prev => prev + 1);
     }
   };
-  
+
   const prevDoctor = () => {
-    if (!isSliderActive) return;
-    if (currentDocIndex <= 0) {
-        setCurrentDocIndex(filteredList.length - visibleItems);
-    } else {
-        setIsTransitioning(true);
-        setCurrentDocIndex((prev) => prev - 1);
+    if (currentDocIndex > 0) {
+      setCurrentDocIndex(prev => prev - 1);
     }
   };
-  
 
   return (
     <div style={{ backgroundColor: theme.bg }} className="selection:bg-[#1A3C34] selection:text-[#F2F0EA] min-h-screen overflow-x-hidden">
@@ -129,160 +126,155 @@ export default function MedivoyageConcierge() {
       {/* =========================================
           SECTION 1: HERO
       ========================================= */}
- <section className="relative pt-20 pb-16 px-4 md:px-6 lg:pt-28 lg:pb-24 border-b" style={{ borderColor: theme.border }}>
-  <div className="max-w-[1280px] mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-    
-    {/* LEFT CONTENT */}
-    <motion.div 
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.8 }}
-      className="space-y-6 text-center lg:text-left"
-    >
-      <div className="flex items-center justify-center lg:justify-start gap-3">
-        <span className="h-[1px] w-6" style={{ backgroundColor: theme.primary }}></span>
-        <span style={{ color: theme.primary, fontFamily: fonts.sans }} className="text-[10px] font-bold tracking-[0.25em] uppercase opacity-80">
-          The Medical Concierge
-        </span>
-      </div>
+      <section className="relative pt-20 pb-16 px-4 md:px-6 lg:pt-28 lg:pb-24 border-b" style={{ borderColor: theme.border }}>
+        <div className="max-w-[1280px] mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+          
+          {/* LEFT CONTENT */}
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            className="space-y-6 text-center lg:text-left"
+          >
+            <div className="flex items-center justify-center lg:justify-start gap-3">
+              <span className="h-[1px] w-6" style={{ backgroundColor: theme.primary }}></span>
+              <span style={{ color: theme.primary, fontFamily: fonts.sans }} className="text-[10px] font-bold tracking-[0.25em] uppercase opacity-80">
+                The Medical Concierge
+              </span>
+            </div>
 
-      <h1 style={{ color: theme.primary, fontFamily: fonts.heading }} className="text-4xl lg:text-5xl xl:text-6xl font-medium leading-[1.1]">
-        We are doctors. <br />
-        <span style={{ color: theme.secondary, fontStyle: 'italic' }}>Not brokers.</span>
-      </h1>
+            <h1 style={{ color: theme.primary, fontFamily: fonts.heading }} className="text-4xl lg:text-5xl xl:text-6xl font-medium leading-[1.1]">
+              We are doctors. <br />
+              <span style={{ color: theme.secondary, fontStyle: 'italic' }}>Not brokers.</span>
+            </h1>
 
-      <p style={{ color: theme.textLight, fontFamily: fonts.body }} className="text-base md:text-lg lg:text-xl max-w-md mx-auto lg:mx-0 leading-relaxed">
-        Your health journey shouldn't be a transaction. We ensure end-to-end clinical oversight, JCI-accredited care, and zero hidden margins.
-      </p>
+            <p style={{ color: theme.textLight, fontFamily: fonts.body }} className="text-base md:text-lg lg:text-xl max-w-md mx-auto lg:mx-0 leading-relaxed">
+              Your health journey shouldn't be a transaction. We ensure end-to-end clinical oversight, JCI-accredited care, and zero hidden margins.
+            </p>
 
-      <div className="grid grid-cols-2 gap-px max-w-sm mt-6 border opacity-90 mx-auto lg:mx-0" style={{ borderColor: theme.primary, backgroundColor: theme.primary }}>
-        {['HIPAA Compliant', 'JCI Hospitals', 'Doctor Vetted', 'Zero Wait Time'].map((item, i) => (
-          <div key={i} style={{ backgroundColor: theme.bg }} className="p-3 flex items-center justify-center lg:justify-start gap-2">
-            <ShieldCheck style={{ color: theme.primary }} size={16} strokeWidth={1} />
-            <span style={{ color: theme.primary, fontFamily: fonts.sans }} className="text-xs font-bold tracking-wide">{item}</span>
-          </div>
-        ))}
-      </div>
-
-      <div className="flex flex-wrap items-center justify-center lg:justify-start gap-8 lg:gap-16 mt-10 max-w-md mx-auto lg:mx-0">
-        <img src="jcin.png" alt="Accreditation" className="h-10 lg:h-12 w-auto object-contain" />
-        <img src="/hipan.png" alt="Accreditation" className="h-10 lg:h-12 w-auto object-contain" />
-        <img src="nabh.png" alt="Accreditation" className="h-10 lg:h-12 w-auto object-contain" />
-      </div>
-    </motion.div>
-
-    {/* RIGHT IMAGE WITH FLIP EFFECT (Safari Fix applied) */}
-    <div className="relative h-[500px] lg:h-[550px] w-full mt-8 lg:mt-0 perspective-1000 group mx-auto max-w-lg lg:max-w-none">
-      <motion.div 
-          initial={{ opacity: 0 }}
-          animate={{ 
-            opacity: 1, 
-            rotateY: isFlipped ? 180 : 0 
-          }}
-          transition={{ duration: 0.8, type: "spring", stiffness: 260, damping: 20 }}
-          className="w-full h-full relative"
-          style={{ 
-            transformStyle: 'preserve-3d',
-            WebkitTransformStyle: 'preserve-3d', // Safari prefix
-          }}
-      >
-        
-        {/* --- FRONT FACE --- */}
-        <div 
-            className={`absolute inset-0 backface-hidden ${isFlipped ? 'pointer-events-none' : 'pointer-events-auto'}`} 
-            style={{ 
-              backfaceVisibility: 'hidden', 
-              WebkitBackfaceVisibility: 'hidden', // Safari prefix
-              // Fix: Lower z-index when flipped so it doesn't bleed through
-              zIndex: isFlipped ? 0 : 10 
-            }}
-        >
-          <div className="absolute inset-0 bg-[#1A3C34]/10 z-10 pointer-events-none"></div>
-          <img 
-            src="/sg.jpeg" 
-            alt="Consultation" 
-            className="w-full h-full object-cover contrast-[1.1] rounded-sm shadow-lg"
-          />
-
-          {/* OVERLAY CARD */}
-          <div className="absolute bottom-4 left-4 right-4 md:bottom-6 md:left-6 md:right-6 z-20">
-            {/* FIX: Removed 'backdrop-blur-md' to fix Safari render bug */}
-            <div className="bg-white/95 p-4 md:p-5 rounded-sm shadow-xl border border-[#1A3C34]/10 flex items-center justify-between">
-                <div>
-                    <h3 style={{ fontFamily: fonts.heading, color: theme.primary }} className="text-base md:text-xl font-medium">
-                      Global Patient Support 
-                    </h3>
-                    <p style={{ fontFamily: fonts.sans, color: theme.textLight }} className="text-[10px] md:text-xs uppercase tracking-widest mt-1">
-                      Shivam Aanghan, Canada 🇨🇦
-                    </p>
+            <div className="grid grid-cols-2 gap-px max-w-sm mt-6 border opacity-90 mx-auto lg:mx-0" style={{ borderColor: theme.primary, backgroundColor: theme.primary }}>
+              {['HIPAA Compliant', 'JCI Hospitals', 'Doctor Vetted', 'Zero Wait Time'].map((item, i) => (
+                <div key={i} style={{ backgroundColor: theme.bg }} className="p-3 flex items-center justify-center lg:justify-start gap-2">
+                  <ShieldCheck style={{ color: theme.primary }} size={16} strokeWidth={1} />
+                  <span style={{ color: theme.primary, fontFamily: fonts.sans }} className="text-xs font-bold tracking-wide">{item}</span>
                 </div>
-                <button 
-                  onClick={() => setIsFlipped(true)}
-                  className="h-10 w-10 flex items-center justify-center rounded-full transition-transform hover:scale-110 active:scale-95 cursor-pointer z-30 shadow-md" 
-                  style={{ backgroundColor: theme.secondary }}
-                >
-                    <ArrowRight className="text-[#1A3C34]" size={18} />
-                </button>
-            </div>
-          </div>
-        </div>
-
-        {/* --- BACK FACE (Patient Story) --- */}
-        <div 
-          className={`absolute inset-0 h-full w-full rounded-sm shadow-xl p-6 md:p-10 flex flex-col justify-between items-center text-center backface-hidden ${!isFlipped ? 'pointer-events-none' : 'pointer-events-auto'}`}
-          style={{ 
-              backgroundColor: theme.primary, 
-              backfaceVisibility: 'hidden',
-              WebkitBackfaceVisibility: 'hidden', // Safari prefix
-              transform: 'rotateY(180deg)',
-              WebkitTransform: 'rotateY(180deg)', // Safari prefix
-              // Fix: Raise z-index when flipped to force it on top
-              zIndex: isFlipped ? 10 : 0
-          }}
-        >
-            <div className="mb-2 shrink-0 opacity-30">
-                <Quote className="w-8 h-8 md:w-10 md:h-10" color={theme.secondary} />
+              ))}
             </div>
 
-            <div className="flex-1 overflow-y-auto scrollbar-hide px-2 my-2 w-full flex items-center">
-                <p 
-                    style={{ fontFamily: fonts.heading, color: theme.white }} 
-                    className="text-sm md:text-base lg:text-lg italic leading-relaxed opacity-90"
-                >
-                    “A huge shout-out to the MediVoyage team for an exceptional experience. My family doctor in Canada suspected an ACL tear, but the waiting time for a specialist appointment and MRI was extremely long. While visiting India for a wedding, I was referred to MediVoyage by a friend and it turned out to be the best decision.
-                    The team ensured that my hospital in-time and out-time for both the consultation and MRI were under 90 minutes. Everything was impeccably coordinated with complete medical oversight, and they supported me every step of the way right until the airport.”
-                </p>
+            <div className="flex flex-wrap items-center justify-center lg:justify-start gap-8 lg:gap-16 mt-10 max-w-md mx-auto lg:mx-0">
+              <img src="jcin.png" alt="Accreditation" className="h-10 lg:h-12 w-auto object-contain" />
+              <img src="/hipan.png" alt="Accreditation" className="h-10 lg:h-12 w-auto object-contain" />
+              <img src="nabh.png" alt="Accreditation" className="h-10 lg:h-12 w-auto object-contain" />
             </div>
+          </motion.div>
 
-            <div className="shrink-0 space-y-4 w-full">
-                <div className="space-y-1">
-                    <p style={{ fontFamily: fonts.sans, color: theme.secondary }} className="text-xs md:text-sm font-bold uppercase tracking-widest">
-                        Shivam Aanghan 🇨🇦
-                    </p>
-                    <p className="text-white/60 text-[10px] md:text-xs">Full Body Checkup • Jaipur</p>
+          {/* RIGHT IMAGE WITH FLIP EFFECT */}
+          <div className="relative h-[500px] lg:h-[550px] w-full mt-8 lg:mt-0 perspective-1000 group mx-auto max-w-lg lg:max-w-none">
+            <motion.div 
+                initial={{ opacity: 0 }}
+                animate={{ 
+                  opacity: 1, 
+                  rotateY: isFlipped ? 180 : 0 
+                }}
+                transition={{ duration: 0.8, type: "spring", stiffness: 260, damping: 20 }}
+                className="w-full h-full relative"
+                style={{ 
+                  transformStyle: 'preserve-3d',
+                  WebkitTransformStyle: 'preserve-3d',
+                }}
+            >
+              
+              {/* --- FRONT FACE --- */}
+              <div 
+                  className={`absolute inset-0 backface-hidden ${isFlipped ? 'pointer-events-none' : 'pointer-events-auto'}`} 
+                  style={{ 
+                    backfaceVisibility: 'hidden', 
+                    WebkitBackfaceVisibility: 'hidden',
+                    zIndex: isFlipped ? 0 : 10 
+                  }}
+              >
+                <div className="absolute inset-0 bg-[#1A3C34]/10 z-10 pointer-events-none"></div>
+                <img 
+                  src="/sg.jpeg" 
+                  alt="Consultation" 
+                  className="w-full h-full object-cover contrast-[1.1] rounded-sm shadow-lg"
+                />
+
+                {/* OVERLAY CARD */}
+                <div className="absolute bottom-4 left-4 right-4 md:bottom-6 md:left-6 md:right-6 z-20">
+                  <div className="bg-white/95 p-4 md:p-5 rounded-sm shadow-xl border border-[#1A3C34]/10 flex items-center justify-between">
+                      <div>
+                          <h3 style={{ fontFamily: fonts.heading, color: theme.primary }} className="text-base md:text-xl font-medium">
+                            Global Patient Support 
+                          </h3>
+                          <p style={{ fontFamily: fonts.sans, color: theme.textLight }} className="text-[10px] md:text-xs uppercase tracking-widest mt-1">
+                            Shivam Aanghan, Canada 🇨🇦
+                          </p>
+                      </div>
+                      <button 
+                        onClick={() => setIsFlipped(true)}
+                        className="h-10 w-10 flex items-center justify-center rounded-full transition-transform hover:scale-110 active:scale-95 cursor-pointer z-30 shadow-md" 
+                        style={{ backgroundColor: theme.secondary }}
+                      >
+                          <ArrowRight className="text-[#1A3C34]" size={18} />
+                      </button>
+                  </div>
                 </div>
+              </div>
 
-                <button 
-                    onClick={(e) => {
-                        e.stopPropagation(); 
-                        setIsFlipped(false);
-                    }}
-                    className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-white/10 hover:bg-white/20 transition-colors text-white text-xs uppercase tracking-widest font-bold cursor-pointer"
-                >
-                    <Undo2 size={14} /> Back to View
-                </button>
-            </div>
-            
-            <div className="absolute inset-4 border border-white/10 pointer-events-none rounded-sm"></div>
+              {/* --- BACK FACE (Patient Story) --- */}
+              <div 
+                className={`absolute inset-0 h-full w-full rounded-sm shadow-xl p-6 md:p-10 flex flex-col justify-between items-center text-center backface-hidden ${!isFlipped ? 'pointer-events-none' : 'pointer-events-auto'}`}
+                style={{ 
+                    backgroundColor: theme.primary, 
+                    backfaceVisibility: 'hidden',
+                    WebkitBackfaceVisibility: 'hidden',
+                    transform: 'rotateY(180deg)',
+                    WebkitTransform: 'rotateY(180deg)',
+                    zIndex: isFlipped ? 10 : 0
+                }}
+              >
+                  <div className="mb-2 shrink-0 opacity-30">
+                      <Quote className="w-8 h-8 md:w-10 md:h-10" color={theme.secondary} />
+                  </div>
+
+                  <div className="flex-1 overflow-y-auto scrollbar-hide px-2 my-2 w-full flex items-center">
+                      <p 
+                          style={{ fontFamily: fonts.heading, color: theme.white }} 
+                          className="text-sm md:text-base lg:text-lg italic leading-relaxed opacity-90"
+                      >
+                          “A huge shout-out to the MediVoyage team for an exceptional experience. My family doctor in Canada suspected an ACL tear, but the waiting time for a specialist appointment and MRI was extremely long. While visiting India for a wedding, I was referred to MediVoyage by a friend and it turned out to be the best decision.
+                          The team ensured that my hospital in-time and out-time for both the consultation and MRI were under 90 minutes. Everything was impeccably coordinated with complete medical oversight, and they supported me every step of the way right until the airport.”
+                      </p>
+                  </div>
+
+                  <div className="shrink-0 space-y-4 w-full">
+                      <div className="space-y-1">
+                          <p style={{ fontFamily: fonts.sans, color: theme.secondary }} className="text-xs md:text-sm font-bold uppercase tracking-widest">
+                              Shivam Aanghan 🇨🇦
+                          </p>
+                          <p className="text-white/60 text-[10px] md:text-xs">Full Body Checkup • Jaipur</p>
+                      </div>
+
+                      <button 
+                          onClick={(e) => {
+                              e.stopPropagation(); 
+                              setIsFlipped(false);
+                          }}
+                          className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-white/10 hover:bg-white/20 transition-colors text-white text-xs uppercase tracking-widest font-bold cursor-pointer"
+                      >
+                          <Undo2 size={14} /> Back to View
+                      </button>
+                  </div>
+                  
+                  <div className="absolute inset-4 border border-white/10 pointer-events-none rounded-sm"></div>
+              </div>
+
+            </motion.div>
+          </div>
+
         </div>
-
-      </motion.div>
-    </div>
-
-  </div>
-</section>
-
-
+      </section>
 
       {/* =========================================
           SECTION 3: CURATED SPECIALISTS
@@ -330,9 +322,9 @@ export default function MedivoyageConcierge() {
                     <div className="flex gap-2 shrink-0 self-end">
                         <button 
                             onClick={prevDoctor}
-                            disabled={!isSliderActive}
+                            disabled={currentDocIndex === 0}
                             className={`w-10 h-10 md:w-12 md:h-12 border flex items-center justify-center transition-all ${
-                                !isSliderActive ? 'opacity-30 cursor-not-allowed' : 'hover:bg-[#1A3C34] hover:text-[#F2F0EA]'
+                                currentDocIndex === 0 ? 'opacity-30 cursor-not-allowed' : 'hover:bg-[#1A3C34] hover:text-[#F2F0EA]'
                             }`}
                             style={{ borderColor: theme.primary, color: theme.primary }}
                         >
@@ -340,9 +332,9 @@ export default function MedivoyageConcierge() {
                         </button>
                         <button 
                             onClick={nextDoctor}
-                            disabled={!isSliderActive}
+                            disabled={currentDocIndex >= maxIndex}
                             className={`w-10 h-10 md:w-12 md:h-12 border flex items-center justify-center transition-all ${
-                                !isSliderActive ? 'opacity-30 cursor-not-allowed' : 'hover:bg-[#1A3C34] hover:text-[#F2F0EA]'
+                                currentDocIndex >= maxIndex ? 'opacity-30 cursor-not-allowed' : 'hover:bg-[#1A3C34] hover:text-[#F2F0EA]'
                             }`}
                             style={{ borderColor: theme.primary, color: theme.primary }}
                         >
@@ -353,19 +345,18 @@ export default function MedivoyageConcierge() {
             </div>
 
             {/* Slider Content */}
-            <div className="relative">
-                <div className="overflow-hidden -mx-2 p-2"> 
+            <div className="relative overflow-hidden">
+                <div className="-mx-2 p-2"> 
                     <motion.div 
                         className="flex"
-                        // ✅ FIX: Calculate translation based on total items, not visible items
-                        animate={{ x: isSliderActive ? `-${currentDocIndex * (100 / displayDoctors.length)}%` : '0%' }}
-                        transition={ isTransitioning ? { type: "spring", stiffness: 300, damping: 30 } : { duration: 0 } }
+                        // Calculate translation: Move by percentage of ONE item * currentIndex
+                        animate={{ x: `-${currentDocIndex * (100 / displayDoctors.length)}%` }}
+                        transition={{ type: "spring", stiffness: 300, damping: 30 }}
                         style={{ 
-                          // ✅ FIX: Container width = (Total Items / Visible Items) * 100%
-                          // This ensures each card is exactly 1/(visibleItems) of the viewport width
-                          width: isSliderActive 
-                            ? `${(displayDoctors.length / visibleItems) * 100}%` 
-                            : '100%' 
+                          // Container Width Formula: (Total Items / Visible Items) * 100%
+                          // Example: 8 items / 4 visible = 200% width. Each item is 1/8th of container (12.5%).
+                          // 12.5% of 200% = 25% of viewport. Correct.
+                          width: `${(displayDoctors.length / visibleItems) * 100}%`
                         }} 
                     >
                         {displayDoctors.map((doctor, index) => (
@@ -466,6 +457,7 @@ export default function MedivoyageConcierge() {
           </motion.div>
         </div>
       </section>
+
       {/* =========================================
           SECTION 2: OUR FOUNDERS
       ========================================= */}
