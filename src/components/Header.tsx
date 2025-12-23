@@ -182,3 +182,140 @@ export default function Header({ onChatToggle }: HeaderProps) {
     </div>
   );
 }
+
+
+
+
+// import React, { useState, useEffect } from 'react';
+// import { Link, useNavigate, useLocation } from 'react-router-dom';
+// import { Menu, X } from 'lucide-react';
+
+// interface HeaderProps {
+//   onChatToggle?: () => void;
+// }
+
+// export default function Header({ onChatToggle }: HeaderProps) {
+//   const [isMenuOpen, setIsMenuOpen] = useState(false);
+//   const [isScrolled, setIsScrolled] = useState(false);
+//   const navigate = useNavigate();
+//   const location = useLocation();
+
+//   useEffect(() => {
+//     const handleScroll = () => {
+//       // Toggle state based on scroll position
+//       setIsScrolled(window.scrollY > 50);
+//     };
+//     window.addEventListener('scroll', handleScroll);
+//     return () => window.removeEventListener('scroll', handleScroll);
+//   }, []);
+
+//   const navItems = [
+//     { label: 'Doctors', type: 'scroll', targetId: 'doctors' },
+//     { label: 'Hospitals', type: 'scroll', targetId: 'hospitals' },
+//     { label: 'Treatments', type: 'link', path: '/treatment' }, 
+//     { label: 'Wellness', type: 'link', path: '/wellness' },
+//   ];
+
+//   const handleNavClick = (item: any) => {
+//     setIsMenuOpen(false); 
+//     if (item.type === 'link') {
+//       navigate(item.path);
+//     } else if (item.type === 'scroll') {
+//       if (location.pathname !== '/') {
+//         navigate(`/#${item.targetId}`);
+//       } else {
+//         const element = document.getElementById(item.targetId);
+//         if (element) {
+//           element.scrollIntoView({ behavior: 'smooth' });
+//         }
+//       }
+//     }
+//   };
+
+//   return (
+//     <div className={`fixed top-0 left-0 w-full z-50 transition-all duration-700 ${isScrolled ? 'py-4' : 'py-0'}`}>
+      
+//       <header 
+//         className={`
+//           relative mx-auto transition-all duration-700 ease-in-out
+//           flex items-center justify-between
+          
+//           /* Layout Logic: Full width at top, Pill shape when scrolled */
+//           ${isScrolled 
+//             ? 'w-[92%] max-w-7xl rounded-full px-8 py-3 bg-black/20 backdrop-blur-lg shadow-xl' 
+//             : 'w-full px-6 py-6 bg-transparent backdrop-blur-none'
+//           }
+//         `}
+//       >
+        
+//         {/* 1. LOGO */}
+//         <Link to="/" className="flex items-center gap-2 group z-50 shrink-0" onClick={() => setIsMenuOpen(false)}>
+//           <div className="w-8 h-8 bg-white/90 rounded-full flex items-center justify-center">
+//              <img src="/logo.png" alt="Logo" className="w-5 h-5 object-contain" />
+//           </div>
+//           <span className="text-white text-lg lg:text-xl font-bold tracking-tight font-serif">
+//             MediVoyage
+//           </span>
+//         </Link>
+
+//         {/* 2. RIGHT-ALIGNED DESKTOP GROUP */}
+//         <div className="hidden lg:flex items-center gap-10 ml-auto">
+//           <nav className="flex items-center gap-8">
+//             {navItems.map((item) => (
+//               <button
+//                 key={item.label}
+//                 onClick={() => handleNavClick(item)}
+//                 className="text-white text-[12px] font-semibold uppercase tracking-[0.12em] hover:text-[#C8B092] transition-colors bg-transparent border-none cursor-pointer"
+//               >
+//                 {item.label}
+//               </button>
+//             ))}
+//           </nav>
+
+//           <Link
+//             to="/myconcierge"
+//             className="px-6 py-2 rounded-full bg-white/10 text-white text-[11px] font-bold uppercase tracking-wider hover:bg-white hover:text-[#1A3C34] transition-all duration-300"
+//           >
+//              MV Concierge
+//           </Link>
+//         </div>
+
+//         {/* 3. MOBILE TOGGLE */}
+//         <button
+//           className="lg:hidden p-2 text-white z-50"
+//           onClick={() => setIsMenuOpen(!isMenuOpen)}
+//         >
+//           {isMenuOpen ? <X /> : <Menu />}
+//         </button>
+
+//         {/* 4. MOBILE DROPDOWN */}
+//         <div className={`
+//             lg:hidden absolute top-full left-0 w-full bg-[#1A3C34]/95 backdrop-blur-2xl overflow-hidden transition-all duration-500
+//             ${isMenuOpen ? 'max-h-[450px] py-6' : 'max-h-0'}
+//         `}>
+//           <nav className="flex flex-col px-8 space-y-5">
+//             {navItems.map((item) => (
+//               <button
+//                 key={item.label}
+//                 onClick={() => handleNavClick(item)}
+//                 className="text-left text-white text-lg font-medium opacity-90"
+//               >
+//                 {item.label}
+//               </button>
+//             ))}
+//             <Link
+//               to="/myconcierge"
+//               onClick={() => setIsMenuOpen(false)}
+//               className="text-[#C8B092] text-lg font-bold pt-2"
+//             >
+//               MV Concierge
+//             </Link>
+//           </nav>
+//         </div>
+
+//       </header>
+//     </div>
+//   );
+// }
+
+
