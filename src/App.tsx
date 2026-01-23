@@ -6,11 +6,14 @@ import ScrollToTop from './components/ScrollToTop';
 
 // 2. Page Components
 import HomePage from './pages/HomePage';
-import MyConcierge from './components/myconcierge'; // Matches your lowercase filename
+import MyConcierge from './components/myconcierge';
 import Wellness from './components/Wellness';
 import Treatment from './components/Treatment';
 import VideoCall from './components/VideoCall';
 import OrthopaedicsLanding from './pages/OrthopaedicsLanding';
+
+// --- NEW IMPORT ---
+import MainLanding from './pages/MainLanding';
 
 function App() {
   return (
@@ -19,7 +22,7 @@ function App() {
       <ScrollToTop />
       
       <Routes>
-        {/* Main Home Page (Contains Doctors, Hospitals, Treatments sections) */}
+        {/* Main Home Page */}
         <Route path="/" element={<HomePage />} />
         
         {/* Independent Pages */}
@@ -33,9 +36,14 @@ function App() {
           element={<Wellness onBack={() => window.history.back()} />} 
         />
 
-        {/* --- NEW TELECONSULTATION ROUTE --- */}
+        {/* Teleconsultation & Specific Landing Pages */}
         <Route path="/consultation" element={<VideoCall />} />
         <Route path="/ortho-care" element={<OrthopaedicsLanding />} />
+
+        {/* --- YOUR NEW ROUTE --- */}
+        {/* This makes mymedivoyage.com/mainlanding work */}
+        <Route path="/mainlanding" element={<MainLanding />} />
+        
       </Routes>
     </Router>
   );

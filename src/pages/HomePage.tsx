@@ -7,6 +7,8 @@ import Footer from '../components/Footer';
 import Hero from '../components/Hero';
 import Services from '../components/Services';
 import About from '../components/About';
+import { PopupForm } from '../components/PopupForm';
+import { PatientJourney } from '../components/PatientJourney';
 // Assuming this has Doctors/Partners
 import Hospitalspages from '../components/Hospitalspages';
 import Treatment from '../components/Treatment';
@@ -34,6 +36,7 @@ export default function HomePage() {
       <Header />
 
       <main>
+        <PopupForm />
         {/* 1. Hero Section */}
         <Hero />
 
@@ -44,7 +47,7 @@ export default function HomePage() {
         <div id="about">
           <About />
         </div>
-
+       <PatientJourney/>
        <div id="services">
           <Services />
         </div>

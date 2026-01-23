@@ -170,7 +170,7 @@ export default function Hero() {
         >
             <div 
                 // Removed rounded-3xl, added rounded-none, sharper border
-                className="bg-white/5 border border-white/20 p-8 md:p-12 shadow-2xl relative rounded-none backdrop-blur-md"
+                className="bg-white/[0.02] border border-white/20 p-8 md:p-12 shadow-2xl relative rounded-none backdrop-blur-md"
                 style={{ 
                   WebkitBackdropFilter: 'blur(24px)', 
                   backdropFilter: 'blur(24px)',
