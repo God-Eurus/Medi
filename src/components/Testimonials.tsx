@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Star, Quote, CheckCircle, ChevronLeft, ChevronRight } from 'lucide-react';
+import { Star, Quote, CheckCircle, ChevronLeft, ChevronRight, ArrowRight, Calendar } from 'lucide-react';
 
 const testimonials = [
   {
@@ -37,6 +37,14 @@ export default function Testimonials() {
 
   const prevTestimonial = () => {
     setCurrentIndex((prev) => (prev - 1 + testimonials.length) % testimonials.length);
+  };
+
+  // Scroll to Hero Form
+  const scrollToForm = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth',
+    });
   };
 
   return (
@@ -101,24 +109,37 @@ export default function Testimonials() {
           </div>
         </div>
 
-        {/* Floating Stats Bar - Sharpened */}
-        <div className="relative">
-            <div className="absolute inset-0 bg-[#D4C5A9] blur-2xl opacity-10 rounded-none"></div>
-            <div className="relative bg-white/5 backdrop-blur-md border border-white/10 rounded-none p-8 lg:p-12 mx-auto max-w-4xl">
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-8 divide-y md:divide-y-0 md:divide-x divide-white/10">
-                    <div className="text-center pt-4 md:pt-0">
-                        <div className="text-4xl font-['Montserrat'] font-bold text-white mb-1">10k+</div>
-                        <div className="text-sm text-[#D4C5A9] font-medium uppercase tracking-widest">Happy Patients</div>
+        {/* Stats Bar - No Box */}
+        <div className="relative mt-20">
+            {/* Removed bg, border, padding, and blur classes */}
+            <div className="relative mx-auto max-w-4xl flex flex-col items-center">
+                
+                {/* Stats Row - Forced One Line */}
+                <div className="w-full grid grid-cols-3 divide-x divide-white/10 mb-10">
+                    <div className="text-center px-1 md:px-4">
+                        <div className="text-3xl md:text-5xl font-['Montserrat'] font-bold text-white mb-2">10k+</div>
+                        <div className="text-[10px] md:text-sm text-[#D4C5A9] font-medium uppercase tracking-widest leading-tight">Happy<br className="md:hidden" /> Patients</div>
                     </div>
-                    <div className="text-center pt-4 md:pt-0">
-                        <div className="text-4xl font-['Montserrat'] font-bold text-white mb-1">98%</div>
-                        <div className="text-sm text-[#D4C5A9] font-medium uppercase tracking-widest">Satisfaction Rate</div>
+                    <div className="text-center px-1 md:px-4">
+                        <div className="text-3xl md:text-5xl font-['Montserrat'] font-bold text-white mb-2">98%</div>
+                        <div className="text-[10px] md:text-sm text-[#D4C5A9] font-medium uppercase tracking-widest leading-tight">Satisfaction<br className="md:hidden" /> Rate</div>
                     </div>
-                    <div className="text-center pt-4 md:pt-0">
-                        <div className="text-4xl font-['Montserrat'] font-bold text-white mb-1">50+</div>
-                        <div className="text-sm text-[#D4C5A9] font-medium uppercase tracking-widest">Partner Hospitals</div>
+                    <div className="text-center px-1 md:px-4">
+                        <div className="text-3xl md:text-5xl font-['Montserrat'] font-bold text-white mb-2">50+</div>
+                        <div className="text-[10px] md:text-sm text-[#D4C5A9] font-medium uppercase tracking-widest leading-tight">Partner<br className="md:hidden" /> Hospitals</div>
                     </div>
                 </div>
+
+                {/* Call to Action Button */}
+                <button 
+                    onClick={scrollToForm}
+                    className="group bg-[#D4C5A9] text-[#0F2622] font-['Montserrat'] font-bold py-4 px-10 rounded-none shadow-[0_0_20px_rgba(212,197,169,0.3)] hover:shadow-[0_0_30px_rgba(212,197,169,0.5)] hover:-translate-y-1 transition-all duration-300 flex items-center gap-3 text-lg"
+                >
+                    <Calendar className="w-6 h-6" />
+                    <span className="uppercase tracking-wider">Book Free Consultation</span>
+                    <ArrowRight className="w-6 h-6 group-hover:translate-x-1 transition-transform" />
+                </button>
+
             </div>
         </div>
 
@@ -136,11 +157,11 @@ function TestimonialCard({ testimonial }: { testimonial: any }) {
       {/* User Profile */}
       <div className="flex items-center gap-4 mb-6">
         <div className="relative">
-            {/* Kept profile image rounded for standard UI practice, but container is sharp */}
             <img
             src={testimonial.image}
             alt={testimonial.name}
             className="w-16 h-16 rounded-full object-cover border-2 border-gray-100 shadow-md"
+            loading="lazy"
             />
             <div className="absolute bottom-0 right-0 bg-[#0F2622] rounded-full p-1 border border-white">
                 <CheckCircle size={10} className="text-[#D4C5A9]" />

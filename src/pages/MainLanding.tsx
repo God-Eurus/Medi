@@ -11,6 +11,7 @@ import Blogs from '../components/Blogs';
 
 // --- NEW COMPONENTS (Create these files below) ---
 import HeroTwo from '../components/HeroTwo';
+import StickyMobileCTA from '../components/StickyMobileCTA';
 
 
 
@@ -43,6 +44,8 @@ export default function MediVoyageLanding() {
 
       {/* 6. Footer */}
       <Footer />
+        {/* 7. Sticky Mobile CTA */}
+        <StickyMobileCTA />
 
     </div>
   );
