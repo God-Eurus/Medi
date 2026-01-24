@@ -1,51 +1,58 @@
-import { FileText, Video, Calendar, Plane, Stethoscope, Heart, ArrowRight } from 'lucide-react';
+import React, { useState } from 'react';
+import { ArrowRight, ChevronLeft, ChevronRight } from 'lucide-react';
 
+// DEFINE THE 4-STEP JOURNEY WITH IMAGE PATHS
 const steps = [
   {
-    icon: FileText,
-    title: 'Submit Inquiry',
-    description: 'Share your needs. We match you with specialists & quote in 24h.',
+    imageSrc: './one.jpg',
+    altText: 'Doctor and patient consultation illustration',
+    title: 'Inquiry & Consultation',
+    description: 'Share needs, get matched with specialists, and have a video consultation to finalize the plan.',
   },
   {
-    icon: Video,
-    title: 'Consultation',
-    description: 'Video call with your surgeon to review the plan & costs.',
+    imageSrc: 'two.jpg',
+    altText: 'Travel and logistics illustration',
+    title: 'Travel & Arrival',
+    description: 'We handle visas, flights, and hotels. Enjoy VIP airport pickup and transport upon arrival.',
   },
   {
-    icon: Calendar,
-    title: 'Logistics',
-    description: 'We handle your visa, flight coordination, and hotels.',
+    imageSrc: 'three.jpg',
+    altText: 'Medical treatment illustration',
+    title: 'World-Class Treatment',
+    description: 'Surgery in JCI-accredited hospitals with full on-ground language and logistical support.',
   },
   {
-    icon: Plane,
-    title: 'Arrival',
-    description: 'VIP Airport pickup and transport to your hotel.',
-  },
-  {
-    icon: Stethoscope,
-    title: 'Treatment',
-    description: 'Surgery in JCI-accredited hospitals with full support.',
-  },
-  {
-    icon: Heart,
-    title: 'Recovery',
-    description: 'Post-op care, fit-to-fly check, and safe return home.',
+    imageSrc: 'four.jpg',
+    altText: 'Recovery and return home illustration',
+    title: 'Recovery & Return',
+    description: 'Post-op care monitoring, fit-to-fly certification, and safe coordination for your return home.',
   }
 ];
 
 export function PatientJourney() {
+  const [currentStep, setCurrentStep] = useState(0);
+
   const colors = {
     emerald: '#0F2622',
     gold: '#D4C5A9',
     alabaster: '#F2F0EA'
   };
 
+  // HANDLERS FOR MOBILE NAVIGATION
+  const nextStep = () => {
+    setCurrentStep((prev) => (prev + 1) % steps.length);
+  };
+
+  const prevStep = () => {
+    setCurrentStep((prev) => (prev - 1 + steps.length) % steps.length);
+  };
+
   return (
     <section className="py-16" style={{ backgroundColor: colors.alabaster }}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
-        {/* HEADER (Reduced Margins) */}
-        <div className="text-center mb-12">
+        {/* HEADER */}
+        <div className="text-center mb-12 lg:mb-16">
           <span className="text-xs font-bold tracking-[0.2em] uppercase text-gray-400 mb-2 block">
             The Process
           </span>
@@ -53,54 +60,61 @@ export function PatientJourney() {
             Your Journey to <span className="italic" style={{ color: colors.gold }}>Better Health</span>
           </h2>
           <p className="text-sm text-gray-500 max-w-2xl mx-auto">
-            A seamless, step-by-step path from inquiry to full recovery.
+            A simplified, four-step path towards your medical recovery.
           </p>
         </div>
 
-        {/* STEPS GRID (Tighter Gap) */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 mb-12 relative">
-          
+        {/* ================= DESKTOP VIEW (Grid) ================= */}
+        {/* Hidden on mobile/tablet, visible on large screens */}
+        <div className="hidden lg:grid grid-cols-4 gap-8 mb-16 relative">
           {steps.map((step, index) => {
-            const Icon = step.icon;
-            // Logic to show arrows only between steps (not after the last one)
-            // On desktop (lg), arrows appear after 1, 2, 4, 5. Step 3 wraps, Step 6 ends.
-            const showArrow = index !== 2 && index !== 5; 
-
+            const showArrow = index !== steps.length - 1; 
             return (
-              <div key={index} className="relative group">
-                {/* CARD */}
-                <div className="bg-white p-6 shadow-sm hover:shadow-lg transition-all duration-300 border-t-2 border-transparent hover:border-[#D4C5A9] h-full rounded-none flex flex-col items-center text-center">
-                  
-                  {/* Step Number */}
-                  <div className="text-xs font-bold text-[#D4C5A9] mb-4 tracking-widest">
-                    STEP 0{index + 1}
-                  </div>
-
-                  {/* Compact Icon */}
-                  <div 
-                    className="w-12 h-12 flex items-center justify-center mb-4 bg-[#0F2622] text-[#D4C5A9] shadow-md group-hover:scale-110 transition-transform duration-300 rounded-none"
-                  >
-                    <Icon className="w-6 h-6" strokeWidth={1.5} />
-                  </div>
-
-                  <h3 className="text-lg font-serif font-bold mb-2" style={{ color: colors.emerald }}>
-                    {step.title}
-                  </h3>
-
-                  <p className="text-gray-500 text-xs leading-relaxed max-w-xs mx-auto">
-                    {step.description}
-                  </p>
-                </div>
-
-                {/* CONNECTOR ARROW (Desktop Only) */}
+              <div key={index} className="relative group flex flex-col h-full">
+                <StepCard step={step} index={index} colors={colors} />
+                
+                {/* Connector Arrow */}
                 {showArrow && (
-                  <div className="hidden lg:block absolute top-1/2 -right-5 transform -translate-y-1/2 z-10 text-gray-300">
-                    <ArrowRight size={20} />
+                  <div className="absolute top-1/2 -right-6 transform -translate-y-1/2 z-0 text-[#D4C5A9]/50">
+                    <ArrowRight size={24} />
                   </div>
                 )}
               </div>
             );
           })}
+        </div>
+
+        {/* ================= MOBILE/TABLET VIEW (Slider) ================= */}
+        {/* Visible on mobile/tablet, hidden on large screens */}
+        <div className="lg:hidden mb-16 relative px-2">
+          
+          {/* Active Card with Fade Effect Key */}
+          <div key={currentStep} className="animate-fade-in transition-all duration-300">
+             <StepCard step={steps[currentStep]} index={currentStep} colors={colors} />
+          </div>
+
+          {/* Navigation Controls */}
+          <div className="flex items-center justify-center gap-6 mt-8">
+            <button 
+              onClick={prevStep}
+              className="p-3 rounded-full bg-white shadow-md hover:bg-[#0F2622] hover:text-[#D4C5A9] transition-colors border border-gray-100"
+              aria-label="Previous step"
+            >
+              <ChevronLeft size={24} />
+            </button>
+
+            <span className="text-sm font-bold tracking-widest" style={{ color: colors.emerald }}>
+              {currentStep + 1} / {steps.length}
+            </span>
+
+            <button 
+              onClick={nextStep}
+              className="p-3 rounded-full bg-white shadow-md hover:bg-[#0F2622] hover:text-[#D4C5A9] transition-colors border border-gray-100"
+              aria-label="Next step"
+            >
+              <ChevronRight size={24} />
+            </button>
+          </div>
         </div>
 
         {/* COMPACT TIMELINE BOX */}
@@ -110,7 +124,7 @@ export function PatientJourney() {
         >
           <div className="text-center md:text-right">
              <h3 className="text-lg font-serif font-bold text-white">
-                Total Timeline
+                Estimated Timeline
               </h3>
           </div>
 
@@ -118,12 +132,41 @@ export function PatientJourney() {
 
           <div className="text-center md:text-left">
              <span className="text-2xl font-serif font-bold text-[#D4C5A9]">
-                2-4 Weeks <span className="text-xs text-gray-400 font-sans font-normal ml-2">(Expedited: 7 Days)</span>
+                2-4 Weeks <span className="text-xs text-gray-400 font-sans font-normal ml-2">(Depends on procedure)</span>
               </span>
           </div>
         </div>
 
       </div>
     </section>
+  );
+}
+
+// Helper Component for the Card to avoid code duplication
+function StepCard({ step, index, colors }) {
+  return (
+    <div className="bg-white p-6 shadow-sm hover:shadow-xl transition-all duration-300 border-b-4 border-transparent hover:border-[#D4C5A9] flex-1 flex flex-col items-center text-center z-10 h-full">
+      {/* Step Number */}
+      <div className="text-xs font-bold text-[#D4C5A9] mb-6 tracking-widest uppercase">
+        Step 0{index + 1}
+      </div>
+
+      {/* ILLUSTRATION CONTAINER */}
+      <div className="w-full aspect-[4/3] mb-6 overflow-hidden">
+        <img 
+          src={step.imageSrc} 
+          alt={step.altText}
+          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+        />
+      </div>
+
+      <h3 className="text-xl font-serif font-bold mb-3" style={{ color: colors.emerald }}>
+        {step.title}
+      </h3>
+
+      <p className="text-gray-500 text-sm leading-relaxed">
+        {step.description}
+      </p>
+    </div>
   );
 }
