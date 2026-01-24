@@ -4,25 +4,25 @@ import { ArrowRight, ChevronLeft, ChevronRight } from 'lucide-react';
 // DEFINE THE 4-STEP JOURNEY WITH IMAGE PATHS
 const steps = [
   {
-    imageSrc: './one.jpg',
+    imageSrc: '/one.jpg',
     altText: 'Doctor and patient consultation illustration',
     title: 'Inquiry & Consultation',
     description: 'Share needs, get matched with specialists, and have a video consultation to finalize the plan.',
   },
   {
-    imageSrc: './two.jpg',
+    imageSrc: '/two.jpg',
     altText: 'Travel and logistics illustration',
     title: 'Travel & Arrival',
     description: 'We handle visas, flights, and hotels. Enjoy VIP airport pickup and transport upon arrival.',
   },
   {
-    imageSrc: './three.jpg',
+    imageSrc: '/three.jpg',
     altText: 'Medical treatment illustration',
     title: 'World-Class Treatment',
     description: 'Surgery in JCI-accredited hospitals with full on-ground language and logistical support.',
   },
   {
-    imageSrc: './four.jpg',
+    imageSrc: '/four.jpg',
     altText: 'Recovery and return home illustration',
     title: 'Recovery & Return',
     description: 'Post-op care monitoring, fit-to-fly certification, and safe coordination for your return home.',
