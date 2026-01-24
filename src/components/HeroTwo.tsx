@@ -126,7 +126,7 @@ export default function HeroTwo() {
       {/* 1. BACKGROUND IMAGE & OVERLAY */}
       <div className="absolute inset-0 w-full h-full">
         <img 
-          src="./bgimage.jpg" 
+          src="/bgimage.jpg" 
           alt="Modern Medical Facility" 
           className="w-full h-full object-cover"
         />
