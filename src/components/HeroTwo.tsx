@@ -4,21 +4,18 @@ import {
   Award, 
   ArrowRight, 
   CheckCircle, 
-  UploadCloud, 
   ChevronDown, 
   Search, 
-  X,
   Globe, 
   Headphones, 
   Building2 
 } from 'lucide-react';
-import { COUNTRY_CODES, SPECIALTIES } from './constants';
+import { COUNTRY_CODES } from './constants';
 
 interface FormData {
   name: string;
   email: string;
   phone: string;
-  specialty: string;
   need: string;
 }
 
@@ -27,13 +24,9 @@ export default function HeroTwo() {
     name: '',
     email: '',
     phone: '',
-    specialty: '',
     need: ''
   });
   
-  // File State
-  const [selectedFile, setSelectedFile] = useState<File | null>(null);
-
   // Country Dropdown State
   const defaultCountry = COUNTRY_CODES.find(c => c.country === 'IN') || COUNTRY_CODES[0];
   const [selectedCountry, setSelectedCountry] = useState(defaultCountry);
@@ -65,18 +58,6 @@ export default function HeroTwo() {
     );
   });
 
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files && e.target.files[0]) {
-      setSelectedFile(e.target.files[0]);
-    }
-  };
-
-  const removeFile = (e: React.MouseEvent) => {
-    e.preventDefault();
-    e.stopPropagation();
-    setSelectedFile(null);
-  };
-
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
@@ -88,29 +69,28 @@ export default function HeroTwo() {
       formSubmitData.append("Name", formData.name);
       formSubmitData.append("Email", formData.email);
       formSubmitData.append("Phone", `${selectedCountry.code} ${formData.phone}`);
-      formSubmitData.append("Specialty", formData.specialty || "Not Selected");
       formSubmitData.append("Need", formData.need);
       
-      formSubmitData.append("_subject", "New Treatment Inquiry + File");
+      formSubmitData.append("_subject", "New Treatment Inquiry");
       formSubmitData.append("_captcha", "false"); 
-      
-      if (selectedFile) {
-        formSubmitData.append("attachment", selectedFile);
-      }
 
-      const response = await fetch("https://formsubmit.co/medivoyagehealthcare@gmail.com", { 
+      const response = await fetch("https://formsubmit.co/ajax/medivoyagehealthcare@gmail.com", { 
         method: "POST",
+        headers: { 
+            'Accept': 'application/json'
+        },
         body: formSubmitData,
       });
 
+      const result = await response.json();
+
       if (!response.ok) {
-        throw new Error('Network response was not ok');
+        throw new Error(result.message || 'Network response was not ok');
       }
 
       setSubmitStatus('success');
-      setFormData({ name: '', email: '', phone: '', specialty: '', need: '' });
-      setSelectedFile(null);
-
+      setFormData({ name: '', email: '', phone: '', need: '' });
+      
       setTimeout(() => setSubmitStatus('idle'), 5000);
     } catch (error) {
       console.error('Error submitting inquiry:', error);
@@ -129,6 +109,8 @@ export default function HeroTwo() {
           src="/bgimage.jpg" 
           alt="Modern Medical Facility" 
           className="w-full h-full object-cover"
+          fetchPriority="high"
+          loading="eager"
         />
         <div className="absolute inset-0 bg-gradient-to-r from-[#0F2622]/95 via-[#0F2622]/80 to-[#0F2622]/40"></div>
       </div>
@@ -142,25 +124,25 @@ export default function HeroTwo() {
           {/* LEFT COLUMN: Text Content */}
           <div className="text-white pt-4 w-full">
             
-            {/* Tagline - Hidden on Mobile */}
+            {/* Tagline */}
             <div className="hidden lg:inline-flex items-center gap-2 border border-[#D4C5A9]/30 bg-[#D4C5A9]/10 text-[#D4C5A9] px-4 py-1.5 text-sm font-medium mb-6 backdrop-blur-sm font-['Poppins']">
               <Shield className="w-4 h-4" />
               <span>Clinically-Led Medical Travel</span>
             </div>
 
-            {/* Main Heading - Visible Always */}
+            {/* Main Heading */}
             <h1 className="text-4xl lg:text-5xl font-['Montserrat'] font-bold leading-tight mb-2 lg:mb-4 text-white drop-shadow-lg">
               Doctor Led. World Class HealthCare.<br />
               <span className="text-[#D4C5A9]">Zero Waiting Time.</span>
             </h1>
 
-            {/* Description - Hidden on Mobile */}
+            {/* Description */}
             <p className="hidden lg:block text-xl text-gray-200 mb-8 leading-relaxed max-w-lg drop-shadow-md font-medium font-['Poppins']">
               Connect with internationally accredited hospitals and board-certified surgeons. We handle your entire journey—from free consultation to recovery.
             </p>
 
-             {/* Trust Badges - Hidden on Mobile */}
-             <div className="hidden lg:grid grid-cols-2 gap-x-6 gap-y-6 border-t border-white/20 pt-8 font-['Poppins']">
+            {/* TRUST BADGES (Visible on Mobile & Desktop) */}
+             <div className="grid grid-cols-2 gap-x-4 gap-y-4 lg:gap-x-6 lg:gap-y-6 border-t border-white/20 pt-6 lg:pt-8 font-['Poppins'] mt-6 lg:mt-0">
                  <div className="flex items-center gap-3">
                     <div className="p-2 bg-black/20 backdrop-blur-md border border-white/10"><Award className="w-5 h-5 text-[#D4C5A9]" /></div>
                     <div><span className="block text-sm font-bold text-white shadow-black drop-shadow-md">JCI Accredited</span><span className="text-xs text-[#D4C5A9]">Global Standard</span></div>
@@ -181,7 +163,7 @@ export default function HeroTwo() {
           </div>
 
           {/* RIGHT COLUMN: The GLASS Form */}
-          <div className="w-full flex justify-center lg:justify-end mt-2 lg:mt-0">
+          <div className="w-full flex justify-center lg:justify-end mt-8 lg:mt-0">
             <div 
               className="w-full max-w-md bg-white/5 border border-white/20 p-6 md:p-12 shadow-2xl relative rounded-none backdrop-blur-md font-['Poppins']"
               style={{ 
@@ -191,7 +173,7 @@ export default function HeroTwo() {
               }} 
             >
                 <div className="absolute -top-4 right-6 bg-[#D4C5A9] text-[#0F2622] text-[10px] font-bold px-3 py-1 shadow-lg uppercase tracking-wide font-['Montserrat']">
-                  Free Quote in 24h
+                  Free Quote in 2h
                 </div>
 
                 <h2 className="text-2xl font-['Montserrat'] font-bold text-white mb-2">
@@ -296,69 +278,15 @@ export default function HeroTwo() {
                     placeholder="Email Address"
                   />
 
-                  {/* Specialty Dropdown */}
-                  <div className="relative">
-                    <select
-                      required
-                      value={formData.specialty}
-                      onChange={(e) => setFormData({ ...formData, specialty: e.target.value })}
-                      className="w-full px-4 py-3 bg-white/10 border border-white/10 rounded-none focus:outline-none focus:bg-white/20 focus:border-[#D4C5A9] transition-all text-sm text-white appearance-none cursor-pointer"
-                    >
-                      <option value="" disabled className="bg-[#0F2622] text-gray-400">Select Specialty / Treatment</option>
-                      {SPECIALTIES.map((spec, idx) => (
-                        <option key={idx} value={spec} className="bg-[#0F2622] text-white">
-                          {spec}
-                        </option>
-                      ))}
-                    </select>
-                    <ChevronDown size={14} className="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-400 pointer-events-none" />
-                  </div>
-
                   {/* Description Textarea */}
                   <textarea
                     required
-                    rows={2}
+                    rows={3}
                     value={formData.need}
                     onChange={(e) => setFormData({ ...formData, need: e.target.value })}
                     className="w-full px-4 py-3 bg-white/10 border border-white/10 rounded-none focus:outline-none focus:bg-white/20 focus:border-[#D4C5A9] transition-all resize-none placeholder-gray-400 text-sm text-white"
                     placeholder="Briefly describe your condition or requirements..."
                   />
-
-                  {/* File Upload Input */}
-                  <div className="relative">
-                    <input 
-                      type="file" 
-                      id="file-upload" 
-                      className="hidden" 
-                      onChange={handleFileChange}
-                      accept="image/png, image/jpeg, application/pdf"
-                    />
-                    <label 
-                      htmlFor="file-upload" 
-                      className={`flex items-center justify-between w-full px-4 py-3 border border-dashed rounded-none cursor-pointer transition-all ${
-                        selectedFile 
-                          ? 'bg-[#D4C5A9]/10 border-[#D4C5A9] text-[#D4C5A9]' 
-                          : 'bg-white/5 border-white/20 text-gray-400 hover:text-white hover:border-white/40'
-                      }`}
-                    >
-                      <div className="flex items-center gap-3 overflow-hidden">
-                        <UploadCloud size={18} />
-                        <span className="text-sm truncate">
-                          {selectedFile ? selectedFile.name : "Upload Reports (PDF/Image)"}
-                        </span>
-                      </div>
-                      
-                      {selectedFile && (
-                        <button 
-                          type="button" 
-                          onClick={removeFile}
-                          className="p-1 hover:bg-white/10 rounded-full"
-                        >
-                          <X size={14} />
-                        </button>
-                      )}
-                    </label>
-                  </div>
 
                   {/* Submit Button */}
                   <button
